@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<skins xmlns="http://myfaces.apache.org/trinidad/skin">
+  <skin>
+    <id>cmsportal.desktop</id>
+    <family>cmsportal</family>
+    <extends>skyros-v1.desktop</extends>
+    <render-kit-id>org.apache.myfaces.trinidad.desktop</render-kit-id>
+    <style-sheet-name>skins/cmsportal.css</style-sheet-name>
+    <bundle-name>com.itiyam.hrportal.view.resourcebundle.skinBundle</bundle-name>
+  </skin>
+</skins>

@@ -1,0 +1,181 @@
+body
+{
+  background-color: White;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+h1
+{
+  color: navy;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: x-large;
+  font-weight: bolder;
+  text-transform: capitalize;
+}
+h2
+{
+  color: navy;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  font-weight: bolder;
+  text-transform: capitalize;
+}
+h3
+{
+  color: navy;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  font-weight: lighter;
+  text-transform: capitalize;
+}
+
+HTML .ResourceGrid
+{
+  height: 270px;
+  width: 160px;
+  border-bottom-width: 0px;
+  padding: 10px 10px 20px 10px;   
+  display: inline-block;
+  *display:  inline; /* IE7 */
+  zoom: 1; /* IE7 */
+  vertical-align: top;
+}
+
+.ResourceTopLabel{
+  color: #333333;
+  text-align: left;
+  text-decoration: none;
+  font-family: Arial,Arial;
+  font-size: 24.0pt;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.ResourceTopText{
+  color: #333333;
+    text-align: left;
+    text-decoration: none;
+    font-family: Roboto-Regular,Arial;
+    font-size: 10.0pt;
+}
+
+af|panelGroupLayout.ResourceTopBox{
+    background-color: #FFFFFF;
+    background-image: none;
+    border : 2px solid #404040;
+    padding: 10px;   
+}
+.ResourceTopBoxLabel{
+    color: #333333;
+    text-align: left;
+    text-decoration: none;
+    font-family: Arial,Arial;
+    font-size: 12.0pt;
+    font-style: normal;
+    font-weight: 400;
+}
+
+af|commandButton.ResourceClearButton,
+af|commandButton:hover.ResourceClearButton,
+af|commandButton:active.ResourceClearButton,
+af|commandButton:active:hover.ResourceClearButton,
+af|commandButton:active:focus.ResourceClearButton,
+af|commandButton:focus.ResourceClearButton,
+af|commandButton:focus:hover.ResourceClearButton{
+    width: 88px;
+    height: 23px;
+    background-color: #FFFFFF;
+    background-image: -moz-linear-gradient(top,#FFFFFF,#E6E6E6);
+    background-image: -webkit-linear-gradient(top,#FFFFFF,#E6E6E6);
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#FFFFFF), color-stop(100%,#E6E6E6));
+    background-image: -o-linear-gradient(top,#FFFFFF,#E6E6E6);
+    background-image: linear-gradient(to bottom,#FFFFFF,#E6E6E6);
+    border : 1px solid #CDCDCD;
+    border-radius: 4px 4px 4px 4px;
+    padding-top: 2px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    text-shadow: none;
+    font-size: 10.0pt;
+    font-family: Arial,Arial;
+}
+
+af|commandButton.ResourceSearchButton,
+af|commandButton:hover.ResourceSearchButton,
+af|commandButton:active.ResourceSearchButton,
+af|commandButton:active:hover.ResourceSearchButton,
+af|commandButton:active:focus.ResourceSearchButton,
+af|commandButton:focus.ResourceSearchButton,
+af|commandButton:focus:hover.ResourceSearchButton{
+    width: 88px;
+    height: 23px;
+    background-color: #663BC9;
+    border : 1px solid #CDCDCD;
+    border-radius: 4px 4px 4px 4px;
+    padding-top: 2px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    text-shadow: none;
+    text-align: center;
+    text-decoration: none;
+    font-family: Arial,Arial;
+    font-size: 10.0pt;
+    font-style: normal;
+    font-weight: 400;
+    background-image: none;
+    color: #EFEFEF;
+} 
+
+.TopicLabel{
+    color: #333333;
+    text-align: left;
+    text-decoration: none;
+    font-family: Roboto-Regular,Arial;
+    font-size: 18.0pt;
+}
+
+af|commandButton.ResourceUploadButton,
+af|commandButton:hover.ResourceUploadButton,
+af|commandButton:active.ResourceUploadButton,
+af|commandButton:active:hover.ResourceUploadButton,
+af|commandButton:active:focus.ResourceUploadButton,
+af|commandButton:focus.ResourceUploadButton,
+af|commandButton:focus:hover.ResourceUploadButton{
+    width: 170px;
+    height: 25px;
+    background-color: #ECECEC;
+    border : 1px solid #CDCDCD;
+    border-radius: 5px 5px 5px 5px;
+    padding: 3px;
+    text-shadow: none;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-family: Arial,Arial;
+    font-size: 10.0pt;
+    font-style: normal;
+    font-weight: 700;
+    background-image: none;
+} 
+
+.ResourceItemText{
+    color: #333333;
+    text-align: center;
+    text-decoration: none;
+    font-family: Arial,Arial;
+    font-size: 10.0pt;
+    font-style: normal;
+    font-weight: 400;
+}  
+
+.FeaturedResourceLabel{   
+    color: #333333;
+    text-align: left;
+    text-decoration: none;
+    font-family: Roboto-Bold,Arial;
+    font-size: 24.0pt;
+}

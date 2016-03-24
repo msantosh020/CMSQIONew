@@ -1,0 +1,257 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" layout="vertical">
+    <af:panelGroupLayout id="pgl14" layout="horizontal">
+      <af:spacer width="170" height="10" id="s9"/>
+      <af:panelGroupLayout id="pgl15" layout="vertical">
+        <af:outputText value="Resources" id="ot1"
+                       styleClass="ResourceTopLabel"/>
+        <af:outputText value="Lorem ipsum dolor sit amet, sapien etiam, nunc amet dolor ac odio mauris justo. Luctus arcu, urna praesent at id quisque ac. Arcu es massa vestibulum malesuada, integer vivamus elit eu mauris eus, cum eros quis aliquam wisi. Nulla wisi laoreet suspendisse integer vivamus elit eu mauris hendrerit facilisi, mi mattis pariatur aliquam pharetra eget."
+                       id="ot2" styleClass="ResourceTopText"/>
+        <af:spacer width="10" height="10" id="s1"/>
+        <af:panelGroupLayout id="pgl2" styleClass="ResourceTopBox"
+                             layout="vertical" partialTriggers="cb1">
+          <af:outputText value="Search Resources" id="ot3"
+                         styleClass="ResourceTopBoxLabel"/>
+          <af:panelFormLayout id="pfl1" labelAlignment="top" rows="3"
+                              maxColumns="4">
+            <f:facet name="footer"/>
+            <af:inputText label="Title" id="it1" autoSubmit="true"
+                          value="#{viewScope.ResourcesBackingBean.resourceSearchBean.title}"/>
+            <af:inputText label="Description" id="it4" autoSubmit="true"
+                          value="#{viewScope.ResourcesBackingBean.resourceSearchBean.description}"/>
+            <af:inputText label="Keyphrase" id="it5" autoSubmit="true"
+                          value="#{viewScope.ResourcesBackingBean.resourceSearchBean.keyphrase}"/>
+            <af:selectOneChoice label="Resource Type" id="soc1"
+                                contentStyle="width:180px;" autoSubmit="true"
+                                value="#{viewScope.ResourcesBackingBean.resourceSearchBean.resourceType}">
+              <af:selectItem label="PDF" value="PDF" id="si2"/>
+              <af:selectItem label="DOCX" value="DOCX" id="si1"/>
+              <af:selectItem label="IMAGE" value="IMAGE" id="si3"/>
+              <af:selectItem label="OTHER" value="OTHER" id="si4"/>
+            </af:selectOneChoice>
+            <af:selectOneChoice label="Format" id="soc5"
+                                contentStyle="width:180px;" autoSubmit="true"
+                                value="#{viewScope.ResourcesBackingBean.resourceSearchBean.format}">
+              <af:selectItem label="PDF" value="PDF" id="si11"/>
+              <af:selectItem label="DOCX" value="DOCX" id="si12"/>
+              <af:selectItem label="IMAGE" value="IMAGE" id="si13"/>
+              <af:selectItem label="OTHER" value="OTHER" id="si14"/>
+            </af:selectOneChoice>
+            <af:selectOneChoice label="State" id="soc2"
+                                contentStyle="width:180px;" autoSubmit="true"
+                                value="#{viewScope.ResourcesBackingBean.resourceSearchBean.state}">
+              <af:selectItem label="Active" value="A" id="si5"/>
+              <af:selectItem label="InActive" value="I" id="si6"/>
+            </af:selectOneChoice>
+            <af:inputText label="Author" id="it2" autoSubmit="true"
+                          value="#{viewScope.ResourcesBackingBean.resourceSearchBean.author}"/>
+            <af:selectOneChoice label="Organization" id="soc3"
+                                contentStyle="width:180px;" autoSubmit="true"
+                                value="#{viewScope.ResourcesBackingBean.resourceSearchBean.organization}">
+              <af:selectItem label="Active" value="A" id="si7"/>
+              <af:selectItem label="InActive" value="I" id="si8"/>
+            </af:selectOneChoice>
+            <af:inputText label="Publication date" id="it3" autoSubmit="true"
+                          value="#{viewScope.ResourcesBackingBean.resourceSearchBean.publicationDate}"/>
+            <af:selectOneChoice label="Scope of Work" id="soc6"
+                                contentStyle="width:180px;" autoSubmit="true"
+                                value="#{viewScope.ResourcesBackingBean.resourceSearchBean.scopeOfWork}">
+              <af:selectItem label="11th Scope of Work" value="11" id="si15"/>
+              <af:selectItem label="10th Scope of Work" value="10" id="si16"/>
+            </af:selectOneChoice>
+            <af:panelGroupLayout id="pgl3" layout="horizontal">
+              <af:commandButton text="Clear" id="cb1"
+                                styleClass="ResourceClearButton"
+                                actionListener="#{viewScope.ResourcesBackingBean.onResourceSearchClearAction}"
+                                partialSubmit="true"/>
+              <af:spacer width="10" height="10" id="s8"/>
+              <af:commandButton text="Search" id="cb2"
+                                styleClass="ResourceSearchButton"
+                                partialSubmit="true"
+                                actionListener="#{viewScope.ResourcesBackingBean.onResourceSearchAction}"/>
+            </af:panelGroupLayout>
+          </af:panelFormLayout>
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+    </af:panelGroupLayout>
+    <af:spacer width="10" height="20" id="s12"/>
+    <af:panelGroupLayout id="pgl4" layout="horizontal"
+                         styleClass="AFStretchWidth" valign="top"
+                         partialTriggers="cb1 cb2">
+      <af:panelGroupLayout id="pgl5" layout="vertical"
+                           inlineStyle="width:170px;" valign="top">
+        <af:panelGroupLayout id="pgl7" layout="vertical"
+                             styleClass="ResourceTopBox">
+          <af:outputText value="Community Topic Filter" id="ot4"
+                         styleClass="ResourceTopBoxLabel"/>
+          <af:outputText value="Community Filter" id="ot5"/>
+          <af:selectOneChoice id="soc4" simple="true"
+                              contentStyle="width:150px;">
+            <af:selectItem label="BFCC" value="BFCC" id="si9"/>
+            <af:selectItem label="PCC" value="PCC" id="si10"/>
+          </af:selectOneChoice>
+        </af:panelGroupLayout>
+        <af:iterator id="i1" var="topic" varStatus="vs"
+                     value="#{viewScope.ResourcesBackingBean.filteredTopicsList}">
+          <af:panelGroupLayout id="pgl8" layout="horizontal">
+            <af:commandImageLink text="#{topic.topicName}" id="cil1"
+                                 icon="/images/topic_expand_icon.PNG"
+                                 partialSubmit="true"
+                                 actionListener="#{viewScope.ResourcesBackingBean.onTopicSelectionAction}">
+              <f:attribute name="topicIndex" value="#{vs.index}"/>
+            </af:commandImageLink>
+            <af:spacer width="10" height="10" id="s10"/>
+            <af:outputText value="#{topic.topicTaskTag}" id="ot6"/>
+          </af:panelGroupLayout>
+          <af:spacer width="10" height="10" id="s2"/>
+        </af:iterator>
+      </af:panelGroupLayout>
+      <af:panelGroupLayout id="pgl6" layout="vertical" valign="top"
+                           partialTriggers="i1:cil1 soc7">
+        <af:panelGridLayout id="pgl9">
+          <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
+            <af:gridCell marginStart="5px" width="50%" id="gc1">
+              <af:outputText value="Topic: #{viewScope.ResourcesBackingBean.currentTopicBean.topicName} (#{viewScope.ResourcesBackingBean.currentTopicBean.topicTaskTag})"
+                             id="ot7" styleClass="TopicLabel"/>
+            </af:gridCell>
+            <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2"
+                         halign="end">
+              <af:commandButton text="Upload Resource" id="cb3"
+                                styleClass="ResourceUploadButton"/>
+            </af:gridCell>
+          </af:gridRow>
+        </af:panelGridLayout>
+        <af:panelGroupLayout id="pgl17" layout="vertical"
+                             styleClass="ResourceTopBox">
+          <af:outputText value="Featured Resources"
+                         styleClass="FeaturedResourceLabel" id="ot16"/>
+          <af:spacer width="10" height="10" id="s7"/>
+          <af:listView id="lv2" var="resource"
+                       value="#{viewScope.ResourcesBackingBean.featuredTopicResources}">
+            <f:facet name="groupHeaderStamp"/>
+            <af:listItem id="li2" styleClass="ResourceGrid">
+              <af:panelGroupLayout id="pgl18" layout="vertical">
+                <af:panelGroupLayout id="pgl19" layout="vertical">
+                  <af:commandImageLink icon="/images/profile_pic_not_available.jpg"
+                                       id="cil4" partialSubmit="true"
+                                       clientComponent="true">
+                    <!--<af:clientListener method="showPdfInPopup" type="click"/>-->
+                    <!--<af:clientAttribute name="path" value="#{node.path}"/>-->
+                    <!--<af:clientAttribute name="name"
+                                      value="#{fn:substringBefore(node.name,'.pdf')}"/>-->
+                  </af:commandImageLink>
+                  <af:spacer width="10" height="10" id="s13"/>
+                  <af:outputText value="#{resource.resourceTitle}" id="ot18"
+                                 styleClass="ResourceItemText"/>
+                  <af:outputText value="#{resource.resourceDescription}"
+                                 id="ot17" styleClass="ResourceItemText"/>
+                  <af:outputText value="#{resource.resourceFormat}" id="ot19"
+                                 styleClass="ResourceItemText"/>
+                  <af:outputText value="#{resource.length}" id="ot20"
+                                 styleClass="ResourceItemText"/>
+                  <af:outputText value="#{resource.addedDate}" id="ot21"
+                                 styleClass="ResourceItemText"/>
+                  <af:outputText value="#{resource.uploadedOrganization}"
+                                 id="ot22" styleClass="ResourceItemText"/>
+                  <af:spacer width="10" height="10" id="s14"/>
+                  <af:panelGroupLayout id="pgl21" layout="horizontal">
+                    <af:commandLink text="Download" id="cl2"></af:commandLink>
+                    <!--<af:goLink text="Print" id="cl2" targetFrame="_blank" destination="#{node.primaryProperty.url.renderUrl}&amp;rid=#{node.propertyMap['dRevisionID'].value}"/>-->
+                    <af:commandLink text="Print" id="cl3" partialSubmit="true"
+                                    clientComponent="true">
+                      <!--<af:clientListener method="showPdfInNewWindowWithPrint"
+                                       type="click"/>-->
+                      <!--<af:clientAttribute name="path" value="#{node.path}"/>-->
+                    </af:commandLink>
+                    <f:facet name="separator">
+                      <af:panelGroupLayout id="pgl20" halign="center"
+                                           layout="horizontal"
+                                           styleClass="AFStretchWidth">
+                        <af:spacer width="3" height="10" id="s15"/>
+                        <af:outputText value="|" id="ot23"/>
+                        <af:spacer width="3" height="10" id="s16"/>
+                      </af:panelGroupLayout>
+                    </f:facet>
+                  </af:panelGroupLayout>
+                </af:panelGroupLayout>
+              </af:panelGroupLayout>
+            </af:listItem>
+          </af:listView>
+        </af:panelGroupLayout>
+        <af:listView id="lv1" var="resource"
+                     value="#{viewScope.ResourcesBackingBean.currentPageTopicResources}">
+          <f:facet name="groupHeaderStamp"/>
+          <af:listItem id="li1" styleClass="ResourceGrid">
+            <af:panelGroupLayout id="pgl10" layout="vertical">
+              <af:panelGroupLayout id="pgl11" layout="vertical">
+                <af:commandImageLink icon="/images/profile_pic_not_available.jpg"
+                                     id="cil3" partialSubmit="true"
+                                     clientComponent="true">
+                  <!--<af:clientListener method="showPdfInPopup" type="click"/>-->
+                  <!--<af:clientAttribute name="path" value="#{node.path}"/>-->
+                  <!--<af:clientAttribute name="name"
+                                      value="#{fn:substringBefore(node.name,'.pdf')}"/>-->
+                </af:commandImageLink>
+                <af:spacer width="10" height="10" id="s3"/>
+                <af:outputText value="#{resource.resourceTitle}" id="ot8"
+                               styleClass="ResourceItemText"/>
+                <af:outputText value="#{resource.resourceDescription}" id="ot9"
+                               styleClass="ResourceItemText"/>
+                <af:outputText value="#{resource.resourceFormat}" id="ot10"
+                               styleClass="ResourceItemText"/>
+                <af:outputText value="#{resource.length}" id="ot11"
+                               styleClass="ResourceItemText"/>
+                <af:outputText value="#{resource.addedDate}" id="ot12"
+                               styleClass="ResourceItemText"/>
+                <af:outputText value="#{resource.uploadedOrganization}"
+                               id="ot13" styleClass="ResourceItemText"/>
+                <af:spacer width="10" height="10" id="s4"/>
+                <af:panelGroupLayout id="pgl12" layout="horizontal">
+                  <af:commandLink text="Download" id="cl1"></af:commandLink>
+                  <!--<af:goLink text="Print" id="cl2" targetFrame="_blank" destination="#{node.primaryProperty.url.renderUrl}&amp;rid=#{node.propertyMap['dRevisionID'].value}"/>-->
+                  <af:commandLink text="Print" id="cil2" partialSubmit="true"
+                                  clientComponent="true">
+                    <!--<af:clientListener method="showPdfInNewWindowWithPrint"
+                                       type="click"/>-->
+                    <!--<af:clientAttribute name="path" value="#{node.path}"/>-->
+                  </af:commandLink>
+                  <f:facet name="separator">
+                    <af:panelGroupLayout id="pgl13" halign="center"
+                                         layout="horizontal"
+                                         styleClass="AFStretchWidth">
+                      <af:spacer width="3" height="10" id="s5"/>
+                      <af:outputText value="|" id="ot14"/>
+                      <af:spacer width="3" height="10" id="s6"/>
+                    </af:panelGroupLayout>
+                  </f:facet>
+                </af:panelGroupLayout>
+              </af:panelGroupLayout>
+            </af:panelGroupLayout>
+          </af:listItem>
+        </af:listView>
+        <af:spacer width="10" height="10" id="s11"/>
+        <af:panelGroupLayout id="pgl16" layout="horizontal" halign="center">
+          <!--<af:selectOneChoice label="Page : " id="soc7">
+            <af:forEach var="pageIndex" begin="1"
+                        end="#{viewScope.ResourcesBackingBean.totalPagesSize}"
+                        step="1">
+              <af:selectItem label="#{pageIndex}" id="si17"/>
+            </af:forEach>
+          </af:selectOneChoice>-->
+          <af:selectOneChoice label="Page : " id="soc7"
+                              value="#{viewScope.ResourcesBackingBean.currentPageIndex}"
+                              autoSubmit="true"
+                              valueChangeListener="#{viewScope.ResourcesBackingBean.onPageNumberSelection}">
+            <f:selectItems id="si17"
+                           value="#{viewScope.ResourcesBackingBean.pagesSI}"/>
+          </af:selectOneChoice>
+          <af:outputText value="of #{viewScope.ResourcesBackingBean.totalPagesSize}"
+                         id="ot15"/>
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+    </af:panelGroupLayout>
+  </af:panelGroupLayout>
+</jsp:root>
