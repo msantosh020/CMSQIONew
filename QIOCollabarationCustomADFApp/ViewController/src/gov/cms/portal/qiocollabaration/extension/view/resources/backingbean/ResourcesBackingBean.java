@@ -1,4 +1,4 @@
-package gov.cms.portal.qiocollabaration.extension.view.resources.backingean;
+package gov.cms.portal.qiocollabaration.extension.view.resources.backingbean;
 
 import gov.cms.portal.qiocollabaration.extension.view.resources.beans.ResourceBean;
 import gov.cms.portal.qiocollabaration.extension.view.resources.beans.ResourceSearchBean;

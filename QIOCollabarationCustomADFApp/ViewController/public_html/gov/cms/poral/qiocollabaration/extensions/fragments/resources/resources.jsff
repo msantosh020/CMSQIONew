@@ -6,14 +6,15 @@
     <af:panelGroupLayout id="pgl14" layout="horizontal">
       <af:spacer width="170" height="10" id="s9"/>
       <af:panelGroupLayout id="pgl15" layout="vertical">
-        <af:outputText value="Resources" id="ot1"
-                       styleClass="ResourceTopLabel"/>
         <af:outputText value="Lorem ipsum dolor sit amet, sapien etiam, nunc amet dolor ac odio mauris justo. Luctus arcu, urna praesent at id quisque ac. Arcu es massa vestibulum malesuada, integer vivamus elit eu mauris eus, cum eros quis aliquam wisi. Nulla wisi laoreet suspendisse integer vivamus elit eu mauris hendrerit facilisi, mi mattis pariatur aliquam pharetra eget."
-                       id="ot2" styleClass="ResourceTopText"/>
+                       id="ot2" styleClass="ResourceTopText"
+                       rendered="#{pageFlowScope.pageType eq 'Resources'}"/>
         <af:spacer width="10" height="10" id="s1"/>
+        <af:outputText value="#{pageFlowScope.pageTitle}" id="ot1"
+                       styleClass="ResourceTopLabel"/>
         <af:panelGroupLayout id="pgl2" styleClass="ResourceTopBox"
                              layout="vertical" partialTriggers="cb1">
-          <af:outputText value="Search Resources" id="ot3"
+          <af:outputText value="Search #{pageFlowScope.pageTitle}" id="ot3"
                          styleClass="ResourceTopBoxLabel"/>
           <af:panelFormLayout id="pfl1" labelAlignment="top" rows="3"
                               maxColumns="4">
@@ -82,7 +83,7 @@
                          styleClass="AFStretchWidth" valign="top"
                          partialTriggers="cb1 cb2">
       <af:panelGroupLayout id="pgl5" layout="vertical"
-                           inlineStyle="width:170px;" valign="top">
+                           inlineStyle="width:200px;" valign="top">
         <af:panelGroupLayout id="pgl7" layout="vertical"
                              styleClass="ResourceTopBox">
           <af:outputText value="Community Topic Filter" id="ot4"
@@ -94,6 +95,16 @@
             <af:selectItem label="PCC" value="PCC" id="si10"/>
           </af:selectOneChoice>
         </af:panelGroupLayout>
+        <af:spacer width="10" height="20" id="s17" rendered="#{pageFlowScope.pageType eq 'EducationNTraining'}"/>
+        <af:panelGroupLayout id="pgl22" layout="vertical" inlineStyle="padding:10px;" halign="center"     
+                             styleClass="ResourceTopBox" rendered="#{pageFlowScope.pageType eq 'EducationNTraining'}">
+          <af:commandButton text="QI-U" id="cb4" styleClass="QIUButton"
+                            partialSubmit="true"/>
+          <af:spacer width="10" height="10" id="s18"/>
+          <af:commandButton text="LOA Resources" id="cb5" styleClass="QIUButton"
+                            partialSubmit="true"/>
+        </af:panelGroupLayout>
+        <af:spacer width="10" height="20" id="s19"/>
         <af:iterator id="i1" var="topic" varStatus="vs"
                      value="#{viewScope.ResourcesBackingBean.filteredTopicsList}">
           <af:panelGroupLayout id="pgl8" layout="horizontal">
@@ -126,7 +137,7 @@
         </af:panelGridLayout>
         <af:panelGroupLayout id="pgl17" layout="vertical"
                              styleClass="ResourceTopBox">
-          <af:outputText value="Featured Resources"
+          <af:outputText value="Featured #{pageFlowScope.pageTitle}"
                          styleClass="FeaturedResourceLabel" id="ot16"/>
           <af:spacer width="10" height="10" id="s7"/>
           <af:listView id="lv2" var="resource"

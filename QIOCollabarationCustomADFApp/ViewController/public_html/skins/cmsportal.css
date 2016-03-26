@@ -179,3 +179,27 @@ af|commandButton:focus:hover.ResourceUploadButton{
     font-family: Roboto-Bold,Arial;
     font-size: 24.0pt;
 }
+
+af|commandButton.QIUButton,
+af|commandButton:hover.QIUButton,
+af|commandButton:active.QIUButton,
+af|commandButton:active:hover.QIUButton,
+af|commandButton:active:focus.QIUButton,
+af|commandButton:focus.QIUButton,
+af|commandButton:focus:hover.QIUButton{
+    width: 162px;
+    height: 25px;
+    background-color: #2696C0;
+    background-image: none;
+    border:1px solid #CDCDCD;
+    border-radius: 5px 5px 5px 5px;
+    padding: 3px;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+    box-shadow: none;
+    text-shadow: none;
+    cursor: pointer;
+    font-size: 10.0pt;
+    font-family: Arial,Arial;
+}

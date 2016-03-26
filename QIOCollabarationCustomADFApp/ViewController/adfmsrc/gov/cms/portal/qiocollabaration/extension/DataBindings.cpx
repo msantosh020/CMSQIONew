@@ -12,11 +12,19 @@
           usageId="gov_cms_portal_qiocollabaration_extension_myTestPageDef"/>
     <page path="/test/resourcesTest.jspx"
           usageId="gov_cms_portal_qiocollabaration_extension_resourcesTestPageDef"/>
+    <page path="/test/educationNTraining.jspx"
+          usageId="gov_cms_portal_qiocollabaration_extension_educationNTrainingPageDef"/>
+    <page path="/test/qiu.jspx"
+          usageId="gov_cms_portal_qiocollabaration_extension_qiuPageDef"/>
   </pageMap>
   <pageDefinitionUsages> 
     <page id="gov_cms_portal_qiocollabaration_extension_myTestPageDef"
           path="test.myTestPageDef"/>
     <page id="gov_cms_portal_qiocollabaration_extension_resourcesTestPageDef"
           path="test.resourcesTestPageDef"/>
+    <page id="gov_cms_portal_qiocollabaration_extension_educationNTrainingPageDef"
+          path="test.educationNTrainingPageDef"/>
+    <page id="gov_cms_portal_qiocollabaration_extension_qiuPageDef"
+          path="test.qiuPageDef"/>
   </pageDefinitionUsages>
 </Application>
