@@ -1,0 +1,12 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<References xmlns="http://xmlns.oracle.com/adf/jndi">
+   <Reference name="ApplicationDB" className="oracle.jdeveloper.db.adapter.DatabaseProvider" partial="true" manageInOracleEnterpriseManager="true" deployable="true" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+   </Reference>
+   <Reference name="application" className="oracle.jdeveloper.db.adapter.DatabaseProvider" partial="false" manageInOracleEnterpriseManager="true" deployable="true" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+   </Reference>
+   <Reference name="{/example/jedi/model/common/}ExampleModuleService" className="oracle.jbo.client.svc.Service" partial="true" manageInOracleEnterpriseManager="true" deployable="true" xmlns="">
+      <Factory className="oracle.jbo.client.svc.ServiceFactory"/>
+   </Reference>
+</References>
