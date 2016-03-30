@@ -200,6 +200,11 @@ af|commandButton:focus:hover.QIUButton{
     box-shadow: none;
     text-shadow: none;
     cursor: pointer;
+    font-family: Arial,Arial;    
+    color: #FFFFFF;
+    text-align: center;
+    text-decoration: none;
     font-size: 10.0pt;
-    font-family: Arial,Arial;
+    font-style: normal;
+    font-weight: 700;
 }

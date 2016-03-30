@@ -14,23 +14,23 @@
       <class>java.lang.String</class>
     </input-parameter-definition>
     <input-parameter-definition id="__11">
-      <name id="__10">uploadResourcePath</name>
-      <value>#{pageFlowScope.uploadResourcePath}</value>
+      <name id="__10">uploadResourcesPath</name>
+      <value>#{pageFlowScope.uploadResourcesPath}</value>
       <class>java.lang.String</class>
     </input-parameter-definition>
     <input-parameter-definition id="__13">
-      <name id="__12">resourcePathParam1</name>
-      <value>#{pageFlowScope.resourcePathParam1}</value>
+      <name id="__12">viewTaskCalendarandContactsPath</name>
+      <value>#{pageFlowScope.viewTaskCalendarandContactsPath}</value>
       <class>java.lang.String</class>
     </input-parameter-definition>
     <input-parameter-definition id="__15">
-      <name id="__14">resourcePathParam2</name>
-      <value>#{pageFlowScope.resourcePathParam2}</value>
+      <name id="__14">qiuPath</name>
+      <value>#{pageFlowScope.qiuPath}</value>
       <class>java.lang.String</class>
     </input-parameter-definition>
     <input-parameter-definition id="__17">
-      <name id="__16">resourcePathParam3</name>
-      <value>#{pageFlowScope.resourcePathParam3}</value>
+      <name id="__16">loaPath</name>
+      <value>#{pageFlowScope.loaPath}</value>
       <class>java.lang.String</class>
     </input-parameter-definition>
     <managed-bean id="__5">

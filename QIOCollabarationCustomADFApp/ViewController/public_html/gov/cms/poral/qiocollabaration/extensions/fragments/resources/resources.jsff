@@ -95,14 +95,25 @@
             <af:selectItem label="PCC" value="PCC" id="si10"/>
           </af:selectOneChoice>
         </af:panelGroupLayout>
-        <af:spacer width="10" height="20" id="s17" rendered="#{pageFlowScope.pageType eq 'EducationNTraining'}"/>
-        <af:panelGroupLayout id="pgl22" layout="vertical" inlineStyle="padding:10px;" halign="center"     
-                             styleClass="ResourceTopBox" rendered="#{pageFlowScope.pageType eq 'EducationNTraining'}">
+        <af:spacer width="10" height="20" id="s17"
+                   rendered="#{pageFlowScope.pageType eq 'EducationNTraining'}"/>
+        <af:panelGroupLayout id="pgl22" layout="vertical"
+                             inlineStyle="padding:10px;" halign="center"
+                             styleClass="ResourceTopBox"
+                             rendered="#{pageFlowScope.pageType eq 'EducationNTraining'}">
           <af:commandButton text="QI-U" id="cb4" styleClass="QIUButton"
-                            partialSubmit="true"/>
+                            actionListener="#{navigationContext.processAction}"
+                            action="pprnav">
+            <f:attribute name="node"
+                         value="#{navigationContext.defaultNavigationModel.node[pageFlowScope.qiuPath]}"/>
+          </af:commandButton>
           <af:spacer width="10" height="10" id="s18"/>
           <af:commandButton text="LOA Resources" id="cb5" styleClass="QIUButton"
-                            partialSubmit="true"/>
+                            actionListener="#{navigationContext.processAction}"
+                            action="pprnav">
+            <f:attribute name="node"
+                         value="#{navigationContext.defaultNavigationModel.node[pageFlowScope.loaPath]}"/>
+          </af:commandButton>
         </af:panelGroupLayout>
         <af:spacer width="10" height="20" id="s19"/>
         <af:iterator id="i1" var="topic" varStatus="vs"
@@ -130,8 +141,22 @@
             </af:gridCell>
             <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2"
                          halign="end">
-              <af:commandButton text="Upload Resource" id="cb3"
-                                styleClass="ResourceUploadButton"/>
+              <af:commandButton text="View Task Calendar and Contacts" id="cb3"
+                                styleClass="QIUButton" inlineStyle="width:230px"   
+                                actionListener="#{navigationContext.processAction}"
+                                action="pprnav"
+                                rendered="#{pageFlowScope.pageType eq 'EducationNTraining'}">
+                <f:attribute name="node"
+                             value="#{navigationContext.defaultNavigationModel.node[pageFlowScope.viewTaskCalendarandContactsPath]}"/>
+              </af:commandButton>
+              <af:spacer width="10" height="10" id="s20"/>
+              <af:commandButton text="Upload Resource" id="cb6"
+                                styleClass="ResourceUploadButton"                                
+                                actionListener="#{navigationContext.processAction}"
+                                action="pprnav">
+                <f:attribute name="node"
+                             value="#{navigationContext.defaultNavigationModel.node[pageFlowScope.uploadResourcesPath]}"/>
+              </af:commandButton>
             </af:gridCell>
           </af:gridRow>
         </af:panelGridLayout>
