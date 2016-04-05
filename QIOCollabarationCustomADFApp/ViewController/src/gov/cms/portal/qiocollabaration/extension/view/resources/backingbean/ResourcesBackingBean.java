@@ -1,5 +1,6 @@
 package gov.cms.portal.qiocollabaration.extension.view.resources.backingbean;
 
+import gov.cms.portal.qiocollabaration.extension.view.common.util.Util;
 import gov.cms.portal.qiocollabaration.extension.view.resources.beans.ResourceBean;
 import gov.cms.portal.qiocollabaration.extension.view.resources.beans.ResourceSearchBean;
 import gov.cms.portal.qiocollabaration.extension.view.resources.beans.TopicBean;
@@ -40,6 +41,7 @@ public class ResourcesBackingBean {
     private TopicBean currentTopicBean = null;
     private ResourceSearchBean resourceSearchBean = new ResourceSearchBean();
     private List<SelectItem> pagesSI;
+    private String resourcesCSParentFolderPath;
 
     public void setAllTopicsList(List<TopicBean> allTopicsList) {
         this.allTopicsList = allTopicsList;
@@ -47,7 +49,7 @@ public class ResourcesBackingBean {
 
     public List<TopicBean> getAllTopicsList() {
         if (allTopicsList == null) {
-            allTopicsList = ResourceContentUtil.getAllTopicsListFromContentserver();
+            allTopicsList = ResourceContentUtil.getAllTopicsListFromContentserver(getResourcesCSParentFolderPath());
             System.out.println("ResourcesBackingBean.java getAllTopicsList() = " + allTopicsList);
         }
         return allTopicsList;
@@ -98,6 +100,9 @@ public class ResourcesBackingBean {
     public TopicBean getCurrentTopicBean() {
         if (currentTopicBean == null) {
             currentTopicBean = getFilteredTopicsList().get(getCurrentTopicIndex());
+            if (currentTopicBean.getTopicResources() == null) {
+                ResourceContentUtil.loadResourcesListOfTopicFromContentServer(currentTopicBean);
+            }
         }
         return currentTopicBean;
     }
@@ -264,6 +269,18 @@ public class ResourcesBackingBean {
             System.out.println("ResourcesBackingBean.java getFeaturedTopicResources() = " + featuredTopicResources);
         }
         return featuredTopicResources;
+    }
+
+
+    public void setResourcesCSParentFolderPath(String resourcesCSParentFolderPath) {
+        this.resourcesCSParentFolderPath = resourcesCSParentFolderPath;
+    }
+
+    public String getResourcesCSParentFolderPath() {
+        if (resourcesCSParentFolderPath == null) {
+            resourcesCSParentFolderPath = Util.getPageFlowScopeParamValue("resourcesCSParentFolderPath");
+        }
+        return resourcesCSParentFolderPath;
     }
 }
 

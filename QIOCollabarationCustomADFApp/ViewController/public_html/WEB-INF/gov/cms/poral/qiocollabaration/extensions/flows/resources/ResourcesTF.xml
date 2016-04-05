@@ -33,6 +33,11 @@
       <value>#{pageFlowScope.loaPath}</value>
       <class>java.lang.String</class>
     </input-parameter-definition>
+    <input-parameter-definition id="__18">
+      <name id="__19">resourcesCSParentFolderPath</name>
+      <value>#{pageFlowScope.resourcesCSParentFolderPath}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
     <managed-bean id="__5">
       <managed-bean-name id="__4">ResourcesBackingBean</managed-bean-name>
       <managed-bean-class id="__3">gov.cms.portal.qiocollabaration.extension.view.resources.backingbean.ResourcesBackingBean</managed-bean-class>

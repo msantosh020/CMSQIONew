@@ -21,6 +21,9 @@ public class TopicBean implements Serializable {
 
     private String topicName;
     private String topicTaskTag;
+    private String parentCollectionId;
+    private String folderType;
+    private String collectionPath;
 
     public void setTopicName(String topicName) {
         this.topicName = topicName;
@@ -63,5 +66,29 @@ public class TopicBean implements Serializable {
             state = false;
         }
         return state;
+    }
+
+    public void setParentCollectionId(String parentCollectionId) {
+        this.parentCollectionId = parentCollectionId;
+    }
+
+    public String getParentCollectionId() {
+        return parentCollectionId;
+    }
+
+    public void setFolderType(String folderType) {
+        this.folderType = folderType;
+    }
+
+    public String getFolderType() {
+        return folderType;
+    }
+
+    public void setCollectionPath(String collectionPath) {
+        this.collectionPath = collectionPath;
+    }
+
+    public String getCollectionPath() {
+        return collectionPath;
     }
 }

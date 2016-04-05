@@ -1,5 +1,6 @@
 package gov.cms.portal.qiocollabaration.extension.view.resources.util;
 
+import gov.cms.portal.qiocollabaration.content.beans.ContentFolderBean;
 import gov.cms.portal.qiocollabaration.content.beans.ContentItemBean;
 import gov.cms.portal.qiocollabaration.content.util.WCContentUtil;
 import gov.cms.portal.qiocollabaration.extension.view.resources.beans.ResourceBean;
@@ -23,67 +24,73 @@ public class ResourceContentUtil {
         super();
     }
 
-    public static List<TopicBean> getAllTopicsListFromContentserver() {
-        return loadTopicsListTest();
-        /*
-        System.out.println("ResourceContentUtil.java getAllTopicsListFromContentserver() starts executing = ");
-        List<TopicBean> allTopicsList1 = loadTopicsListFromContentserver1();
-        System.out.println("ResourceContentUtil.java getAllTopicsListFromContentserver() allTopicsList1 = " + allTopicsList1);
-        List<TopicBean> allTopicsList2 = loadTopicsListFromContentserver2();
-        System.out.println("ResourceContentUtil.java getAllTopicsListFromContentserver() allTopicsList2 = " + allTopicsList2);
-        return allTopicsList1;
-        */
+    public static List<TopicBean> getAllTopicsListFromContentserver(String resourcesParentFolderPath) {
+        return loadTopicsListFromContentserver(resourcesParentFolderPath);
     }
 
-    private static List<TopicBean> loadTopicsListFromContentserver1() {
-        System.out.println("ResourceContentUtil.java loadTopicsListFromContentserver1() starts executing = ");
-        WCContentUtil scUtil = new WCContentUtil("idc://hovm1014.keste.com:4444", "weblogic");
-        List<ContentItemBean> contentItems = null;
+    private static List<TopicBean> loadTopicsListFromContentserver(String resourcesParentFolderPath) {
+        System.out.println("ResourceContentUtil.java loadTopicsListFromContentserver() starts executing resourcesParentFolderPath = " + resourcesParentFolderPath);
+        WCContentUtil csUtil = new WCContentUtil("idc://hovm1014.keste.com:4444", "weblogic");
+        List<ContentFolderBean> contentFolders = null;
         List<TopicBean> allTopicsList = null;
         try {
-            contentItems = scUtil.getFolderContentItemsByCollectionPath("/Contribution Folders/TestPortal/Resources/Images/");
-            System.out.println("ResourceContentUtil.java loadTopicsListFromContentserver1() contentItems = " + contentItems);
-            allTopicsList = formTopicBeansFromContentItemBeans(contentItems);
+            contentFolders = csUtil.getSubFoldersByCollectionPath(resourcesParentFolderPath);
+            System.out.println("ResourceContentUtil.java loadTopicsListFromContentserver() contentFolders = " + contentFolders);
+            allTopicsList = formTopicBeansFromContentItemBeans(contentFolders);
+            if (allTopicsList != null && allTopicsList.size() > 0) {
+                loadResourcesListOfTopicFromContentServer(allTopicsList.get(0));
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("ResourceContentUtil.java loadTopicsListFromContentserver1() Exception is " + e);
+            System.out.println("ResourceContentUtil.java loadTopicsListFromContentserver() Exception is " + e);
         }
-        System.out.println("ResourceContentUtil.java loadTopicsListFromContentserver1() allTopicsList = " + allTopicsList);
+        System.out.println("ResourceContentUtil.java loadTopicsListFromContentserver() allTopicsList = " + allTopicsList);
         return allTopicsList;
     }
 
-    private static List<TopicBean> loadTopicsListFromContentserver2() {
+    public static void loadResourcesListOfTopicFromContentServer(TopicBean topicBean) {
         System.out.println("ResourceContentUtil.java loadTopicsListFromContentserver2() starts executing = ");
-        WCContentUtil scUtil = new WCContentUtil();
+        WCContentUtil csUtil = new WCContentUtil("idc://hovm1014.keste.com:4444", "weblogic");
         List<ContentItemBean> contentItems = null;
-        List<TopicBean> allTopicsList = null;
         try {
-            contentItems = scUtil.getFolderContentItemsByCollectionPath("/Contribution Folders/TestPortal/Resources/Images/");
+            contentItems = csUtil.getFolderContentItemsByCollectionPath(topicBean.getCollectionPath());
             System.out.println("ResourceContentUtil.java loadTopicsListFromContentserver2() contentItems = " + contentItems);
-            allTopicsList = formTopicBeansFromContentItemBeans(contentItems);
+            topicBean.setTopicResources(getResources(contentItems));
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("ResourceContentUtil.java loadTopicsListFromContentserver2() Exception is " + e);
         }
-        System.out.println("ResourceContentUtil.java loadTopicsListFromContentserver2() allTopicsList = " + allTopicsList);
-        return allTopicsList;
+        System.out.println("ResourceContentUtil.java loadTopicsListFromContentserver2() allTopicsList = " + topicBean.getTopicResources());
     }
 
-    private static List<TopicBean> formTopicBeansFromContentItemBeans(List<ContentItemBean> contentItems) {
-        System.out.println("ResourceContentUtil.java formTopicBeansFromContentItemBeans() contentItems = " + contentItems);
-        ResourceBean resourceBean = null;
-        Map<String, TopicBean> topicsMap = new HashMap<String, TopicBean>();
-        for (ContentItemBean contentItem : contentItems) {
-            resourceBean = getResourceBean(contentItem);
-            addResourceToTopic(topicsMap, contentItem.getTopicsNames(), contentItem.getTagNames(), resourceBean);
-        }
-
+    private static List<TopicBean> formTopicBeansFromContentItemBeans(List<ContentFolderBean> contentFolders) {
+        System.out.println("ResourceContentUtil.java formTopicBeansFromContentItemBeans() contentFolders = " + contentFolders);
         List<TopicBean> allTopicsList = new ArrayList<TopicBean>();
-        for (String topicName : topicsMap.keySet()) {
-            allTopicsList.add(topicsMap.get(topicName));
+        TopicBean topicBean = null;
+        for (ContentFolderBean contentFolder : contentFolders) {
+            topicBean = getTopicBean(contentFolder);
+            allTopicsList.add(topicBean);
         }
         System.out.println("ResourceContentUtil.java formTopicBeansFromContentItemBeans() allTopicsList = " + allTopicsList);
         return allTopicsList;
+    }
+
+    private static TopicBean getTopicBean(ContentFolderBean contentFolder) {
+        TopicBean topicBean = new TopicBean();
+        topicBean.setCollectionPath(contentFolder.getCollectionPath());
+        topicBean.setFolderType(contentFolder.getFolderType());
+        topicBean.setParentCollectionId(contentFolder.getParentCollectionId());
+        topicBean.setTopicName(contentFolder.getTitle());
+        topicBean.setTopicTaskTag(contentFolder.getComments());
+        return topicBean;
+    }
+
+    private static List<ResourceBean> getResources(List<ContentItemBean> contentItems) {
+        List<ResourceBean> resources = new ArrayList<ResourceBean>();
+        for (ContentItemBean contentItem : contentItems) {
+            resources.add(getResourceBean(contentItem));
+        }
+        return resources;
     }
 
     private static ResourceBean getResourceBean(ContentItemBean contentItem) {
@@ -152,7 +159,7 @@ public class ResourceContentUtil {
     }
 
     public static void main(String[] args) {
-        List<TopicBean> allTopicsList = getAllTopicsListFromContentserver();
+        List<TopicBean> allTopicsList = getAllTopicsListFromContentserver("");
         System.out.println(allTopicsList);
     }
 }
