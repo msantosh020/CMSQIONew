@@ -90,7 +90,8 @@
                          styleClass="ResourceTopBoxLabel"/>
           <af:outputText value="Community Filter" id="ot5"/>
           <af:selectOneChoice id="soc4" simple="true"
-                              contentStyle="width:150px;">
+                              contentStyle="width:150px;" autoSubmit="true"
+                              valueChangeListener="#{viewScope.ResourcesBackingBean.onCommunityChange}">
             <af:selectItem label="BFCC" value="BFCC" id="si9"/>
             <af:selectItem label="PCC" value="PCC" id="si10"/>
           </af:selectOneChoice>
@@ -117,7 +118,7 @@
         </af:panelGroupLayout>
         <af:spacer width="10" height="20" id="s19"/>
         <af:iterator id="i1" var="topic" varStatus="vs"
-                     value="#{viewScope.ResourcesBackingBean.filteredTopicsList}">
+                     value="#{viewScope.ResourcesBackingBean.currentCommunity.communityTopics}">
           <af:panelGroupLayout id="pgl8" layout="horizontal">
             <af:commandImageLink text="#{topic.topicName}" id="cil1"
                                  icon="/images/topic_expand_icon.PNG"

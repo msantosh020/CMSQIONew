@@ -1,6 +1,7 @@
 package gov.cms.portal.qiocollabaration.extension.view.resources.backingbean;
 
 import gov.cms.portal.qiocollabaration.extension.view.common.util.Util;
+import gov.cms.portal.qiocollabaration.extension.view.resources.beans.CommunityBean;
 import gov.cms.portal.qiocollabaration.extension.view.resources.beans.ResourceBean;
 import gov.cms.portal.qiocollabaration.extension.view.resources.beans.ResourceSearchBean;
 import gov.cms.portal.qiocollabaration.extension.view.resources.beans.TopicBean;
@@ -29,12 +30,15 @@ public class ResourcesBackingBean {
         super();
     }
 
+    private List<CommunityBean> communities;
+    private CommunityBean currentCommunity;
     private List<TopicBean> allTopicsList;
     private List<TopicBean> filteredTopicsList;
     private List<ResourceBean> filteredTopicResources;
     private List<ResourceBean> currentPageTopicResources;
     private List<ResourceBean> featuredTopicResources;
     private static final int NUMBER_RESOURCES_PER_PAGE = 4;
+    private int currentCommunityIndex = 0;
     private int currentTopicIndex = 0;
     private int currentPageIndex = 1;
     private Integer totalPagesSize;
@@ -49,7 +53,7 @@ public class ResourcesBackingBean {
 
     public List<TopicBean> getAllTopicsList() {
         if (allTopicsList == null) {
-            allTopicsList = ResourceContentUtil.getAllTopicsListFromContentserver(getResourcesCSParentFolderPath());
+            //allTopicsList = ResourceContentUtil.getAllTopicsListFromContentserver(getResourcesCSParentFolderPath());
             System.out.println("ResourcesBackingBean.java getAllTopicsList() = " + allTopicsList);
         }
         return allTopicsList;
@@ -80,6 +84,9 @@ public class ResourcesBackingBean {
     public List<ResourceBean> getFilteredTopicResources() {
         if (filteredTopicResources == null) {
             TopicBean currentTopic = getFilteredTopicsList().get(getCurrentTopicIndex());
+            if (currentTopic.getTopicResources() == null) {
+                ResourceContentUtil.loadResourcesListOfTopicFromContentServer(currentTopic);
+            }
             filteredTopicResources = currentTopic.getFilteredTopicResources();
         }
         return filteredTopicResources;
@@ -99,10 +106,7 @@ public class ResourcesBackingBean {
 
     public TopicBean getCurrentTopicBean() {
         if (currentTopicBean == null) {
-            currentTopicBean = getFilteredTopicsList().get(getCurrentTopicIndex());
-            if (currentTopicBean.getTopicResources() == null) {
-                ResourceContentUtil.loadResourcesListOfTopicFromContentServer(currentTopicBean);
-            }
+            currentTopicBean = getCurrentCommunity().getCommunityTopics().get(getCurrentTopicIndex());
         }
         return currentTopicBean;
     }
@@ -281,6 +285,56 @@ public class ResourcesBackingBean {
             resourcesCSParentFolderPath = Util.getPageFlowScopeParamValue("resourcesCSParentFolderPath");
         }
         return resourcesCSParentFolderPath;
+    }
+
+    public void setCurrentCommunity(CommunityBean currentCommunity) {
+        this.currentCommunity = currentCommunity;
+    }
+
+    public CommunityBean getCurrentCommunity() {
+        if (currentCommunity == null) {
+            currentCommunity = getCommunities().get(getCurrentCommunityIndex());
+            if (currentCommunity.getCommunityTopics() == null) {
+                ResourceContentUtil.loadCommunityTopics(currentCommunity);
+            }
+        }
+        return currentCommunity;
+    }
+
+    public void setCommunities(List<CommunityBean> communities) {
+        this.communities = communities;
+    }
+
+    public List<CommunityBean> getCommunities() {
+        if (communities == null) {
+            communities = ResourceContentUtil.initializeResourcesFromContentserver(getResourcesCSParentFolderPath());
+            System.out.println("ResourcesBackingBean.java getCommunities() = " + communities);
+        }
+        return communities;
+    }
+
+    public void setCurrentCommunityIndex(int currentCommunityIndex) {
+        this.currentCommunityIndex = currentCommunityIndex;
+    }
+
+    public int getCurrentCommunityIndex() {
+        return currentCommunityIndex;
+    }
+
+    public void onCommunityChange(ValueChangeEvent valueChangeEvent) {
+        // Add event code here...
+        valueChangeEvent.getComponent().processUpdates(FacesContext.getCurrentInstance());
+        String selectedCommunity = (String)valueChangeEvent.getNewValue();
+        int count = getCommunities().size();
+        CommunityBean community = null;
+        for (int i = 0; i < count; i++) {
+            community = getCommunities().get(i);
+            if (selectedCommunity.equals(community.getCommunityName())) {
+                setCurrentCommunityIndex(i);
+                setCurrentCommunity(null);
+                break;
+            }
+        }
     }
 }
 
