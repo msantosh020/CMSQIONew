@@ -374,6 +374,14 @@
             <value n="id" v="WebCenter Portal Framework"/>
             <value n="isJDK" v="false"/>
          </hash>
+         <hash>
+            <value n="id" v="ADF Designtime API"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="RIDC Library"/>
+            <value n="isJDK" v="false"/>
+         </hash>
       </list>
       <hash n="internalDefinitions">
          <list n="libraryDefinitions">
@@ -527,6 +535,14 @@
          </hash>
          <hash>
             <value n="id" v="WebCenter Portal Framework"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="ADF Designtime API"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="RIDC Library"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>

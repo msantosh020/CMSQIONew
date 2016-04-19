@@ -7,12 +7,18 @@ public class CommunityBean {
         super();
     }
     
+    public CommunityBean(boolean emptyCommunity) {
+        super();
+        this.emptyCommunity = emptyCommunity;
+    }
+    
     private String communityCode;
     private String communityName;
     private String parentCollectionId;
     private String collectionId;
     private String collectionPath;
     List<TopicBean> communityTopics;
+    private boolean emptyCommunity;
 
     public void setCommunityCode(String communityCode) {
         this.communityCode = communityCode;
@@ -60,5 +66,13 @@ public class CommunityBean {
 
     public String getCollectionId() {
         return collectionId;
+    }
+
+    public void setEmptyCommunity(boolean emptyCommunity) {
+        this.emptyCommunity = emptyCommunity;
+    }
+
+    public boolean isEmptyCommunity() {
+        return emptyCommunity;
     }
 }

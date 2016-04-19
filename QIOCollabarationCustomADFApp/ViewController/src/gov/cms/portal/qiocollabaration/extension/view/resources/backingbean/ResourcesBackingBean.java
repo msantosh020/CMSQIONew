@@ -45,6 +45,7 @@ public class ResourcesBackingBean {
     private TopicBean currentTopicBean = null;
     private ResourceSearchBean resourceSearchBean = new ResourceSearchBean();
     private List<SelectItem> pagesSI;
+    private List<SelectItem> communitiesSI;
     private String resourcesCSParentFolderPath;
 
     public void setAllTopicsList(List<TopicBean> allTopicsList) {
@@ -83,11 +84,16 @@ public class ResourcesBackingBean {
 
     public List<ResourceBean> getFilteredTopicResources() {
         if (filteredTopicResources == null) {
-            TopicBean currentTopic = getFilteredTopicsList().get(getCurrentTopicIndex());
-            if (currentTopic.getTopicResources() == null) {
-                ResourceContentUtil.loadResourcesListOfTopicFromContentServer(currentTopic);
+            try {
+                TopicBean currentTopic = getCurrentCommunity().getCommunityTopics().get(getCurrentTopicIndex());
+                if (currentTopic.getTopicResources() == null) {
+                    ResourceContentUtil.loadResourcesListOfTopicFromContentServer(currentTopic);
+                }
+                filteredTopicResources = currentTopic.getFilteredTopicResources();
+            } catch (Exception e) {
+                filteredTopicResources =  new ArrayList<ResourceBean>();
             }
-            filteredTopicResources = currentTopic.getFilteredTopicResources();
+            
         }
         return filteredTopicResources;
     }
@@ -106,7 +112,14 @@ public class ResourcesBackingBean {
 
     public TopicBean getCurrentTopicBean() {
         if (currentTopicBean == null) {
-            currentTopicBean = getCurrentCommunity().getCommunityTopics().get(getCurrentTopicIndex());
+            if(!getCurrentCommunity().isEmptyCommunity()){
+                currentTopicBean = getCurrentCommunity().getCommunityTopics().get(getCurrentTopicIndex());
+                if (currentTopicBean.getTopicResources() == null) {
+                    ResourceContentUtil.loadResourcesListOfTopicFromContentServer(currentTopicBean);
+                }
+            } else {
+                currentTopicBean = new TopicBean(true);
+            }
         }
         return currentTopicBean;
     }
@@ -201,17 +214,19 @@ public class ResourcesBackingBean {
     public List<ResourceBean> getCurrentPageTopicResources() {
         if (currentPageTopicResources == null) {
             currentPageTopicResources = new ArrayList<ResourceBean>();
-            int filteredTopicResourcesSize = getFilteredTopicResources().size();
-            int currentPageStartIndex = (getCurrentPageIndex() - 1) * NUMBER_RESOURCES_PER_PAGE;
-            int currentPageEndIndex = (getCurrentPageIndex() * NUMBER_RESOURCES_PER_PAGE);
-            if (currentPageEndIndex > filteredTopicResourcesSize) {
-                currentPageEndIndex = filteredTopicResourcesSize;
+//            int filteredTopicResourcesSize = getFilteredTopicResources().size();
+            int filteredTopicResourcesSize = getCurrentTopicBean().getFilteredTopicResources() != null ? getCurrentTopicBean().getFilteredTopicResources().size() : 0;
+            if(filteredTopicResourcesSize > 0){
+                int currentPageStartIndex = (getCurrentPageIndex() - 1) * NUMBER_RESOURCES_PER_PAGE;
+                int currentPageEndIndex = (getCurrentPageIndex() * NUMBER_RESOURCES_PER_PAGE);
+                if (currentPageEndIndex > filteredTopicResourcesSize) {
+                    currentPageEndIndex = filteredTopicResourcesSize;
+                }
+    
+                for (int i = currentPageStartIndex; i < currentPageEndIndex; i++) {
+                    currentPageTopicResources.add(getFilteredTopicResources().get(i));
+                }
             }
-
-            for (int i = currentPageStartIndex; i < currentPageEndIndex; i++) {
-                currentPageTopicResources.add(getFilteredTopicResources().get(i));
-            }
-
             System.out.println("ResourcesBackingBean.java getCurrentPageTopicResources() = " + currentPageTopicResources);
         }
         return currentPageTopicResources;
@@ -266,11 +281,11 @@ public class ResourcesBackingBean {
     public List<ResourceBean> getFeaturedTopicResources() {
         if (featuredTopicResources == null) {
             featuredTopicResources = new ArrayList<ResourceBean>();
-            for (int i = 0; i < 4; i++) {
-                featuredTopicResources.add(getFilteredTopicResources().get(i));
-            }
-
-            System.out.println("ResourcesBackingBean.java getFeaturedTopicResources() = " + featuredTopicResources);
+//            for (int i = 0; i < 4; i++) {
+//                featuredTopicResources.add(getFilteredTopicResources().get(i));
+//            }
+//
+//            System.out.println("ResourcesBackingBean.java getFeaturedTopicResources() = " + featuredTopicResources);
         }
         return featuredTopicResources;
     }
@@ -283,6 +298,9 @@ public class ResourcesBackingBean {
     public String getResourcesCSParentFolderPath() {
         if (resourcesCSParentFolderPath == null) {
             resourcesCSParentFolderPath = Util.getPageFlowScopeParamValue("resourcesCSParentFolderPath");
+            if(resourcesCSParentFolderPath == null){
+                resourcesCSParentFolderPath = "/WebCenterSpaces-Root/Resources/";
+            }
         }
         return resourcesCSParentFolderPath;
     }
@@ -293,8 +311,8 @@ public class ResourcesBackingBean {
 
     public CommunityBean getCurrentCommunity() {
         if (currentCommunity == null) {
-            currentCommunity = getCommunities().get(getCurrentCommunityIndex());
-            if (currentCommunity.getCommunityTopics() == null) {
+            currentCommunity = getCommunities() != null && getCommunities().size() > 0 ? getCommunities().get(getCurrentCommunityIndex()) : new CommunityBean(true);
+            if (currentCommunity != null && !currentCommunity.isEmptyCommunity() && currentCommunity.getCommunityTopics() == null) {
                 ResourceContentUtil.loadCommunityTopics(currentCommunity);
             }
         }
@@ -307,7 +325,11 @@ public class ResourcesBackingBean {
 
     public List<CommunityBean> getCommunities() {
         if (communities == null) {
-            communities = ResourceContentUtil.initializeResourcesFromContentserver(getResourcesCSParentFolderPath());
+            if(getResourcesCSParentFolderPath() != null){
+                communities = ResourceContentUtil.initializeResourcesFromContentserver(getResourcesCSParentFolderPath());
+            } else {
+                communities = new ArrayList<CommunityBean>();
+            }
             System.out.println("ResourcesBackingBean.java getCommunities() = " + communities);
         }
         return communities;
@@ -335,6 +357,20 @@ public class ResourcesBackingBean {
                 break;
             }
         }
+    }
+
+    public void setCommunitiesSI(List<SelectItem> communitiesSI) {
+        this.communitiesSI = communitiesSI;
+    }
+
+    public List<SelectItem> getCommunitiesSI() {
+        if (communitiesSI == null) {
+            communitiesSI = new ArrayList<SelectItem>();
+            for (CommunityBean communityBean : getCommunities()) {
+                communitiesSI.add(new SelectItem(communityBean.getCommunityName(), communityBean.getCommunityName()));
+            }
+        }
+        return communitiesSI;
     }
 }
 

@@ -92,8 +92,8 @@
           <af:selectOneChoice id="soc4" simple="true"
                               contentStyle="width:150px;" autoSubmit="true"
                               valueChangeListener="#{viewScope.ResourcesBackingBean.onCommunityChange}">
-            <af:selectItem label="BFCC" value="BFCC" id="si9"/>
-            <af:selectItem label="PCC" value="PCC" id="si10"/>
+            <f:selectItems id="si17"
+                           value="#{viewScope.ResourcesBackingBean.communitiesSI}"/>
           </af:selectOneChoice>
         </af:panelGroupLayout>
         <af:spacer width="10" height="20" id="s17"
@@ -161,7 +161,7 @@
             </af:gridCell>
           </af:gridRow>
         </af:panelGridLayout>
-        <af:panelGroupLayout id="pgl17" layout="vertical"
+        <!--<af:panelGroupLayout id="pgl17" layout="vertical"
                              styleClass="ResourceTopBox">
           <af:outputText value="Featured #{pageFlowScope.pageTitle}"
                          styleClass="FeaturedResourceLabel" id="ot16"/>
@@ -175,10 +175,10 @@
                   <af:commandImageLink icon="/images/profile_pic_not_available.jpg"
                                        id="cil4" partialSubmit="true"
                                        clientComponent="true">
-                    <!--<af:clientListener method="showPdfInPopup" type="click"/>-->
-                    <!--<af:clientAttribute name="path" value="#{node.path}"/>-->
-                    <!--<af:clientAttribute name="name"
-                                      value="#{fn:substringBefore(node.name,'.pdf')}"/>-->
+                    --><!--<af:clientListener method="showPdfInPopup" type="click"/>--><!--
+                    --><!--<af:clientAttribute name="path" value="#{node.path}"/>--><!--
+                    --><!--<af:clientAttribute name="name"
+                                      value="#{fn:substringBefore(node.name,'.pdf')}"/>--><!--
                   </af:commandImageLink>
                   <af:spacer width="10" height="10" id="s13"/>
                   <af:outputText value="#{resource.resourceTitle}" id="ot18"
@@ -196,12 +196,12 @@
                   <af:spacer width="10" height="10" id="s14"/>
                   <af:panelGroupLayout id="pgl21" layout="horizontal">
                     <af:commandLink text="Download" id="cl2"></af:commandLink>
-                    <!--<af:goLink text="Print" id="cl2" targetFrame="_blank" destination="#{node.primaryProperty.url.renderUrl}&amp;rid=#{node.propertyMap['dRevisionID'].value}"/>-->
+                    --><!--<af:goLink text="Print" id="cl2" targetFrame="_blank" destination="#{node.primaryProperty.url.renderUrl}&amp;rid=#{node.propertyMap['dRevisionID'].value}"/>--><!--
                     <af:commandLink text="Print" id="cl3" partialSubmit="true"
                                     clientComponent="true">
-                      <!--<af:clientListener method="showPdfInNewWindowWithPrint"
-                                       type="click"/>-->
-                      <!--<af:clientAttribute name="path" value="#{node.path}"/>-->
+                      --><!--<af:clientListener method="showPdfInNewWindowWithPrint"
+                                       type="click"/>--><!--
+                      --><!--<af:clientAttribute name="path" value="#{node.path}"/>--><!--
                     </af:commandLink>
                     <f:facet name="separator">
                       <af:panelGroupLayout id="pgl20" halign="center"
@@ -217,7 +217,7 @@
               </af:panelGroupLayout>
             </af:listItem>
           </af:listView>
-        </af:panelGroupLayout>
+        </af:panelGroupLayout>-->
         <af:listView id="lv1" var="resource"
                      value="#{viewScope.ResourcesBackingBean.currentPageTopicResources}">
           <f:facet name="groupHeaderStamp"/>
@@ -282,7 +282,7 @@
                               value="#{viewScope.ResourcesBackingBean.currentPageIndex}"
                               autoSubmit="true"
                               valueChangeListener="#{viewScope.ResourcesBackingBean.onPageNumberSelection}">
-            <f:selectItems id="si17"
+            <f:selectItems id="si9"
                            value="#{viewScope.ResourcesBackingBean.pagesSI}"/>
           </af:selectOneChoice>
           <af:outputText value="of #{viewScope.ResourcesBackingBean.totalPagesSize}"

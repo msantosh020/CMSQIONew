@@ -12,6 +12,8 @@
       <parameters>
         <parameter id="pageType" value="EducationNTraining"/>
         <parameter id="pageTitle" value="Education and Training Materials"/>
+        <parameter id="resourcesCSParentFolderPath"
+                   value="/WebCenterSpaces-Root/Resources/"/>
       </parameters>
     </taskFlow>
   </executables>

@@ -5,6 +5,7 @@ import gov.cms.portal.qiocollabaration.content.beans.ContentItemBean;
 import gov.cms.portal.qiocollabaration.content.util.WCContentUtil;
 import gov.cms.portal.qiocollabaration.extension.view.resources.beans.CommunityBean;
 import gov.cms.portal.qiocollabaration.extension.view.resources.beans.ResourceBean;
+import gov.cms.portal.qiocollabaration.extension.view.resources.beans.SubTopicBean;
 import gov.cms.portal.qiocollabaration.extension.view.resources.beans.TopicBean;
 
 import java.text.ParseException;
@@ -27,11 +28,11 @@ public class ResourceContentUtil {
 
     private static WCContentUtil getWCContentUtil() {
         // Use below lines while deploying to server TODO
-        //WCContentUtil csUtil = new WCContentUtil();
+        WCContentUtil csUtil = new WCContentUtil();
         // Use below code for running local machine
         //String url = "idc://hovm1014.keste.com:4444"; TODO
-        String url = "https://<HOST_NAME>.oracleoutsourcing.com/cs/idcplg";
-        WCContentUtil csUtil = new WCContentUtil(url, "weblogic");
+//        String url = "http://10.163.64.1:16200/cs/idcplg";
+//        WCContentUtil csUtil = new WCContentUtil(url, "weblogic");
         return csUtil;
     }
 
@@ -57,8 +58,8 @@ public class ResourceContentUtil {
                 communityBean.setCollectionPath(contentFolder.getCollectionPath());
                 communityBean.setParentCollectionId(contentFolder.getParentCollectionId());
                 communityBean.setCollectionId(contentFolder.getCollectionId());
-                communityBean.setCommunityName(contentFolder.getTitle());
-                communityBean.setCommunityCode(contentFolder.getTitle());
+                communityBean.setCommunityName(contentFolder.getCollectionName());
+                communityBean.setCommunityCode(contentFolder.getCollectionName());
                 communities.add(communityBean);
             }
 
@@ -96,11 +97,25 @@ public class ResourceContentUtil {
     public static void loadResourcesListOfTopicFromContentServer(TopicBean topicBean) {
         System.out.println("ResourceContentUtil.java loadResourcesListOfTopicFromContentServer() starts executing topicBean = " + topicBean);
         WCContentUtil csUtil = getWCContentUtil();
-        List<ContentItemBean> contentItems = null;
+        List<ContentFolderBean> subTopicFolders = null;
+        List<SubTopicBean> subTopics = new ArrayList<SubTopicBean>();
+        SubTopicBean subTopicBean = null;
+        List<ContentItemBean> subTopicsContentItems = null;
+        List<ResourceBean> allTopicsContentItems = new ArrayList<ResourceBean>();
         try {
-            contentItems = csUtil.getFolderContentItemsByCollectionPath(topicBean.getCollectionPath());
-            System.out.println("ResourceContentUtil.java loadResourcesListOfTopicFromContentServer() contentItems = " + contentItems);
-            topicBean.setTopicResources(getResources(contentItems));
+            subTopicFolders = csUtil.getSubFolders(topicBean.getCollectionId());
+            System.out.println("ResourceContentUtil.java loadResourcesListOfTopicFromContentServer() contentItems = " + subTopicFolders);
+            for (ContentFolderBean contentFolder : subTopicFolders) {
+                subTopicBean = getSubTopicBean(contentFolder);
+                subTopics.add(subTopicBean);
+                subTopicsContentItems = csUtil.getFolderContentItemsByCollectionID(subTopicBean.getCollectionId());
+                subTopicBean.setTopicResources(getResources(subTopicsContentItems));
+                allTopicsContentItems.addAll(subTopicBean.getTopicResources());
+            }
+            topicBean.setFilteredSubTopics(subTopics);
+            topicBean.setFilteredTopicResources(allTopicsContentItems);
+            topicBean.setTopicResources(allTopicsContentItems);
+            
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("ResourceContentUtil.java loadResourcesListOfTopicFromContentServer() Exception is " + e);
@@ -125,9 +140,21 @@ public class ResourceContentUtil {
         topicBean.setCollectionPath(contentFolder.getCollectionPath());
         topicBean.setFolderType(contentFolder.getFolderType());
         topicBean.setParentCollectionId(contentFolder.getParentCollectionId());
-        topicBean.setTopicName(contentFolder.getTitle());
+        topicBean.setCollectionId(contentFolder.getCollectionId());
+        topicBean.setTopicName(contentFolder.getCollectionName());
         topicBean.setTopicTaskTag(contentFolder.getComments());
         return topicBean;
+    }
+    
+    private static SubTopicBean getSubTopicBean(ContentFolderBean contentFolder) {
+        SubTopicBean subTopicBean = new SubTopicBean();
+        subTopicBean.setCollectionPath(contentFolder.getCollectionPath());
+        subTopicBean.setFolderType(contentFolder.getFolderType());
+        subTopicBean.setParentCollectionId(contentFolder.getParentCollectionId());
+        subTopicBean.setCollectionId(contentFolder.getCollectionId());
+        subTopicBean.setSubTopicName(contentFolder.getCollectionName());
+        subTopicBean.setSubTopicTaskTag(contentFolder.getComments());
+        return subTopicBean;
     }
 
     private static List<ResourceBean> getResources(List<ContentItemBean> contentItems) {
@@ -204,7 +231,7 @@ public class ResourceContentUtil {
     }
 
     public static void main(String[] args) {
-        List<CommunityBean> allTopicsList = getAllTopicsListFromContentserver("");
+        List<CommunityBean> allTopicsList = getAllTopicsListFromContentserver("/WebCenterSpaces-Root/Resources/");
         System.out.println(allTopicsList);
     }
 }

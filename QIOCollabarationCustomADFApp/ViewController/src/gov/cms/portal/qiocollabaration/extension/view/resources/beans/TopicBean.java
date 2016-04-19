@@ -11,6 +11,11 @@ public class TopicBean implements Serializable {
     public TopicBean() {
         super();
     }
+    
+    public TopicBean(boolean emptyTopic) {
+        super();
+        this.emptyTopic = emptyTopic;
+    }
 
     public TopicBean(String topicName, String topicTaskTag) {
         super();
@@ -24,6 +29,8 @@ public class TopicBean implements Serializable {
     private String parentCollectionId;
     private String folderType;
     private String collectionPath;
+    private String collectionId;
+    private boolean emptyTopic;
 
     public void setTopicName(String topicName) {
         this.topicName = topicName;
@@ -43,6 +50,7 @@ public class TopicBean implements Serializable {
 
     private List<ResourceBean> topicResources;
     private List<ResourceBean> filteredTopicResources;
+    private List<SubTopicBean> filteredSubTopics;
 
     public void setTopicResources(List<ResourceBean> topicResources) {
         this.topicResources = topicResources;
@@ -90,5 +98,30 @@ public class TopicBean implements Serializable {
 
     public String getCollectionPath() {
         return collectionPath;
+    }
+
+    public void setFilteredSubTopics(List<SubTopicBean> filteredSubTopics) {
+        this.filteredSubTopics = filteredSubTopics;
+    }
+
+    public List<SubTopicBean> getFilteredSubTopics() {
+        return filteredSubTopics;
+    }
+
+
+    public void setCollectionId(String collectionId) {
+        this.collectionId = collectionId;
+    }
+
+    public String getCollectionId() {
+        return collectionId;
+    }
+
+    public void setEmptyTopic(boolean emptyTopic) {
+        this.emptyTopic = emptyTopic;
+    }
+
+    public boolean isEmptyTopic() {
+        return emptyTopic;
     }
 }
