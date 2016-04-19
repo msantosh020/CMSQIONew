@@ -121,6 +121,9 @@
                      <hash n="filters">
                         <list n="rules">
                            <hash>
+                              <value n="pattern" v="WEB-INF/web.xml"/>
+                           </hash>
+                           <hash>
                               <value n="pattern" v="WEB-INF/"/>
                               <value n="type" v="1"/>
                            </hash>
