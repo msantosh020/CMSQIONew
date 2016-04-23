@@ -117,23 +117,26 @@
           </af:commandButton>
         </af:panelGroupLayout>
         <af:spacer width="10" height="20" id="s19"/>
-        <af:iterator id="i1" var="topic" varStatus="vs"
-                     value="#{viewScope.ResourcesBackingBean.currentCommunity.communityTopics}">
-          <af:panelGroupLayout id="pgl8" layout="horizontal">
-            <af:commandImageLink text="#{topic.topicName}" id="cil1"
-                                 icon="/images/topic_expand_icon.PNG"
-                                 partialSubmit="true"
-                                 actionListener="#{viewScope.ResourcesBackingBean.onTopicSelectionAction}">
-              <f:attribute name="topicIndex" value="#{vs.index}"/>
-            </af:commandImageLink>
-            <af:spacer width="10" height="10" id="s10"/>
-            <af:outputText value="#{topic.topicTaskTag}" id="ot6"/>
-          </af:panelGroupLayout>
-          <af:spacer width="10" height="10" id="s2"/>
-        </af:iterator>
+        <af:panelGroupLayout id="pgl6" layout="vertical" valign="top"
+                             partialTriggers="soc4">
+          <af:iterator id="i1" var="topic" varStatus="vs"
+                       value="#{viewScope.ResourcesBackingBean.currentCommunity.communityTopics}">
+            <af:panelGroupLayout id="pgl8" layout="horizontal">
+              <af:commandImageLink text="#{topic.topicName}" id="cil1"
+                                   icon="/images/topic_expand_icon.PNG"
+                                   partialSubmit="true"
+                                   actionListener="#{viewScope.ResourcesBackingBean.onTopicSelectionAction}">
+                <f:attribute name="topicIndex" value="#{vs.index}"/>
+              </af:commandImageLink>
+              <af:spacer width="10" height="10" id="s10"/>
+              <af:outputText value="#{topic.topicTaskTag}" id="ot6"/>
+            </af:panelGroupLayout>
+            <af:spacer width="10" height="10" id="s2"/>
+          </af:iterator>
+        </af:panelGroupLayout>
       </af:panelGroupLayout>
-      <af:panelGroupLayout id="pgl6" layout="vertical" valign="top"
-                           partialTriggers="i1:cil1 soc7">
+      <af:panelGroupLayout id="pgl17" layout="vertical" valign="top"
+                           partialTriggers="i1:cil1 soc7 soc4">
         <af:panelGridLayout id="pgl9">
           <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
             <af:gridCell marginStart="5px" width="50%" id="gc1">
@@ -143,7 +146,7 @@
             <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2"
                          halign="end">
               <af:commandButton text="View Task Calendar and Contacts" id="cb3"
-                                styleClass="QIUButton" inlineStyle="width:230px"   
+                                styleClass="QIUButton" inlineStyle="width:230px"
                                 actionListener="#{navigationContext.processAction}"
                                 action="pprnav"
                                 rendered="#{pageFlowScope.pageType eq 'EducationNTraining'}">
@@ -152,7 +155,7 @@
               </af:commandButton>
               <af:spacer width="10" height="10" id="s20"/>
               <af:commandButton text="Upload Resource" id="cb6"
-                                styleClass="ResourceUploadButton"                                
+                                styleClass="ResourceUploadButton"
                                 actionListener="#{navigationContext.processAction}"
                                 action="pprnav">
                 <f:attribute name="node"
@@ -175,10 +178,16 @@
                   <af:commandImageLink icon="/images/profile_pic_not_available.jpg"
                                        id="cil4" partialSubmit="true"
                                        clientComponent="true">
-                    --><!--<af:clientListener method="showPdfInPopup" type="click"/>--><!--
-                    --><!--<af:clientAttribute name="path" value="#{node.path}"/>--><!--
-                    --><!--<af:clientAttribute name="name"
-                                      value="#{fn:substringBefore(node.name,'.pdf')}"/>--><!--
+                    -->
+        <!--<af:clientListener method="showPdfInPopup" type="click"/>-->
+        <!--
+                    -->
+        <!--<af:clientAttribute name="path" value="#{node.path}"/>-->
+        <!--
+                    -->
+        <!--<af:clientAttribute name="name"
+                                      value="#{fn:substringBefore(node.name,'.pdf')}"/>-->
+        <!--
                   </af:commandImageLink>
                   <af:spacer width="10" height="10" id="s13"/>
                   <af:outputText value="#{resource.resourceTitle}" id="ot18"
@@ -196,12 +205,18 @@
                   <af:spacer width="10" height="10" id="s14"/>
                   <af:panelGroupLayout id="pgl21" layout="horizontal">
                     <af:commandLink text="Download" id="cl2"></af:commandLink>
-                    --><!--<af:goLink text="Print" id="cl2" targetFrame="_blank" destination="#{node.primaryProperty.url.renderUrl}&amp;rid=#{node.propertyMap['dRevisionID'].value}"/>--><!--
+                    -->
+        <!--<af:goLink text="Print" id="cl2" targetFrame="_blank" destination="#{node.primaryProperty.url.renderUrl}&amp;rid=#{node.propertyMap['dRevisionID'].value}"/>-->
+        <!--
                     <af:commandLink text="Print" id="cl3" partialSubmit="true"
                                     clientComponent="true">
-                      --><!--<af:clientListener method="showPdfInNewWindowWithPrint"
-                                       type="click"/>--><!--
-                      --><!--<af:clientAttribute name="path" value="#{node.path}"/>--><!--
+                      -->
+        <!--<af:clientListener method="showPdfInNewWindowWithPrint"
+                                       type="click"/>-->
+        <!--
+                      -->
+        <!--<af:clientAttribute name="path" value="#{node.path}"/>-->
+        <!--
                     </af:commandLink>
                     <f:facet name="separator">
                       <af:panelGroupLayout id="pgl20" halign="center"

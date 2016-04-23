@@ -91,9 +91,9 @@ public class ResourcesBackingBean {
                 }
                 filteredTopicResources = currentTopic.getFilteredTopicResources();
             } catch (Exception e) {
-                filteredTopicResources =  new ArrayList<ResourceBean>();
+                filteredTopicResources = new ArrayList<ResourceBean>();
             }
-            
+
         }
         return filteredTopicResources;
     }
@@ -112,7 +112,7 @@ public class ResourcesBackingBean {
 
     public TopicBean getCurrentTopicBean() {
         if (currentTopicBean == null) {
-            if(!getCurrentCommunity().isEmptyCommunity()){
+            if (!getCurrentCommunity().isEmptyCommunity()) {
                 currentTopicBean = getCurrentCommunity().getCommunityTopics().get(getCurrentTopicIndex());
                 if (currentTopicBean.getTopicResources() == null) {
                     ResourceContentUtil.loadResourcesListOfTopicFromContentServer(currentTopicBean);
@@ -127,6 +127,7 @@ public class ResourcesBackingBean {
     public void onTopicSelectionAction(ActionEvent actionEvent) {
         // Add event code here...
         Integer topicIndex = (Integer)actionEvent.getComponent().getAttributes().get("topicIndex");
+        System.out.println("ResourcesBackingBean.java onTopicSelectionAction() starts executing topicIndex=" + topicIndex);
         setCurrentTopicIndex(topicIndex);
         setFilteredTopicResources(null);
         setCurrentTopicBean(null);
@@ -134,6 +135,7 @@ public class ResourcesBackingBean {
         setPagesSI(null);
         setTotalPagesSize(null);
         setCurrentPageIndex(1);
+        System.out.println("ResourcesBackingBean.java onTopicSelectionAction() end of executing ");
     }
 
     public void setResourceSearchBean(ResourceSearchBean resourceSearchBean) {
@@ -214,15 +216,15 @@ public class ResourcesBackingBean {
     public List<ResourceBean> getCurrentPageTopicResources() {
         if (currentPageTopicResources == null) {
             currentPageTopicResources = new ArrayList<ResourceBean>();
-//            int filteredTopicResourcesSize = getFilteredTopicResources().size();
+            //            int filteredTopicResourcesSize = getFilteredTopicResources().size();
             int filteredTopicResourcesSize = getCurrentTopicBean().getFilteredTopicResources() != null ? getCurrentTopicBean().getFilteredTopicResources().size() : 0;
-            if(filteredTopicResourcesSize > 0){
+            if (filteredTopicResourcesSize > 0) {
                 int currentPageStartIndex = (getCurrentPageIndex() - 1) * NUMBER_RESOURCES_PER_PAGE;
                 int currentPageEndIndex = (getCurrentPageIndex() * NUMBER_RESOURCES_PER_PAGE);
                 if (currentPageEndIndex > filteredTopicResourcesSize) {
                     currentPageEndIndex = filteredTopicResourcesSize;
                 }
-    
+
                 for (int i = currentPageStartIndex; i < currentPageEndIndex; i++) {
                     currentPageTopicResources.add(getFilteredTopicResources().get(i));
                 }
@@ -281,11 +283,11 @@ public class ResourcesBackingBean {
     public List<ResourceBean> getFeaturedTopicResources() {
         if (featuredTopicResources == null) {
             featuredTopicResources = new ArrayList<ResourceBean>();
-//            for (int i = 0; i < 4; i++) {
-//                featuredTopicResources.add(getFilteredTopicResources().get(i));
-//            }
-//
-//            System.out.println("ResourcesBackingBean.java getFeaturedTopicResources() = " + featuredTopicResources);
+            //            for (int i = 0; i < 4; i++) {
+            //                featuredTopicResources.add(getFilteredTopicResources().get(i));
+            //            }
+            //
+            //            System.out.println("ResourcesBackingBean.java getFeaturedTopicResources() = " + featuredTopicResources);
         }
         return featuredTopicResources;
     }
@@ -298,7 +300,7 @@ public class ResourcesBackingBean {
     public String getResourcesCSParentFolderPath() {
         if (resourcesCSParentFolderPath == null) {
             resourcesCSParentFolderPath = Util.getPageFlowScopeParamValue("resourcesCSParentFolderPath");
-            if(resourcesCSParentFolderPath == null){
+            if (resourcesCSParentFolderPath == null) {
                 resourcesCSParentFolderPath = "/WebCenterSpaces-Root/Resources/";
             }
         }
@@ -325,7 +327,7 @@ public class ResourcesBackingBean {
 
     public List<CommunityBean> getCommunities() {
         if (communities == null) {
-            if(getResourcesCSParentFolderPath() != null){
+            if (getResourcesCSParentFolderPath() != null) {
                 communities = ResourceContentUtil.initializeResourcesFromContentserver(getResourcesCSParentFolderPath());
             } else {
                 communities = new ArrayList<CommunityBean>();
