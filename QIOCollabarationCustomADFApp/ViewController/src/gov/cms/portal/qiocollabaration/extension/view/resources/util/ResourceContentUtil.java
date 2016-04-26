@@ -2,6 +2,7 @@ package gov.cms.portal.qiocollabaration.extension.view.resources.util;
 
 import gov.cms.portal.qiocollabaration.content.beans.ContentFolderBean;
 import gov.cms.portal.qiocollabaration.content.beans.ContentItemBean;
+import gov.cms.portal.qiocollabaration.content.beans.ResourceSearchBean;
 import gov.cms.portal.qiocollabaration.content.util.WCContentUtil;
 import gov.cms.portal.qiocollabaration.extension.view.resources.beans.CommunityBean;
 import gov.cms.portal.qiocollabaration.extension.view.resources.beans.ResourceBean;
@@ -31,8 +32,8 @@ public class ResourceContentUtil {
         WCContentUtil csUtil = new WCContentUtil();
         // Use below code for running local machine
         //String url = "idc://hovm1014.keste.com:4444"; TODO
-//        String url = "http://10.163.64.1:16200/cs/idcplg";
-//        WCContentUtil csUtil = new WCContentUtil(url, "weblogic");
+        //        String url = "http://10.163.64.1:16200/cs/idcplg";
+        //        WCContentUtil csUtil = new WCContentUtil(url, "weblogic");
         return csUtil;
     }
 
@@ -115,7 +116,7 @@ public class ResourceContentUtil {
             topicBean.setFilteredSubTopics(subTopics);
             topicBean.setFilteredTopicResources(allTopicsContentItems);
             topicBean.setTopicResources(allTopicsContentItems);
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("ResourceContentUtil.java loadResourcesListOfTopicFromContentServer() Exception is " + e);
@@ -145,7 +146,7 @@ public class ResourceContentUtil {
         topicBean.setTopicTaskTag(contentFolder.getComments());
         return topicBean;
     }
-    
+
     private static SubTopicBean getSubTopicBean(ContentFolderBean contentFolder) {
         SubTopicBean subTopicBean = new SubTopicBean();
         subTopicBean.setCollectionPath(contentFolder.getCollectionPath());
@@ -229,9 +230,33 @@ public class ResourceContentUtil {
 
         return allTopicsList;
     }
+    
+    public static List<CommunityBean> searchResurces(String topFolderPath, ResourceSearchBean searchBean){
+        System.out.println("ResourceContentUtil.java searchResurces() starts executing searchBean = " + searchBean +";; topFolderPath="+topFolderPath);
+        List<CommunityBean> communities = new ArrayList<CommunityBean>();
+        WCContentUtil csUtil = getWCContentUtil();
+        List<ContentFolderBean> communityFolders = null;
+        CommunityBean communityBean = null;
+        try {
+            String collectionId =  csUtil.getFolderCollectionId(topFolderPath); 
+            System.out.println("collectionId =" + collectionId);
+            List<ContentItemBean> contentList = csUtil.searchFileByTitleInFolder(collectionId, searchBean);
+            
+            System.out.println("ResourceContentUtil.java initializeResources() communities = " + communities);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("ResourceContentUtil.java initializeResources() Exception is " + e);
+        }
+        return communities;
+    }
 
-    public static void main(String[] args) {
-        List<CommunityBean> allTopicsList = getAllTopicsListFromContentserver("/WebCenterSpaces-Root/Resources/");
-        System.out.println(allTopicsList);
+    public static void main(String[] args) throws Exception {
+        //List<CommunityBean> allTopicsList = getAllTopicsListFromContentserver("/WebCenterSpaces-Root/Resources/");
+        String url = "http://10.163.64.1:16200/cs/idcplg";
+        WCContentUtil csUtil = new WCContentUtil(url, "weblogic");
+        String collectionId = csUtil.getFolderCollectionId("/WebCenterSpaces-Root/Resources/"); 
+        System.out.println("collectionId =" + collectionId);
+        List<ContentItemBean> contentList = csUtil.searchFileByTitleInFolder("QIN", collectionId);
+        System.out.println("contentList =" + contentList);
     }
 }

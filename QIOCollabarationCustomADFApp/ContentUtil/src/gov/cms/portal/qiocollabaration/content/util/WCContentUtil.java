@@ -3,6 +3,7 @@ package gov.cms.portal.qiocollabaration.content.util;
 
 import gov.cms.portal.qiocollabaration.content.beans.ContentFolderBean;
 import gov.cms.portal.qiocollabaration.content.beans.ContentItemBean;
+import gov.cms.portal.qiocollabaration.content.beans.ResourceSearchBean;
 import gov.cms.portal.qiocollabaration.content.exception.CustomException;
 
 import java.io.InputStream;
@@ -138,7 +139,7 @@ public class WCContentUtil implements Serializable {
 
     public List<ContentItemBean> getFolderContentItemsByCollectionPath(String collectionPath) throws IdcClientException, ParseException, NamingException {
         //logger.fine("Start of getFolderContentItemsByCollectionPath");
-        System.out.println("WCContentUtil.java getFolderContentItemsByCollectionPath() starts executing collectionPath= "+collectionPath);
+        System.out.println("WCContentUtil.java getFolderContentItemsByCollectionPath() starts executing collectionPath= " + collectionPath);
         List<ContentItemBean> contentItems = null;
         ServiceResponse response = null;
         DataBinder dataBinder = null;
@@ -153,7 +154,7 @@ public class WCContentUtil implements Serializable {
                 String connName = utils.getDefaultConnectionName();
                 userContext = utils.getDefaultIdcContext(connName);
 
-//               IdcContext userContext = new IdcContext("weblogic");
+                //               IdcContext userContext = new IdcContext("weblogic");
 
                 response = idcClient.sendRequest(userContext, dataBinder);
                 DataBinder serverBinder = response.getResponseAsBinder();
@@ -172,12 +173,12 @@ public class WCContentUtil implements Serializable {
                 //logger.severe("Error in getFolderContentItemsByCollectionPath - " + e);
                 e.printStackTrace();
                 throw e;
-            } 
-//            catch (NamingException e) {
-//                //logger.severe("Error in getFolderContentItemsByCollectionPath - " + e);
-//                e.printStackTrace();
-//                throw e;
-//            }            
+            }
+            //            catch (NamingException e) {
+            //                //logger.severe("Error in getFolderContentItemsByCollectionPath - " + e);
+            //                e.printStackTrace();
+            //                throw e;
+            //            }
             finally {
                 if (response != null) {
                     response.close();
@@ -185,13 +186,13 @@ public class WCContentUtil implements Serializable {
             }
         }
         //logger.fine("End of getFolderContentItemsByCollectionPath");
-        System.out.println("WCContentUtil.java getFolderContentItemsByCollectionPath() contentItems= "+contentItems);
+        System.out.println("WCContentUtil.java getFolderContentItemsByCollectionPath() contentItems= " + contentItems);
         return contentItems;
     }
-    
+
     public List<ContentItemBean> getFolderContentItemsByCollectionID(String parentFolderID) throws IdcClientException, ParseException, NamingException {
         //logger.fine("Start of getFolderContentItemsByCollectionPath");
-        System.out.println("WCContentUtil.java getFolderContentItemsByCollectionID() starts executing parentFolderID= "+parentFolderID);
+        System.out.println("WCContentUtil.java getFolderContentItemsByCollectionID() starts executing parentFolderID= " + parentFolderID);
         List<ContentItemBean> contentItems = null;
         ServiceResponse response = null;
         DataBinder dataBinder = null;
@@ -202,11 +203,11 @@ public class WCContentUtil implements Serializable {
                 dataBinder.putLocal(IDCSERVICE, COLLECTION_CONTENT_SERVICE);
                 dataBinder.putLocal(hasCollectionID, TRUE);
                 dataBinder.putLocal(dCollectionID, parentFolderID);
-                    IdcContext userContext = null;
-                    String connName = utils.getDefaultConnectionName();
-                    userContext = utils.getDefaultIdcContext(connName);
+                IdcContext userContext = null;
+                String connName = utils.getDefaultConnectionName();
+                userContext = utils.getDefaultIdcContext(connName);
 
-//               IdcContext userContext = new IdcContext("weblogic");
+                //               IdcContext userContext = new IdcContext("weblogic");
 
                 response = idcClient.sendRequest(userContext, dataBinder);
                 DataBinder serverBinder = response.getResponseAsBinder();
@@ -225,12 +226,12 @@ public class WCContentUtil implements Serializable {
                 //logger.severe("Error in getFolderContentItemsByCollectionPath - " + e);
                 e.printStackTrace();
                 throw e;
-            } 
-    //            catch (NamingException e) {
-    //                //logger.severe("Error in getFolderContentItemsByCollectionPath - " + e);
-    //                e.printStackTrace();
-    //                throw e;
-    //            }
+            }
+            //            catch (NamingException e) {
+            //                //logger.severe("Error in getFolderContentItemsByCollectionPath - " + e);
+            //                e.printStackTrace();
+            //                throw e;
+            //            }
             finally {
                 if (response != null) {
                     response.close();
@@ -238,7 +239,7 @@ public class WCContentUtil implements Serializable {
             }
         }
         //logger.fine("End of getFolderContentItemsByCollectionPath");
-        System.out.println("WCContentUtil.java getFolderContentItemsByCollectionID() contentItems= "+contentItems);
+        System.out.println("WCContentUtil.java getFolderContentItemsByCollectionID() contentItems= " + contentItems);
         return contentItems;
     }
 
@@ -268,6 +269,9 @@ public class WCContentUtil implements Serializable {
         item.setSecurityGroup(obj.get(dSecurityGroup));
         item.setDescription(obj.get(xDescription));
         item.setContentCategory(obj.get(xContentCategory));
+        item.setCommunityName(obj.get("xorigin"));
+        item.setSubTopicName(obj.get("xsubtopic"));
+        item.setTopicsNames(obj.get("xtopicname"));
 
         if (obj.get(dDocLastModifiedDate) != null) {
             try {
@@ -314,7 +318,7 @@ public class WCContentUtil implements Serializable {
         item.setRevisionLabel(obj.get(dRevLabel));
         item.setTagNames(obj.get("xsbiApprovalType"));
         item.setTopicsNames(obj.get("xsbiCreatedBy"));
-        
+
         return item;
     }
 
@@ -499,14 +503,82 @@ public class WCContentUtil implements Serializable {
         return isUndoCheckOutSuccessful;
     }
 
+    public String getFolderCollectionId(String folderPath) {
+        String folderID = null;
+        DataBinder dataBinder = null;
+        ServiceResponse response = null;
+        DataBinder serverBinder = null;
+        try {
+            //            IdcContext userContext = null;
+            //            String connName = utils.getDefaultConnectionName();
+            //            userContext = utils.getDefaultIdcContext(connName);
+            IdcContext userContext = new IdcContext("weblogic");
+            dataBinder = idcClient.createBinder();
+            dataBinder.putLocal("IdcService", "COLLECTION_INFO");
+            dataBinder.putLocal("hasCollectionPath", "true");
+            dataBinder.putLocal("dCollectionPath", folderPath);
+
+            response = idcClient.sendRequest(userContext, dataBinder);
+            serverBinder = response.getResponseAsBinder();
+            DataResultSet rs = serverBinder.getResultSet("PATH");
+            DataObject da = rs.getRows().get(rs.getRows().size() - 1);
+            folderID = da.get("dCollectionID");
+        } catch (Exception e) {
+            //logger.severe("Error in undoCheckOutContentByDocName - " + e);
+            e.printStackTrace();
+        } finally {
+            if (response != null) {
+                response.close();
+            }
+        }
+        return folderID;
+    }
+
     public List<ContentItemBean> searchFileByTitleInFolder(String title, String collectionId) throws ParseException, IdcClientException, NamingException {
+        StringBuilder queryText = new StringBuilder();
+        //        if (title != null && !"".equals(title)) {
+        //            queryText.append("dDocTitle <substring> `" + title + "` ");
+        //            queryText.append("<AND> xCollectionID = `" + collectionId + "` ");
+        //        } else {
+        //            queryText.append("xCollectionID = `" + collectionId + "` ");
+        //        }
+        queryText.append("dDocTitle <substring> `" + title + "` ");
+        return getContentItemsFromQueryInFolder(collectionId, queryText.toString(), null, null);
+    }
+
+    public List<ContentItemBean> searchFileByTitleInFolder(String collectionId, ResourceSearchBean searchBean) throws ParseException, IdcClientException, NamingException {
+        StringBuilder queryText = new StringBuilder();
+        addQueryStr(queryText, "dDocTitle", searchBean.getTitle());
+//        addQueryStr(queryText, "dDocTitle", searchBean.getAuthor());
+//        addQueryStr(queryText, "dDocTitle", searchBean.getTitle());
+//        addQueryStr(queryText, "dDocTitle", searchBean.getTitle());
+//        addQueryStr(queryText, "dDocTitle", searchBean.getTitle());
+//        addQueryStr(queryText, "dDocTitle", searchBean.getTitle());
+        return getContentItemsFromQueryInFolder(collectionId, queryText.toString(), null, null);
+    }
+
+    private boolean isEmpty(String str) {
+        if (str != null && !str.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    public void addQueryStr(StringBuilder queryText, String docTag, String searchValue) {
+        if (!isEmpty(searchValue) && queryText.length() > 0) {
+            queryText.append("<AND> " + docTag + " = `" + searchValue + "` ");
+        }
+    }
+
+    public List<ContentItemBean> searchFileByTitleInFolderPath(String title, String collectionPath) throws ParseException, IdcClientException, NamingException {
         StringBuilder queryText = new StringBuilder();
         if (title != null && !"".equals(title)) {
             queryText.append("dDocTitle <substring> `" + title + "` ");
-            queryText.append("<AND> xCollectionID = `" + collectionId + "` ");
+            queryText.append("<AND> dCollectionPath = `" + collectionPath + "` ");
         } else {
-            queryText.append("xCollectionID = `" + collectionId + "` ");
+            queryText.append("dCollectionPath = `" + collectionPath + "` ");
         }
+        queryText.append("dDocTitle <substring> `" + title + "` ");
         return getContentItemsFromQuery(queryText.toString(), null, null);
     }
 
@@ -554,9 +626,11 @@ public class WCContentUtil implements Serializable {
         List<ContentItemBean> contentItems = new ArrayList<ContentItemBean>();
 
         try {
-            IdcContext userContext = null;
-            String connName = utils.getDefaultConnectionName();
-            userContext = utils.getDefaultIdcContext(connName);
+            //            IdcContext userContext = null;
+            //            String connName = utils.getDefaultConnectionName();
+            //            userContext = utils.getDefaultIdcContext(connName);
+            IdcContext userContext = new IdcContext("weblogic");
+
             dataBinder = idcClient.createBinder();
             dataBinder.putLocal(IDCSERVICE, GET_SEARCH_RESULTS);
             dataBinder.putLocal("QueryText", queryText);
@@ -625,11 +699,113 @@ public class WCContentUtil implements Serializable {
             //logger.severe("Unable to fetch content items matching the query due to : " + e.getMessage());
             e.printStackTrace();
             throw e;
-        } catch (NamingException e) {
+        }
+        //        catch (NamingException e) {
+        //            //logger.severe("Unable to fetch content items matching the query due to : " + e.getMessage());
+        //            e.printStackTrace();
+        //            throw e;
+        //        }
+        finally {
+            if (serviceResponse != null) {
+                serviceResponse.close();
+            }
+        }
+
+        return contentItems;
+    }
+
+    public List<ContentItemBean> getContentItemsFromQueryInFolder(String folderCollectionId, String queryText, String sortField, String sortOrder) throws ParseException, IdcClientException,
+                                                                                                                                                          NamingException {
+        ServiceResponse serviceResponse = null;
+        int totalRows = 0;
+        int rowsPerPage = 0;
+        int endRow = 0;
+        int numOfPages = 0;
+        DataBinder dataBinder = null;
+        List<ContentItemBean> contentItems = new ArrayList<ContentItemBean>();
+
+        try {
+            //            IdcContext userContext = null;
+            //            String connName = utils.getDefaultConnectionName();
+            //            userContext = utils.getDefaultIdcContext(connName);
+            IdcContext userContext = new IdcContext("weblogic");
+
+            dataBinder = idcClient.createBinder();
+            dataBinder.putLocal(IDCSERVICE, GET_SEARCH_RESULTS);
+            dataBinder.putLocal("folderChildren", folderCollectionId);
+            dataBinder.putLocal("QueryText", queryText);
+
+            //            if (noOfItems != -1) {
+            //                dataBinder.putLocal("ResultCount", noOfItems + "");
+            //            }
+
+            if (sortField != null && !"".equals(sortField.trim()))
+                dataBinder.putLocal("SortField", sortField);
+
+            if (sortField != null && !"".equals(sortField.trim()))
+                dataBinder.putLocal("SortOrder", sortOrder);
+
+            serviceResponse = idcClient.sendRequest(userContext, dataBinder);
+            DataBinder responseDataBinder = serviceResponse.getResponseAsBinder();
+
+            DataResultSet dataResultSet = responseDataBinder.getResultSet("SearchResults");
+            for (DataObject obj : dataResultSet.getRows()) {
+                ContentItemBean item = getPopulatedContentItem(obj);
+                contentItems.add(item);
+            }
+
+            totalRows = Integer.parseInt(responseDataBinder.getLocal("TotalRows"));
+
+            if (totalRows > 0) {
+
+                endRow = Integer.parseInt(responseDataBinder.getLocal("EndRow"));
+                numOfPages = Integer.parseInt(responseDataBinder.getLocal("NumPages"));
+
+                // fetch the remaining results recursively using the same binder
+                if (numOfPages > 1) {
+
+                    rowsPerPage = endRow;
+                    int startRow = endRow + 1;
+                    int i = 1;
+
+                    while (i <= numOfPages) {
+
+                        if (totalRows >= (startRow + rowsPerPage - 1))
+                            endRow = startRow + rowsPerPage - 1;
+                        else
+                            endRow = totalRows;
+
+                        dataBinder.putLocal("StartRow", startRow + "");
+                        dataBinder.putLocal("EndRow", endRow + "");
+                        serviceResponse = idcClient.sendRequest(userContext, dataBinder);
+                        responseDataBinder = serviceResponse.getResponseAsBinder();
+                        dataResultSet = responseDataBinder.getResultSet("SearchResults");
+                        for (DataObject obj : dataResultSet.getRows()) {
+                            ContentItemBean item = getPopulatedContentItem(obj);
+                            contentItems.add(item);
+                        }
+
+                        startRow = endRow + 1;
+                        i++;
+                    }
+                }
+            }
+
+        } catch (IdcClientException e) {
             //logger.severe("Unable to fetch content items matching the query due to : " + e.getMessage());
             e.printStackTrace();
             throw e;
-        } finally {
+        } catch (ParseException e) {
+            //logger.severe("Unable to fetch content items matching the query due to : " + e.getMessage());
+            e.printStackTrace();
+            throw e;
+        }
+        //        catch (NamingException e) {
+        //            //logger.severe("Unable to fetch content items matching the query due to : " + e.getMessage());
+        //            e.printStackTrace();
+        //            throw e;
+        //        }
+        finally {
             if (serviceResponse != null) {
                 serviceResponse.close();
             }
@@ -917,7 +1093,7 @@ public class WCContentUtil implements Serializable {
                 IdcContext userContext = null;
                 String connName = utils.getDefaultConnectionName();
                 userContext = utils.getDefaultIdcContext(connName);
-//                IdcContext userContext = new IdcContext("weblogic"); //TODO need to revert to above code
+                //                IdcContext userContext = new IdcContext("weblogic"); //TODO need to revert to above code
                 response = idcClient.sendRequest(userContext, dataBinder);
                 DataBinder serverBinder = response.getResponseAsBinder();
 
@@ -944,13 +1120,13 @@ public class WCContentUtil implements Serializable {
         }
         return subfolders;
     }
-    
+
     public List<ContentFolderBean> getSubFoldersByCollectionPath(String collectionPath) throws IdcClientException, NamingException {
         List<ContentFolderBean> subfolders = new ArrayList<ContentFolderBean>();
         ServiceResponse response = null;
         DataBinder dataBinder = null;
         if (collectionPath != null) {
-            try {                
+            try {
                 dataBinder = this.idcClient.createBinder();
                 dataBinder.putLocal(IDCSERVICE, SUBFOLDERS_SERVICE);
                 dataBinder.putLocal(hasCollectionPath, TRUE);
@@ -958,10 +1134,10 @@ public class WCContentUtil implements Serializable {
                 IdcContext userContext = null;
                 String connName = utils.getDefaultConnectionName();
                 userContext = utils.getDefaultIdcContext(connName);
-//                IdcContext userContext = new IdcContext("weblogic"); //TODO need to revert to above code
+                //                IdcContext userContext = new IdcContext("weblogic"); //TODO need to revert to above code
                 response = idcClient.sendRequest(userContext, dataBinder);
                 DataBinder serverBinder = response.getResponseAsBinder();
-                
+
 
                 DataResultSet resultSet = serverBinder.getResultSet(COLLECTIONS_RESULTSET);
 
@@ -978,7 +1154,7 @@ public class WCContentUtil implements Serializable {
             } catch (IdcClientException e) {
                 //logger.severe("Unable to fetch the sub folders information due to : " + e.getMessage());
                 throw e;
-            }finally {
+            } finally {
                 if (response != null) {
                     response.close();
                 }
@@ -986,7 +1162,7 @@ public class WCContentUtil implements Serializable {
         }
         return subfolders;
     }
-    
+
     public static void deleteContentItem(String dId, String dDocName) {
         ServiceResponse serviceResponse = null;
         try {
@@ -1020,11 +1196,11 @@ public class WCContentUtil implements Serializable {
 
 
     public static void main(String[] args) throws NamingException {
-        
+
         WCContentUtil scUtil = new WCContentUtil("idc://hovm1014.keste.com:4444", "weblogic");
         List<ContentItemBean> results = null;
         try {
-          //  results = scUtil.getFolderContentItemsByCollectionPath("/Contribution Folders/TestPortal/Resources/Images/");
+            //  results = scUtil.getFolderContentItemsByCollectionPath("/Contribution Folders/TestPortal/Resources/Images/");
             results = scUtil.getFolderContentItemsByCollectionPath("/WebCenterSpaces-Root/Resources/");
         } catch (IdcClientException e) {
         } catch (ParseException e) {

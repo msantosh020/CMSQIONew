@@ -91,6 +91,7 @@
           <af:outputText value="Community Filter" id="ot5"/>
           <af:selectOneChoice id="soc4" simple="true"
                               contentStyle="width:150px;" autoSubmit="true"
+                              value="#{viewScope.ResourcesBackingBean.selectedCommunit}"
                               valueChangeListener="#{viewScope.ResourcesBackingBean.onCommunityChange}">
             <f:selectItems id="si17"
                            value="#{viewScope.ResourcesBackingBean.communitiesSI}"/>

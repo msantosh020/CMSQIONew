@@ -38,6 +38,8 @@ public class ContentItemBean extends ContentBean implements Serializable {
     private String description;
     private String tagNames;
     private String topicsNames;
+    private String communityName;
+    private String subTopicName;
 
 
     public void setDocId(String docId) {
@@ -212,5 +214,21 @@ public class ContentItemBean extends ContentBean implements Serializable {
 
     public String getTopicsNames() {
         return topicsNames;
+    }
+
+    public void setCommunityName(String communityName) {
+        this.communityName = communityName;
+    }
+
+    public String getCommunityName() {
+        return communityName;
+    }
+
+    public void setSubTopicName(String subTopicName) {
+        this.subTopicName = subTopicName;
+    }
+
+    public String getSubTopicName() {
+        return subTopicName;
     }
 }

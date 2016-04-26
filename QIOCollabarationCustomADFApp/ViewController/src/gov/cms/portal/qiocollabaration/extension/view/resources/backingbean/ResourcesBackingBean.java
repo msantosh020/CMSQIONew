@@ -1,9 +1,9 @@
 package gov.cms.portal.qiocollabaration.extension.view.resources.backingbean;
 
+import gov.cms.portal.qiocollabaration.content.beans.ResourceSearchBean;
 import gov.cms.portal.qiocollabaration.extension.view.common.util.Util;
 import gov.cms.portal.qiocollabaration.extension.view.resources.beans.CommunityBean;
 import gov.cms.portal.qiocollabaration.extension.view.resources.beans.ResourceBean;
-import gov.cms.portal.qiocollabaration.extension.view.resources.beans.ResourceSearchBean;
 import gov.cms.portal.qiocollabaration.extension.view.resources.beans.TopicBean;
 
 import gov.cms.portal.qiocollabaration.extension.view.resources.util.ContainsSearchPredicate;
@@ -37,7 +37,7 @@ public class ResourcesBackingBean {
     private List<ResourceBean> filteredTopicResources;
     private List<ResourceBean> currentPageTopicResources;
     private List<ResourceBean> featuredTopicResources;
-    private static final int NUMBER_RESOURCES_PER_PAGE = 4;
+    private static final int NUMBER_RESOURCES_PER_PAGE = 10;
     private int currentCommunityIndex = 0;
     private int currentTopicIndex = 0;
     private int currentPageIndex = 1;
@@ -47,6 +47,7 @@ public class ResourcesBackingBean {
     private List<SelectItem> pagesSI;
     private List<SelectItem> communitiesSI;
     private String resourcesCSParentFolderPath;
+    private String selectedCommunit;
 
     public void setAllTopicsList(List<TopicBean> allTopicsList) {
         this.allTopicsList = allTopicsList;
@@ -373,6 +374,17 @@ public class ResourcesBackingBean {
             }
         }
         return communitiesSI;
+    }
+
+    public void setSelectedCommunit(String selectedCommunit) {
+        this.selectedCommunit = selectedCommunit;
+    }
+
+    public String getSelectedCommunit() {
+        if (selectedCommunit == null) {
+            selectedCommunit = getCurrentCommunity().getCommunityName();
+        }
+        return selectedCommunit;
     }
 }
 
