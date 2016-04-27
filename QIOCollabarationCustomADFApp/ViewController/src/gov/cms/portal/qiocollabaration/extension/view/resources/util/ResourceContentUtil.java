@@ -279,5 +279,7 @@ public class ResourceContentUtil {
         System.out.println("collectionId =" + collectionId);
         List<ContentItemBean> contentList = csUtil.searchFileByTitleInFolder("QIN", collectionId);
         System.out.println("contentList =" + contentList);
+        List<CommunityBean> communityList = formSearchResources(contentList);
+        System.out.println("communityList =" + communityList);
     }
 }
