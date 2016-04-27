@@ -1,10 +1,18 @@
 package gov.cms.portal.qiocollabaration.extension.view.resources.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SubTopicBean {
     public SubTopicBean() {
         super();
+    }
+    
+    public SubTopicBean(String subTopicName) {
+        super();
+        this.subTopicName = subTopicName;
+        topicResources = new ArrayList<ResourceBean>();
+        filteredTopicResources = new ArrayList<ResourceBean>();
     }
     
     private String subTopicName;

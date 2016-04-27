@@ -230,18 +230,16 @@ public class ResourceContentUtil {
 
         return allTopicsList;
     }
-    
-    public static List<CommunityBean> searchResurces(String topFolderPath, ResourceSearchBean searchBean){
-        System.out.println("ResourceContentUtil.java searchResurces() starts executing searchBean = " + searchBean +";; topFolderPath="+topFolderPath);
+
+    public static List<CommunityBean> searchResurces(String topFolderPath, ResourceSearchBean searchBean) {
+        System.out.println("ResourceContentUtil.java searchResurces() starts executing searchBean = " + searchBean + ";; topFolderPath=" + topFolderPath);
         List<CommunityBean> communities = new ArrayList<CommunityBean>();
         WCContentUtil csUtil = getWCContentUtil();
-        List<ContentFolderBean> communityFolders = null;
-        CommunityBean communityBean = null;
         try {
-            String collectionId =  csUtil.getFolderCollectionId(topFolderPath); 
+            String collectionId = csUtil.getFolderCollectionId(topFolderPath);
             System.out.println("collectionId =" + collectionId);
-            List<ContentItemBean> contentList = csUtil.searchFileByTitleInFolder(collectionId, searchBean);
-            
+            List<ContentItemBean> searchContentItemsList = csUtil.searchFileByTitleInFolder(collectionId, searchBean);
+            communities = formSearchResources(searchContentItemsList);
             System.out.println("ResourceContentUtil.java initializeResources() communities = " + communities);
         } catch (Exception e) {
             e.printStackTrace();
@@ -250,11 +248,34 @@ public class ResourceContentUtil {
         return communities;
     }
 
+    private static void addResourceToCommunity(Map<String, CommunityBean> communitMap, ContentItemBean contentItemBean) {
+        CommunityBean community = communitMap.get(contentItemBean.getCommunityName());
+        if (community == null) {
+            community = new CommunityBean(contentItemBean.getCommunityName());
+            communitMap.put(contentItemBean.getCommunityName(), community);
+        }
+        community.addResource(contentItemBean.getTopicsNames(), contentItemBean.getSubTopicName(), getResourceBean(contentItemBean));
+    }
+
+    private static List<CommunityBean> formSearchResources(List<ContentItemBean> searchContentItemsList) {
+        List<CommunityBean> communityList = new ArrayList<CommunityBean>();
+        Map<String, CommunityBean> communitMap = new HashMap<String, CommunityBean>();
+        for (ContentItemBean contentItemBean : searchContentItemsList) {
+            addResourceToCommunity(communitMap, contentItemBean);
+        }
+
+        for (Map.Entry<String, CommunityBean> entry : communitMap.entrySet()) {
+            communityList.add(entry.getValue());
+        }
+
+        return communityList;
+    }
+
     public static void main(String[] args) throws Exception {
         //List<CommunityBean> allTopicsList = getAllTopicsListFromContentserver("/WebCenterSpaces-Root/Resources/");
         String url = "http://10.163.64.1:16200/cs/idcplg";
         WCContentUtil csUtil = new WCContentUtil(url, "weblogic");
-        String collectionId = csUtil.getFolderCollectionId("/WebCenterSpaces-Root/Resources/"); 
+        String collectionId = csUtil.getFolderCollectionId("/WebCenterSpaces-Root/Resources/");
         System.out.println("collectionId =" + collectionId);
         List<ContentItemBean> contentList = csUtil.searchFileByTitleInFolder("QIN", collectionId);
         System.out.println("contentList =" + contentList);

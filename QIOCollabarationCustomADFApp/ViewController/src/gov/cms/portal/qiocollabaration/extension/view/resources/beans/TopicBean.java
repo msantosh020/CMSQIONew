@@ -11,7 +11,7 @@ public class TopicBean implements Serializable {
     public TopicBean() {
         super();
     }
-    
+
     public TopicBean(boolean emptyTopic) {
         super();
         this.emptyTopic = emptyTopic;
@@ -123,5 +123,26 @@ public class TopicBean implements Serializable {
 
     public boolean isEmptyTopic() {
         return emptyTopic;
+    }
+
+    public void addResource(String subTopicName, ResourceBean resource) {
+        SubTopicBean subTopicBean = getSubTopicBean(subTopicName);
+        subTopicBean.getFilteredTopicResources().add(resource);
+        subTopicBean.getTopicResources().add(resource);
+    }
+
+    private SubTopicBean getSubTopicBean(String subTopicName) {
+        SubTopicBean subTopicBean = null;
+        for (SubTopicBean stBean : getFilteredSubTopics()) {
+            if (subTopicName.equals(stBean.getSubTopicName())) {
+                subTopicBean = stBean;
+                break;
+            }
+        }
+        if (subTopicBean == null) {
+            subTopicBean = new SubTopicBean(subTopicName);
+            getFilteredSubTopics().add(subTopicBean);
+        }
+        return subTopicBean;
     }
 }

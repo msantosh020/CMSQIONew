@@ -1,17 +1,24 @@
 package gov.cms.portal.qiocollabaration.extension.view.resources.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommunityBean {
     public CommunityBean() {
         super();
     }
-    
+
     public CommunityBean(boolean emptyCommunity) {
         super();
         this.emptyCommunity = emptyCommunity;
     }
-    
+
+    public CommunityBean(String communityName) {
+        super();
+        this.communityName = communityName;
+        this.communityTopics = new ArrayList<TopicBean>();
+    }
+
     private String communityCode;
     private String communityName;
     private String parentCollectionId;
@@ -75,4 +82,25 @@ public class CommunityBean {
     public boolean isEmptyCommunity() {
         return emptyCommunity;
     }
+
+    public void addResource(String topicName, String subTopicName, ResourceBean resource) {
+        TopicBean topicBean = getTopicBean(topicName);
+        topicBean.addResource(subTopicName, resource);
+    }
+
+    private TopicBean getTopicBean(String topicName) {
+        TopicBean topicBean = null;
+        for (TopicBean tBean : getCommunityTopics()) {
+            if (topicName.equals(tBean.getTopicName())) {
+                topicBean = tBean;
+                break;
+            }
+        }
+        if (topicBean == null) {
+            topicBean = new TopicBean(topicName, null);
+            getCommunityTopics().add(topicBean);
+        }
+        return topicBean;
+    }
+
 }

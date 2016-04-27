@@ -173,6 +173,7 @@ public class ResourcesBackingBean {
         setPagesSI(null);
         setTotalPagesSize(null);
         setCurrentPageIndex(1);
+        ResourceContentUtil.searchResurces(getResourcesCSParentFolderPath(), getResourceSearchBean());
         System.out.println("ResourcesBackingBean.java onResourceSearchAction() end of executing");
     }
 
