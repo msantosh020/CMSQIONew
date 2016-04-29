@@ -2,7 +2,7 @@
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
           xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
           xmlns:f="http://java.sun.com/jsf/core">
-  <af:panelGroupLayout id="pgl1" layout="vertical">
+  <af:panelGroupLayout id="pgl1" layout="vertical" partialTriggers="cb1 cb2">
     <af:panelGroupLayout id="pgl14" layout="horizontal">
       <af:spacer width="170" height="10" id="s9"/>
       <af:panelGroupLayout id="pgl15" layout="vertical">
@@ -28,40 +28,268 @@
             <af:selectOneChoice label="Resource Type" id="soc1"
                                 contentStyle="width:180px;" autoSubmit="true"
                                 value="#{viewScope.ResourcesBackingBean.resourceSearchBean.resourceType}">
-              <af:selectItem label="PDF" value="PDF" id="si2"/>
-              <af:selectItem label="DOCX" value="DOCX" id="si1"/>
-              <af:selectItem label="IMAGE" value="IMAGE" id="si3"/>
-              <af:selectItem label="OTHER" value="OTHER" id="si4"/>
+              <af:selectItem label="Cross-task Sharing Call"
+                             value="Cross-task Sharing Call" id="si2"/>
+              <af:selectItem label="Deliverable" value="Deliverable" id="si1"/>
+              <af:selectItem label="General Resource" value="General Resource"
+                             id="si3"/>
+              <af:selectItem label="Logic Model" value="Logic Model" id="si4"/>
+              <af:selectItem label="Office Hours" value="Office Hours"
+                             id="si10"/>
+              <af:selectItem label="Participation Agreement Sample"
+                             value="Participation Agreement Sample" id="si18"/>
+              <af:selectItem label="Root Cause Analysis"
+                             value="Root Cause Analysis" id="si19"/>
+              <af:selectItem label="Run Charts" value="Run Charts" id="si20"/>
+              <af:selectItem label="Sharing Call" value="Sharing Call"
+                             id="si21"/>
+              <af:selectItem label="Special Call" value="Special Call"
+                             id="si22"/>
+              <af:selectItem label="Template" value="Template" id="si23"/>
+              <af:selectItem label="Town Hall Meeting Agenda"
+                             value="Town Hall Meeting Agenda" id="si24"/>
+              <af:selectItem label="Town Hall Training"
+                             value="Town Hall Training" id="si25"/>
             </af:selectOneChoice>
             <af:selectOneChoice label="Format" id="soc5"
                                 contentStyle="width:180px;" autoSubmit="true"
                                 value="#{viewScope.ResourcesBackingBean.resourceSearchBean.format}">
-              <af:selectItem label="PDF" value="PDF" id="si11"/>
-              <af:selectItem label="DOCX" value="DOCX" id="si12"/>
-              <af:selectItem label="IMAGE" value="IMAGE" id="si13"/>
-              <af:selectItem label="OTHER" value="OTHER" id="si14"/>
+              <af:selectItem label="Blog Post" value="Blog Post" id="si11"/>
+              <af:selectItem label="Booklet" value="Booklet" id="si12"/>
+              <af:selectItem label="Bookmark" value="Bookmark" id="si13"/>
+              <af:selectItem label="Brochure" value="Brochure" id="si14"/>
+              <af:selectItem label="Calculator" value="Calculator" id="si135"/>
+              <af:selectItem label="Calendar or Planner"
+                             value="Calendar or Planner" id="si134"/>
+              <af:selectItem label="Chart, Diagram, or Graph"
+                             value="Chart, Diagram, or Graph" id="si133"/>
+              <af:selectItem label="Checklist or Worksheet"
+                             value="Checklist or Worksheet" id="si132"/>
+              <af:selectItem label="Contact List or Directory"
+                             value="Contact List or Directory" id="si131"/>
+              <af:selectItem label="Email or Eblast" value="Email or Eblast"
+                             id="si130"/>
+              <af:selectItem label="Fact Sheet or Tip Sheet"
+                             value="Fact Sheet or Tip Sheet" id="si129"/>
+              <af:selectItem label="FAQ" value="FAQ" id="si128"/>
+              <af:selectItem label="Flyer" value="Flyer" id="si127"/>
+              <af:selectItem label="Form" value="Form" id="si126"/>
+              <af:selectItem label="Game or Puzzle" value="Game or Puzzle"
+                             id="si125"/>
+              <af:selectItem label="Guide or Manual" value="Guide or Manual"
+                             id="si124"/>
+              <af:selectItem label="Town Hall Training"
+                             value="Town Hall Training" id="si123"/>
+              <af:selectItem label="Journal Article or White Paper"
+                             value="Journal Article or White Paper" id="si122"/>
+              <af:selectItem label="Letter, Memo, or Invitation"
+                             value="Letter, Memo, or Invitation" id="si121"/>
+              <af:selectItem label="Logo" value="Logo" id="si120"/>
+              <af:selectItem label="Magnet" value="Magnet" id="si118"/>
+              <af:selectItem label="Mousepad" value="Mousepad" id="si119"/>
+              <af:selectItem label="Newsletter" value="Newsletter" id="si117"/>
+              <af:selectItem label="Packet or Toolkit" value="Packet or Toolkit"
+                             id="si116"/>
+              <af:selectItem label="Photo Album" value="Photo Album"
+                             id="si114"/>
+              <af:selectItem label="Placemat" value="Placemat" id="si115"/>
+              <af:selectItem label="Postcard" value="Postcard" id="si113"/>
+              <af:selectItem label="Poster" value="Poster" id="si112"/>
+              <af:selectItem label="Press Release" value="Press Release"
+                             id="si111"/>
+              <af:selectItem label="Report" value="Report" id="si110"/>
+              <af:selectItem label="Placemat" value="Placemat" id="si109"/>
+              <af:selectItem label="Standard" value="Standard" id="si108"/>
+              <af:selectItem label="Stickers" value="Stickers" id="si107"/>
+              <af:selectItem label="Wallet Card" value="Wallet Card"
+                             id="si106"/>
+              <af:selectItem label="Web Badge or Web Widget"
+                             value="Web Badge or Web Widget" id="si105"/>
             </af:selectOneChoice>
             <af:selectOneChoice label="State" id="soc2"
                                 contentStyle="width:180px;" autoSubmit="true"
                                 value="#{viewScope.ResourcesBackingBean.resourceSearchBean.state}">
-              <af:selectItem label="Active" value="A" id="si5"/>
-              <af:selectItem label="InActive" value="I" id="si6"/>
+              <af:selectItem label="Alabama - AL" value="Alabama - AL"
+                             id="si104"/>
+              <af:selectItem label="Alaska - AK" value="Alaska - AK"
+                             id="si103"/>
+              <af:selectItem label="Arizona - AZ" value="Arizona - AZ"
+                             id="si102"/>
+              <af:selectItem label="Arkansas - AR" value="Arkansas - AR"
+                             id="si101"/>
+              <af:selectItem label="California - CA" value="California - CA"
+                             id="si100"/>
+              <af:selectItem label="Colorado - CO" value="Colorado - CO"
+                             id="si99"/>
+              <af:selectItem label="Commonwealth of Puerto Rico - PR"
+                             value="Commonwealth of Puerto Rico - PR"
+                             id="si98"/>
+              <af:selectItem label="Connecticut - CT" value="Connecticut - CT"
+                             id="si97"/>
+              <af:selectItem label="Delaware - DE" value="Delaware - DE"
+                             id="si96"/>
+              <af:selectItem label="District of Columbia - DC"
+                             value="District of Columbia - DC" id="si95"/>
+              <af:selectItem label="Florida - FL" value="Florida - FL"
+                             id="si94"/>
+              <af:selectItem label="Georgia - GA" value="Georgia - GA"
+                             id="si92"/>
+              <af:selectItem label="Hawaii - HI" value="Hawaii - HI" id="si93"/>
+              <af:selectItem label="Idaho - ID" value="Idaho - ID" id="si91"/>
+              <af:selectItem label="Illinois - IL" value="Illinois - IL"
+                             id="si90"/>
+              <af:selectItem label="Indiana - IN" value="Indiana - IN"
+                             id="si89"/>
+              <af:selectItem label="Iowa - IA" value="Iowa - IA" id="si88"/>
+              <af:selectItem label="Kansas - KS" value="Kansas - KS" id="si87"/>
+              <af:selectItem label="Kentucky - KY" value="Kentucky - KY"
+                             id="si85"/>
+              <af:selectItem label="Louisiana - LA" value="Louisiana - LA"
+                             id="si86"/>
+              <af:selectItem label="Maine - ME" value="Maine - ME" id="si84"/>
+              <af:selectItem label="Maryland - MD" value="Maryland - MD"
+                             id="si83"/>
+              <af:selectItem label="Massachusetts - MA"
+                             value="Massachusetts - MA" id="si82"/>
+              <af:selectItem label="Michigan - MI" value="Michigan - MI"
+                             id="si81"/>
+              <af:selectItem label="Minnesota - MN" value="Minnesota - MN"
+                             id="si80"/>
+              <af:selectItem label="Mississippi - MS" value="Mississippi - MS"
+                             id="si79"/>
+              <af:selectItem label="Missouri - MO" value="Missouri - MO"
+                             id="si78"/>
+              <af:selectItem label="Montana - MT" value="Montana - MT"
+                             id="si77"/>
+              <af:selectItem label="Nebraska - NE" value="Nebraska - NE"
+                             id="si76"/>
+              <af:selectItem label="Nevada - NV" value="Nevada - NV" id="si75"/>
+              <af:selectItem label="New Hampshire - NH"
+                             value="New Hampshire - NH" id="si74"/>
+              <af:selectItem label="New Jersey - NJ" value="New Jersey - NJ"
+                             id="si73"/>
+              <af:selectItem label="New Mexico - NM" value="New Mexico - NM"
+                             id="si72"/>
+              <af:selectItem label="New York - NY" value="New York - NY"
+                             id="si71"/>
+              <af:selectItem label="North Carolina - NC"
+                             value="North Carolina - NC" id="si70"/>
+              <af:selectItem label="North Dakota - ND" value="North Dakota - ND"
+                             id="si69"/>
+              <af:selectItem label="Ohio - OH" value="Ohio - OH" id="si68"/>
+              <af:selectItem label="Oklahoma - OK" value="Oklahoma - OK"
+                             id="si67"/>
+              <af:selectItem label="Oregon - OR" value="Oregon - OR" id="si66"/>
+              <af:selectItem label="Pennsylvania - PA" value="Pennsylvania - PA"
+                             id="si65"/>
+              <af:selectItem label="Rhode Island - RI" value="Rhode Island - RI"
+                             id="si64"/>
+              <af:selectItem label="South Carolina - SC"
+                             value="South Carolina - SC" id="si63"/>
+              <af:selectItem label="South Dakota - SD" value="South Dakota - SD"
+                             id="si62"/>
+              <af:selectItem label="Tennessee - TN" value="Tennessee - TN"
+                             id="si61"/>
+              <af:selectItem label="Texas - TX" value="Texas - TX" id="si60"/>
+              <af:selectItem label="U.S. Virgin Islands - VI"
+                             value="U.S. Virgin Islands - VI" id="si59"/>
+              <af:selectItem label="Utah - UT" value="Utah - UT" id="si58"/>
+              <af:selectItem label="Vermont - VT" value="Vermont - VT"
+                             id="si57"/>
+              <af:selectItem label="Virginia - VA" value="Virginia - VA"
+                             id="si56"/>
+              <af:selectItem label="Washington - WA" value="Washington - WA"
+                             id="si55"/>
+              <af:selectItem label="West Virginia - WV"
+                             value="West Virginia - WV" id="si54"/>
+              <af:selectItem label="Wisconsin - WI" value="Wisconsin - WI"
+                             id="si53"/>
+              <af:selectItem label="Wyoming - WY" value="Wyoming - WY"
+                             id="si52"/>
             </af:selectOneChoice>
             <af:inputText label="Author" id="it2" autoSubmit="true"
                           value="#{viewScope.ResourcesBackingBean.resourceSearchBean.author}"/>
             <af:selectOneChoice label="Organization" id="soc3"
                                 contentStyle="width:180px;" autoSubmit="true"
                                 value="#{viewScope.ResourcesBackingBean.resourceSearchBean.organization}">
-              <af:selectItem label="Active" value="A" id="si7"/>
-              <af:selectItem label="InActive" value="I" id="si8"/>
+              <af:selectItem label="Agency for Healthcare Research and Quality (AHRQ)"
+                             value="Agency for Healthcare Research and Quality (AHRQ)"
+                             id="si51"/>
+              <af:selectItem label="Alliant Quality" value="Alliant Quality"
+                             id="si50"/>
+              <af:selectItem label="Atlantic Quality Improvement Network"
+                             value="Atlantic Quality Improvement Network"
+                             id="si48"/>
+              <af:selectItem label="Atom Alliance" value="Atom Alliance"
+                             id="si49"/>
+              <af:selectItem label="Beneficiary and Family Centered Care-National Coordinating Center (BFCC-NCC)"
+                             value="Beneficiary and Family Centered Care-National Coordinating Center (BFCC-NCC)"
+                             id="si47"/>
+              <af:selectItem label="Care Reinvention through Innovation Spread National Coordinating Center (CRISP NCC)"
+                             value="Care Reinvention through Innovation Spread National Coordinating Center (CRISP NCC)"
+                             id="si46"/>
+              <af:selectItem label="Center for Improving Health for Populations and Communities (IHPC NCC)"
+                             value="Center for Improving Health for Populations and Communities (IHPC NCC)"
+                             id="si45"/>
+              <af:selectItem label="Centers for Disease and Prevention Control (CDC)"
+                             value="Centers for Disease and Prevention Control (CDC)"
+                             id="si44"/>
+              <af:selectItem label="Centers for Medicare and Medicaid Services (CMS)"
+                             value="Centers for Medicare and Medicaid Services (CMS)"
+                             id="si43"/>
+              <af:selectItem label="Great Plains Quality Innovation Network"
+                             value="Great Plains Quality Innovation Network"
+                             id="si42"/>
+              <af:selectItem label="Health Services Advisory Group"
+                             value="Health Services Advisory Group" id="si41"/>
+              <af:selectItem label="HealthInsight" value="HealthInsight"
+                             id="si40"/>
+              <af:selectItem label="Iowa Foundation for Medical Care"
+                             value="Iowa Foundation for Medical Care"
+                             id="si39"/>
+              <af:selectItem label="Kansas Foundation for Medical Care Inc."
+                             value="Kansas Foundation for Medical Care Inc."
+                             id="si38"/>
+              <af:selectItem label="KEPRO" value="KEPRO" id="si37"/>
+              <af:selectItem label="Lake Superior Quality Innovation Network"
+                             value="Lake Superior Quality Innovation Network"
+                             id="si36"/>
+              <af:selectItem label="Livanta" value="Livanta" id="si35"/>
+              <af:selectItem label="Mountain Pacific Quality Health Foundation"
+                             value="Mountain Pacific Quality Health Foundation"
+                             id="si34"/>
+              <af:selectItem label="New England Quality Innovation Network"
+                             value="New England Quality Innovation Network"
+                             id="si33"/>
+              <af:selectItem label="New York Organ Donor Network"
+                             value="New York Organ Donor Network" id="si32"/>
+              <af:selectItem label="Other" value="Other" id="si31"/>
+              <af:selectItem label="Program Collaboration Center-Integrated Communications (PCC-IC)"
+                             value="Program Collaboration Center-Integrated Communications (PCC-IC)"
+                             id="si30"/>
+              <af:selectItem label="Qualis Health" value="Qualis Health"
+                             id="si29"/>
+              <af:selectItem label="Quality Innovation Network-National Coordinating Center (QIN-NCC)"
+                             value="Quality Innovation Network-National Coordinating Center (QIN-NCC)"
+                             id="si28"/>
+              <af:selectItem label="Quality Insights Quality Innovation Network"
+                             value="Quality Insights Quality Innovation Network"
+                             id="si27"/>
+              <af:selectItem label="Telligen" value="Telligen" id="si26"/>
+              <af:selectItem label="ThedaCare" value="ThedaCare" id="si8"/>
+              <af:selectItem label="TMF" value="TMF" id="si7"/>
+              <af:selectItem label="U.S. Environmental Protection Agency"
+                             value="U.S. Environmental Protection Agency"
+                             id="si6"/>
+              <af:selectItem label="VHQC" value="VHQC" id="si5"/>
             </af:selectOneChoice>
             <af:inputText label="Publication date" id="it3" autoSubmit="true"
                           value="#{viewScope.ResourcesBackingBean.resourceSearchBean.publicationDate}"/>
             <af:selectOneChoice label="Scope of Work" id="soc6"
                                 contentStyle="width:180px;" autoSubmit="true"
                                 value="#{viewScope.ResourcesBackingBean.resourceSearchBean.scopeOfWork}">
-              <af:selectItem label="11th Scope of Work" value="11" id="si15"/>
-              <af:selectItem label="10th Scope of Work" value="10" id="si16"/>
+              <af:selectItem label="11thSOW" value="11thSOW" id="si15"/>
+              <af:selectItem label="10thSOW" value="10thSOW" id="si16"/>
             </af:selectOneChoice>
             <af:panelGroupLayout id="pgl3" layout="horizontal">
               <af:commandButton text="Clear" id="cb1"
@@ -79,26 +307,11 @@
       </af:panelGroupLayout>
     </af:panelGroupLayout>
     <af:spacer width="10" height="20" id="s12"/>
-    <af:panelGroupLayout id="pgl4" layout="horizontal"
-                         styleClass="AFStretchWidth" valign="top"
-                         partialTriggers="cb1 cb2">
+    <af:panelGroupLayout id="pgl4" layout="horizontal" halign="left"
+                         valign="top"
+                         partialTriggers="cb2 cb1">
       <af:panelGroupLayout id="pgl5" layout="vertical"
                            inlineStyle="width:200px;" valign="top">
-        <af:panelGroupLayout id="pgl7" layout="vertical"
-                             styleClass="ResourceTopBox">
-          <af:outputText value="Community Topic Filter" id="ot4"
-                         styleClass="ResourceTopBoxLabel"/>
-          <af:outputText value="Community Filter" id="ot5"/>
-          <af:selectOneChoice id="soc4" simple="true"
-                              contentStyle="width:150px;" autoSubmit="true"
-                              value="#{viewScope.ResourcesBackingBean.selectedCommunit}"
-                              valueChangeListener="#{viewScope.ResourcesBackingBean.onCommunityChange}">
-            <f:selectItems id="si17"
-                           value="#{viewScope.ResourcesBackingBean.communitiesSI}"/>
-          </af:selectOneChoice>
-        </af:panelGroupLayout>
-        <af:spacer width="10" height="20" id="s17"
-                   rendered="#{pageFlowScope.pageType eq 'EducationNTraining'}"/>
         <af:panelGroupLayout id="pgl22" layout="vertical"
                              inlineStyle="padding:10px;" halign="center"
                              styleClass="ResourceTopBox"
@@ -117,6 +330,21 @@
                          value="#{navigationContext.defaultNavigationModel.node[pageFlowScope.loaPath]}"/>
           </af:commandButton>
         </af:panelGroupLayout>
+        <af:panelGroupLayout id="pgl7" layout="vertical"
+                             styleClass="ResourceTopBox">
+          <af:outputText value="Community Topic Filter" id="ot4"
+                         styleClass="ResourceTopBoxLabel"/>
+          <af:outputText value="Community Filter" id="ot5"/>
+          <af:selectOneChoice id="soc4" simple="true"
+                              contentStyle="width:150px;" autoSubmit="true"
+                              value="#{viewScope.ResourcesBackingBean.selectedCommunit}"
+                              valueChangeListener="#{viewScope.ResourcesBackingBean.onCommunityChange}">
+            <f:selectItems id="si17"
+                           value="#{viewScope.ResourcesBackingBean.communitiesSI}"/>
+          </af:selectOneChoice>
+        </af:panelGroupLayout>
+        <af:spacer width="10" height="20" id="s17"
+                   rendered="#{pageFlowScope.pageType eq 'EducationNTraining'}"/>
         <af:spacer width="10" height="20" id="s19"/>
         <af:panelGroupLayout id="pgl6" layout="vertical" valign="top"
                              partialTriggers="soc4">
@@ -136,13 +364,14 @@
           </af:iterator>
         </af:panelGroupLayout>
       </af:panelGroupLayout>
-      <af:panelGroupLayout id="pgl17" layout="vertical" valign="top"
-                           partialTriggers="i1:cil1 soc7 soc4">
+      <af:panelGroupLayout id="pgl17" layout="vertical" valign="top" halign="left"
+                           styleClass="AFStretchWidth" partialTriggers="cb2 cb1 soc4 i1:cil1 soc7">
         <af:panelGridLayout id="pgl9">
           <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
             <af:gridCell marginStart="5px" width="50%" id="gc1">
               <af:outputText value="Topic: #{viewScope.ResourcesBackingBean.currentTopicBean.topicName} (#{viewScope.ResourcesBackingBean.currentTopicBean.topicTaskTag})"
                              id="ot7" styleClass="TopicLabel"/>
+              <af:spacer width="500" height="10" id="s7"/>
             </af:gridCell>
             <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2"
                          halign="end">

@@ -21,6 +21,8 @@ public class TopicBean implements Serializable {
         super();
         this.topicName = topicName;
         this.topicTaskTag = topicTaskTag;
+        filteredSubTopics = new ArrayList<SubTopicBean>();
+        filteredTopicResources = new ArrayList<ResourceBean>();
         topicResources = new ArrayList<ResourceBean>();
     }
 
@@ -129,6 +131,8 @@ public class TopicBean implements Serializable {
         SubTopicBean subTopicBean = getSubTopicBean(subTopicName);
         subTopicBean.getFilteredTopicResources().add(resource);
         subTopicBean.getTopicResources().add(resource);
+        filteredTopicResources.add(resource);
+        topicResources.add(resource);
     }
 
     private SubTopicBean getSubTopicBean(String subTopicName) {

@@ -16,6 +16,26 @@
     <param-name>oracle.adf.view.rich.versionString.HIDDEN</param-name>
     <param-value>true</param-value>
   </context-param>
+  <context-param>
+    <param-name>org.apache.myfaces.trinidad.CLIENT_STATE_MAX_TOKENS</param-name>
+    <param-value>3</param-value>
+  </context-param>
+  <context-param>
+    <param-name>oracle.webcenter.last_modified_version</param-name>
+    <param-value>11.1.1.9.0</param-value>
+  </context-param>
+  <context-param>
+    <param-name>oracle.webcenter.last_modified_label</param-name>
+    <param-value>WORKPLACE_11.1.1.9.0WCPBP_GENERIC_160107.0701</param-value>
+  </context-param>
+  <context-param>
+    <param-name>oracle.adf.jsp.provider.0</param-name>
+    <param-value>oracle.mds.jsp.MDSJSPProviderHelper</param-value>
+  </context-param>
+  <context-param>
+    <param-name>org.apache.myfaces.trinidad.CHANGE_PERSISTENCE</param-name>
+    <param-value>oracle.adf.view.rich.change.MDSDocumentChangeManager</param-value>
+  </context-param>
   <filter>
     <filter-name>JpsFilter</filter-name>
     <filter-class>oracle.security.jps.ee.http.JpsFilter</filter-class>
@@ -31,10 +51,18 @@
   <filter>
     <filter-name>ADFLibraryFilter</filter-name>
     <filter-class>oracle.adf.library.webapp.LibraryFilter</filter-class>
+    <init-param>
+      <param-name>provider-lazy-inited</param-name>
+      <param-value>true</param-value>
+    </init-param>
   </filter>
   <filter>
     <filter-name>adfBindings</filter-name>
     <filter-class>oracle.adf.model.servlet.ADFBindingFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>WebCenterEventDispatcherFilter</filter-name>
+    <filter-class>oracle.webcenter.framework.events.dispatcher.EventDispatcherFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>JpsFilter</filter-name>
@@ -61,11 +89,90 @@
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>REQUEST</dispatcher>
   </filter-mapping>
+  <filter-mapping>
+    <filter-name>WebCenterEventDispatcherFilter</filter-name>
+    <servlet-name>Faces Servlet</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>JpsFilter</filter-name>
+    <servlet-name>ProfilePhotoServlet</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>adfBindings</filter-name>
+    <servlet-name>adfextapplogin</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>JpsFilter</filter-name>
+    <servlet-name>adfextapplogin</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>JpsFilter</filter-name>
+    <servlet-name>GetHandler</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>JpsFilter</filter-name>
+    <url-pattern>/DownloadBinaryServlet/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>JpsFilter</filter-name>
+    <url-pattern>/ShowPropertyServlet/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>JpsFilter</filter-name>
+    <url-pattern>/ShowDoc/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>JpsFilter</filter-name>
+    <url-pattern>/ShowBinary/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>JpsFilter</filter-name>
+    <url-pattern>/ShowProperty/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>adfBindings</filter-name>
+    <servlet-name>GetHandler</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>adfBindings</filter-name>
+    <url-pattern>/DownloadBinaryServlet/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>adfBindings</filter-name>
+    <url-pattern>/ShowPropertyServlet/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>adfBindings</filter-name>
+    <url-pattern>/ShowDoc/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>adfBindings</filter-name>
+    <url-pattern>/ShowBinary/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>adfBindings</filter-name>
+    <url-pattern>/ShowProperty/*</url-pattern>
+  </filter-mapping>
   <listener>
     <listener-class>oracle.adf.mbean.share.config.ADFConfigLifeCycleCallBack</listener-class>
   </listener>
   <listener>
     <listener-class>oracle.adf.mbean.share.connection.ADFConnectionLifeCycleCallBack</listener-class>
+  </listener>
+  <listener>
+    <description>WebCenter Lifecycle Context Listener</description>
+    <display-name>WebCenterLifecycleContextListener</display-name>
+    <listener-class>oracle.webcenter.lifecycle.listener.LifecycleServletContextListener</listener-class>
+  </listener>
+  <listener>
+    <description>WebCenter Framework Context Listener</description>
+    <display-name>WCFrameworkContextListener</display-name>
+    <listener-class>oracle.webcenter.framework.internal.view.WCFrameworkContextListener</listener-class>
+  </listener>
+  <listener>
+    <description>WebCenter Framework Executor Listener</description>
+    <display-name>WebCenterExecutorContextListener</display-name>
+    <listener-class>oracle.webcenter.concurrent.WebCenterExecutorContextListener</listener-class>
   </listener>
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
@@ -95,6 +202,47 @@
   <servlet>
     <servlet-name>adflibResources</servlet-name>
     <servlet-class>oracle.adf.library.webapp.ResourceServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ojsp</servlet-name>
+    <servlet-class>oracle.jsp.runtimev2.JspServlet</servlet-class>
+    <init-param>
+      <param-name>generic_servlet_mode</param-name>
+      <param-value>single</param-value>
+    </init-param>
+    <init-param>
+      <param-name>page_provider</param-name>
+      <param-value>oracle.adf.library.webapp.ADFJspResourceProvider</param-value>
+    </init-param>
+    <init-param>
+      <param-name>jsp_timeout</param-name>
+      <param-value>600</param-value>
+    </init-param>
+    <init-param>
+      <param-name>debug_mode</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <init-param>
+      <param-name>el_expression_factory</param-name>
+      <param-value>com.sun.el.ExpressionFactoryImpl</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>ProfilePhotoServlet</servlet-name>
+    <servlet-class>oracle.webcenter.peopleconnections.profile.internal.view.webapp.ProfilePhotoServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>adfextapplogin</servlet-name>
+    <servlet-class>oracle.adf.extapp.ExtAppLoginController</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetHandler</servlet-name>
+    <servlet-class>oracle.webcenter.content.http.GetHandlerServlet</servlet-class>
+    <init-param>
+      <param-name>dav.generateEntityForCollectionGet</param-name>
+      <param-value>true</param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
@@ -132,6 +280,34 @@
     <servlet-name>adflibResources</servlet-name>
     <url-pattern>/adflib/*</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>resources</servlet-name>
+    <url-pattern>/webcenter-resources/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>resources</servlet-name>
+    <url-pattern>/webcenter-framework-resources/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ojsp</servlet-name>
+    <url-pattern>*.jsff</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ojsp</servlet-name>
+    <url-pattern>*.jspx</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ProfilePhotoServlet</servlet-name>
+    <url-pattern>/profilephoto/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>adfextapplogin</servlet-name>
+    <url-pattern>/adfextapplogin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetHandler</servlet-name>
+    <url-pattern>/content/*</url-pattern>
+  </servlet-mapping>
   <mime-mapping>
     <extension>swf</extension>
     <mime-type>application/x-shockwave-flash</mime-type>
@@ -142,4 +318,14 @@
       <is-xml>true</is-xml>
     </jsp-property-group>
   </jsp-config>
+  <resource-ref>
+    <res-ref-name>jdbc/WebCenterDS</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
+  <resource-ref>
+    <res-ref-name>jdbc/ActivitiesDS</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
 </web-app>

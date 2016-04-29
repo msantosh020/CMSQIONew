@@ -37,7 +37,7 @@ public class ResourcesBackingBean {
     private List<ResourceBean> filteredTopicResources;
     private List<ResourceBean> currentPageTopicResources;
     private List<ResourceBean> featuredTopicResources;
-    private static final int NUMBER_RESOURCES_PER_PAGE = 10;
+    private static final int NUMBER_RESOURCES_PER_PAGE = 12;
     private int currentCommunityIndex = 0;
     private int currentTopicIndex = 0;
     private int currentPageIndex = 1;
@@ -154,17 +154,26 @@ public class ResourcesBackingBean {
         setFilteredTopicsList(null);
         setFilteredTopicResources(null);
         setCurrentTopicIndex(0);
-        setCurrentPageIndex(1);
         setCurrentTopicBean(null);
         setCurrentPageTopicResources(null);
         setPagesSI(null);
         setTotalPagesSize(null);
+        setCurrentPageIndex(1);
+        setCurrentCommunity(null);
+        setCurrentCommunityIndex(0);
+        setCommunities(null);
+        getCommunities();
+        setCommunitiesSI(null);
         System.out.println("ResourcesBackingBean.java onResourceSearchClearAction() end of executing");
     }
 
     public void onResourceSearchAction(ActionEvent actionEvent) {
         // Add event code here...
         System.out.println("ResourcesBackingBean.java onResourceSearchAction() starts executing");
+        
+        if (!getResourceSearchBean().isFilterCriteriaEntered()) {
+            return;
+        }
         setFilteredTopicsList(null);
         setFilteredTopicResources(null);
         setCurrentTopicIndex(0);
@@ -173,7 +182,10 @@ public class ResourcesBackingBean {
         setPagesSI(null);
         setTotalPagesSize(null);
         setCurrentPageIndex(1);
-        ResourceContentUtil.searchResurces(getResourcesCSParentFolderPath(), getResourceSearchBean());
+        setCurrentCommunity(null);
+        setCurrentCommunityIndex(0);
+        setCommunities(ResourceContentUtil.searchResurces(getResourcesCSParentFolderPath(), getResourceSearchBean()));
+        setCommunitiesSI(null);
         System.out.println("ResourcesBackingBean.java onResourceSearchAction() end of executing");
     }
 
