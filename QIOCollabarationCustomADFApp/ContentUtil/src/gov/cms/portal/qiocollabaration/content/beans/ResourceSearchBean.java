@@ -84,7 +84,8 @@ public class ResourceSearchBean implements Serializable {
 
     public boolean isFilterCriteriaEntered() {
         boolean isFilter = false;
-        if (isNonEmpty(getAuthor()) || isNonEmpty(getFormat()) || isNonEmpty(getKeyphrase()) || isNonEmpty(getOrganization()) || isNonEmpty(getPublicationDate()) || isNonEmpty(getState())) {
+        if (isNonEmpty(getAuthor()) || isNonEmpty(getFormat()) || isNonEmpty(getKeyphrase()) || isNonEmpty(getOrganization()) || isNonEmpty(getPublicationDate()) || isNonEmpty(getState()) ||
+            isNonEmpty(getResourceType()) || isNonEmpty(getTitle()) || isNonEmpty(getDescription()) || isNonEmpty(getScopeOfWork())) {
             isFilter = true;
         }
         return isFilter;

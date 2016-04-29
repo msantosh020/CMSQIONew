@@ -37,9 +37,9 @@ public class ContentItemBean extends ContentBean implements Serializable {
     private String contentCategory;
     private String description;
     private String tagNames;
-    private String topicsNames;
-    private String communityName;
-    private String subTopicName;
+    private String topicsNames;   //xsow
+    private String communityName; //xcommunityoforigin
+    private String subTopicName;  //xtopics
 
 
     public void setDocId(String docId) {
