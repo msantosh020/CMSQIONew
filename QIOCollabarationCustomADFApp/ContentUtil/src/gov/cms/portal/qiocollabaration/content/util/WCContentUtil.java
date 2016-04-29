@@ -127,7 +127,11 @@ public class WCContentUtil implements Serializable {
     private static final String dId = "dID";
     private static final String dRevLabel = "dRevLabel";
 
-    // custom metadata fields
+
+// custom metadata fields
+    private static final String xcommunityoforigin = "xcommunityoforigin";
+    private static final String xtopics = "xtopics";
+    private static final String xsow = "xsow";
     private static final String xContentCategory = "xContentCategory";
     private static final String xDescription = "xDescription";
     private static final String xFolderType = "xFolderType";
@@ -269,9 +273,9 @@ public class WCContentUtil implements Serializable {
         item.setSecurityGroup(obj.get(dSecurityGroup));
         item.setDescription(obj.get(xDescription));
         item.setContentCategory(obj.get(xContentCategory));
-        item.setCommunityName(obj.get("xorigin"));
-        item.setSubTopicName(obj.get("xsubtopic"));
-        item.setTopicsNames(obj.get("xtopicname"));
+        item.setCommunityName(obj.get("xcommunityoforigin"));
+        item.setSubTopicName(obj.get("xtopics"));
+        item.setTopicsNames(obj.get("xsow"));
 
         if (obj.get(dDocLastModifiedDate) != null) {
             try {
@@ -317,7 +321,7 @@ public class WCContentUtil implements Serializable {
         item.setDId(obj.get(dId));
         item.setRevisionLabel(obj.get(dRevLabel));
         item.setTagNames(obj.get("xsbiApprovalType"));
-        item.setTopicsNames(obj.get("xsbiCreatedBy"));
+ //       item.setTopicsNames(obj.get("xsbiCreatedBy"));
 
         return item;
     }
@@ -549,11 +553,16 @@ public class WCContentUtil implements Serializable {
     public List<ContentItemBean> searchFileByTitleInFolder(String collectionId, ResourceSearchBean searchBean) throws ParseException, IdcClientException, NamingException {
         StringBuilder queryText = new StringBuilder();
         addQueryStr(queryText, "dDocTitle", searchBean.getTitle());
-//        addQueryStr(queryText, "dDocTitle", searchBean.getAuthor());
-//        addQueryStr(queryText, "dDocTitle", searchBean.getTitle());
-//        addQueryStr(queryText, "dDocTitle", searchBean.getTitle());
-//        addQueryStr(queryText, "dDocTitle", searchBean.getTitle());
-//        addQueryStr(queryText, "dDocTitle", searchBean.getTitle());
+        addQueryStr(queryText, "xresourcetype", searchBean.getResourceType());
+        addQueryStr(queryText, "dDocAuthor", searchBean.getAuthor());
+        addQueryStr(queryText, "xsow", searchBean.getScopeOfWork());
+        addQueryStr(queryText, "xdescription", searchBean.getDescription());
+        addQueryStr(queryText, "xFormat", searchBean.getFormat());
+        addQueryStr(queryText, "xorganizationalauthor", searchBean.getOrganization());
+        addQueryStr(queryText, "xkeyphrases", searchBean.getKeyphrase());
+        addQueryStr(queryText, "xstatesoffocus", searchBean.getState());
+        addQueryStr(queryText, "xpublicationdate", searchBean.getPublicationDate());
+        System.out.println("queryText=" + queryText.toString());
         return getContentItemsFromQueryInFolder(collectionId, queryText.toString(), null, null);
     }
 
@@ -565,8 +574,11 @@ public class WCContentUtil implements Serializable {
     }
 
     public void addQueryStr(StringBuilder queryText, String docTag, String searchValue) {
-        if (!isEmpty(searchValue) && queryText.length() > 0) {
-            queryText.append("<AND> " + docTag + " = `" + searchValue + "` ");
+        if (!isEmpty(searchValue)) {
+            if (queryText.length() > 0) {
+                queryText.append("<AND> ");
+            }
+            queryText.append(docTag + " <substring> `" + searchValue + "` ");
         }
     }
 
