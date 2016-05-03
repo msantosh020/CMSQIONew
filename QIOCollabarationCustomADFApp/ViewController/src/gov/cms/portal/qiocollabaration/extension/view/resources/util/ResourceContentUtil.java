@@ -179,6 +179,8 @@ public class ResourceContentUtil {
         resourceBean.setThumbnailImageUrl(contentItem.getWebURL());
         resourceBean.setUpdatedDate(contentItem.getLastModifiedDate());
         resourceBean.setUploadedOrganization(contentItem.getOwner());
+        resourceBean.setResourceNativeWebUrl(contentItem.getNativeWebURL());
+        resourceBean.setResourceWebUrl(contentItem.getWebURL());
         return resourceBean;
     }
 

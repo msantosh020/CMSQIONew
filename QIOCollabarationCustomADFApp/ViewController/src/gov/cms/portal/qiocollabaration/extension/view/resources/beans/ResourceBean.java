@@ -37,6 +37,8 @@ public class ResourceBean implements Serializable {
     private String author;
     private String thumbnailImageUrl;
     private String resourceUrl;
+    private String resourceWebUrl;
+    private String resourceNativeWebUrl;
     private String community;
 
     public void setResourceTitle(String resourceTitle) {
@@ -125,5 +127,21 @@ public class ResourceBean implements Serializable {
 
     public String getCommunity() {
         return community;
+    }
+
+    public void setResourceWebUrl(String resourceWebUrl) {
+        this.resourceWebUrl = resourceWebUrl;
+    }
+
+    public String getResourceWebUrl() {
+        return resourceWebUrl;
+    }
+
+    public void setResourceNativeWebUrl(String resourceNativeWebUrl) {
+        this.resourceNativeWebUrl = resourceNativeWebUrl;
+    }
+
+    public String getResourceNativeWebUrl() {
+        return resourceNativeWebUrl;
     }
 }
