@@ -492,13 +492,13 @@
                                id="ot13" styleClass="ResourceItemText"/>
                 <af:spacer width="10" height="10" id="s4"/>
                 <af:panelGroupLayout id="pgl12" layout="horizontal">
-                  <af:commandLink text="Download" id="cl1"></af:commandLink>
-                  <!--<af:goLink text="Print" id="cl2" targetFrame="_blank" destination="#{node.primaryProperty.url.renderUrl}&amp;rid=#{node.propertyMap['dRevisionID'].value}"/>-->
+                  <af:outputText escape="false" value="&lt;a href='#{request.scheme}://#{request.serverName}//#{resource.resourceWebUrl}' download>Download&lt;/a>"
+                                 id="ot16"/>
                   <af:commandLink text="Print" id="cil2" partialSubmit="true"
                                   clientComponent="true">
-                    <!--<af:clientListener method="showPdfInNewWindowWithPrint"
-                                       type="click"/>-->
-                    <!--<af:clientAttribute name="path" value="#{node.path}"/>-->
+                    <af:clientListener method="showPdfInNewWindowWithPrint"
+                                       type="click"/>
+                    <af:clientAttribute name="path" value="#{request.scheme}://#{request.serverName}//#{resource.resourceWebUrl}"/>
                   </af:commandLink>
                   <f:facet name="separator">
                     <af:panelGroupLayout id="pgl13" halign="center"
@@ -535,5 +535,33 @@
         </af:panelGroupLayout>
       </af:panelGroupLayout>
     </af:panelGroupLayout>
+    <af:resource type="javascript">
+           showPdfInPopup = function (event) {
+               var source = event.getSource();
+               var title = source.getProperty('name');
+               var path = source.getProperty('path');
+               newPath = path.replace('hovm1014_content', 'hovm1014_content/path');
+               
+               var pw1 = source.findComponent('::pw1');
+               pw1.setTitle(title);
+               var popupinlineFrame1 = source.findComponent('::inlineFrame1');
+               popupinlineFrame1.setSource('/webcenter/content/conn' + newPath);
+                 
+               var popup = source.findComponent('::p1');
+               var hints = {
+               };
+               popup.show(hints);             
+           }
+           
+           showPdfInNewWindowWithPrint = function (event) {
+               /*
+               var source = event.getSource();
+               var path = source.getProperty('path');
+               newPath = '/webcenter/content/conn' + (path.replace('hovm1014_content', 'hovm1014_content/path'));
+               */
+               window.open(newPath).print();
+           }
+           
+         </af:resource>
   </af:panelGroupLayout>
 </jsp:root>

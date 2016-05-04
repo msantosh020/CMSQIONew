@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <af:panelGroupLayout id="pgl1" layout="vertical">
+    <af:listView id="lv1" var="topic"
+                 value="#{viewScope.QIUMainBackingBean.currentPageTopics}">
+      <af:listItem id="li1" styleClass="ResourceGrid">
+        <af:panelGroupLayout id="pgl10" layout="vertical"
+                             styleClass="QIUPanelBox">
+          <af:outputText value="#{topic.topicName}" id="ot1"
+                         styleClass="QIUTopicName"/>
+          <af:spacer width="10" height="10" id="s1"/>
+          <af:panelGroupLayout id="pgl2" layout="horizontal" halign="center"
+                               styleClass="AFStretchWidth">
+            <af:commandButton text="View Packet" id="cb1" action="pprnav"
+                              styleClass="QIUViewPacketButton"
+                              actionListener="#{navigationContext.processAction}">
+              <!--<f:attribute name="node" value="#{node}"/>-->
+              <af:setActionListener from="#{topic.collectionId}"
+                                    to="#{sessionScope.selectedQIUTopicCollectionId}"/>
+            </af:commandButton>
+          </af:panelGroupLayout>
+        </af:panelGroupLayout>
+      </af:listItem>
+    </af:listView>
+  </af:panelGroupLayout>
+</jsp:root>
