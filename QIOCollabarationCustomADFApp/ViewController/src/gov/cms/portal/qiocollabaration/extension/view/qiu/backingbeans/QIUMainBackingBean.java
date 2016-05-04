@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
+import javax.faces.model.SelectItem;
 
 
 public class QIUMainBackingBean {
@@ -24,6 +25,7 @@ public class QIUMainBackingBean {
     private String qiuCSParentFolderPath;
     private int currentPageIndex = 1;
     private Integer totalPagesSize;
+    private List<SelectItem> pagesSI;
 
     public void setQiuTopicList(List<QIUTopicBean> qiuTopicList) {
         this.qiuTopicList = qiuTopicList;
@@ -101,5 +103,19 @@ public class QIUMainBackingBean {
         // Add event code here...
         valueChangeEvent.getComponent().processUpdates(FacesContext.getCurrentInstance());
         setCurrentPageTopics(null);
+    }
+
+    public void setPagesSI(List<SelectItem> pagesSI) {
+        this.pagesSI = pagesSI;
+    }
+
+    public List<SelectItem> getPagesSI() {
+        if (pagesSI == null) {
+            pagesSI = new ArrayList<SelectItem>();
+            for (int i = 1; i <= getTotalPagesSize(); i++) {
+                pagesSI.add(new SelectItem(new Integer(i), "" + i));
+            }
+        }
+        return pagesSI;
     }
 }

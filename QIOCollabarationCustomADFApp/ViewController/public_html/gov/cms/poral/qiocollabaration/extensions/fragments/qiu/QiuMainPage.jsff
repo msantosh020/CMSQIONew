@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
-          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
-  <af:panelGroupLayout id="pgl1" layout="vertical">
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" layout="vertical" partialTriggers="soc7">
     <af:listView id="lv1" var="topic"
                  value="#{viewScope.QIUMainBackingBean.currentPageTopics}">
       <af:listItem id="li1" styleClass="ResourceGrid">
@@ -15,7 +16,8 @@
             <af:commandButton text="View Packet" id="cb1" action="pprnav"
                               styleClass="QIUViewPacketButton"
                               actionListener="#{navigationContext.processAction}">
-              <!--<f:attribute name="node" value="#{node}"/>-->
+              <f:attribute name="node"
+                           value="#{navigationContext.defaultNavigationModel.node['Home/page1217']}"/>
               <af:setActionListener from="#{topic.collectionId}"
                                     to="#{sessionScope.selectedQIUTopicCollectionId}"/>
             </af:commandButton>
@@ -23,5 +25,17 @@
         </af:panelGroupLayout>
       </af:listItem>
     </af:listView>
+    <af:spacer width="10" height="20" id="s2"/>
+    <af:panelGroupLayout id="pgl16" layout="horizontal" halign="center">
+      <af:selectOneChoice label="Page : " id="soc7"
+                          value="#{viewScope.QIUMainBackingBean.currentPageIndex}"
+                          autoSubmit="true"
+                          valueChangeListener="#{viewScope.QIUMainBackingBean.onPageNumberSelection}">
+        <f:selectItems id="si9"
+                       value="#{viewScope.QIUMainBackingBean.pagesSI}"/>
+      </af:selectOneChoice>
+      <af:outputText value="of #{viewScope.QIUMainBackingBean.totalPagesSize}"
+                     id="ot15"/>
+    </af:panelGroupLayout>
   </af:panelGroupLayout>
 </jsp:root>

@@ -20,9 +20,8 @@ public class QIUContentUtil {
         // Use below lines while deploying to server TODO
         WCContentUtil csUtil = new WCContentUtil();
         // Use below code for running local machine
-        //  String url = "idc://hovm1014.keste.com:4444"; TODO
-        //                String url = "http://10.163.64.1:16200/cs/idcplg";
-        //                WCContentUtil csUtil = new WCContentUtil(url, "weblogic");
+//        String url = "http://10.163.64.1:16200/cs/idcplg";
+//        WCContentUtil csUtil = new WCContentUtil(url, "weblogic");
         return csUtil;
     }
 
@@ -129,10 +128,12 @@ public class QIUContentUtil {
     }
 
     public static void main(String[] args) throws Exception {
-        List<QIUTopicBean> qiuTopicList = loadQIUTopics("qiuCSParentFolderPath");
+        List<QIUTopicBean> qiuTopicList = loadQIUTopics("/WebCenterSpaces-Root/QIU/");
         System.out.println("qiuTopicList =" + qiuTopicList);
-
-        List<QIUTopicCategoryBean> qiuTopicCategoryList = getQiuTopicCategoryList("qiuTopcCollectionId");
-        System.out.println("contentList =" + qiuTopicCategoryList);
+        for (QIUTopicBean qiuTopic : qiuTopicList) {
+            System.out.println("qiuTopic.getCollectionId() =" + qiuTopic.getCollectionId());
+            List<QIUTopicCategoryBean> qiuTopicCategoryList = getQiuTopicCategoryList(qiuTopic.getCollectionId());
+            System.out.println("contentList =" + qiuTopicCategoryList);
+        }
     }
 }
