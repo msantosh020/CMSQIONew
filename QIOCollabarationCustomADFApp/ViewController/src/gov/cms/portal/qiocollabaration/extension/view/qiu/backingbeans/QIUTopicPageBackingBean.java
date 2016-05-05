@@ -33,7 +33,7 @@ public class QIUTopicPageBackingBean {
         if (qiuTopicCSParentFolderPath == null) {
             qiuTopicCSParentFolderPath = Util.getPageFlowScopeParamValue("qiuTopicCSParentFolderPath");
             if (qiuTopicCSParentFolderPath == null) {
-                qiuTopicCSParentFolderPath = "/WebCenterSpaces-Root/Resources/";
+                qiuTopicCSParentFolderPath = "/WebCenterSpaces-Root/QIU/";
             }
         }
         return qiuTopicCSParentFolderPath;

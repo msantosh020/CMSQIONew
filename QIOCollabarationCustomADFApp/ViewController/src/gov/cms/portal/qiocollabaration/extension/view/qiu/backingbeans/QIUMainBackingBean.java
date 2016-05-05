@@ -46,7 +46,7 @@ public class QIUMainBackingBean {
         if (qiuCSParentFolderPath == null) {
             qiuCSParentFolderPath = Util.getPageFlowScopeParamValue("qiuMainContentPath");
             if (qiuCSParentFolderPath == null) {
-                qiuCSParentFolderPath = "/WebCenterSpaces-Root/Resources/";
+                qiuCSParentFolderPath = "/WebCenterSpaces-Root/QIU/";
             }
         }
         return qiuCSParentFolderPath;
