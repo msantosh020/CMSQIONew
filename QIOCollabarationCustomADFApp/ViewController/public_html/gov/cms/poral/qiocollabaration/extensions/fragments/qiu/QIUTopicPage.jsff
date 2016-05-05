@@ -7,11 +7,13 @@
                  value="#{viewScope.QIUTopicPageBackingBean.qiuTopicCategoryList}">
       <af:panelBox text="#{category.categoryName}" id="pb1">
         <f:facet name="toolbar"/>
-        <af:iterator id="i2" var="resource" varStatus="vs"
-                     value="#{category.resources}">
-          <af:commandLink text="#{resource.resourceTitle}" id="cl1"/>
-          <af:spacer width="10" height="10" id="s1"/>
-        </af:iterator>
+        <af:panelGroupLayout id="pgl2" layout="vertical">
+          <af:iterator id="i2" var="resourceBean" varStatus="vs"
+                       value="#{category.resources}">
+            <af:outputText value="#{resourceBean.resourceTitle}" id="cl1"/>  
+            <af:spacer width="10" height="10" id="s1"/>
+          </af:iterator>
+        </af:panelGroupLayout>
       </af:panelBox>
     </af:iterator>
   </af:panelGroupLayout>

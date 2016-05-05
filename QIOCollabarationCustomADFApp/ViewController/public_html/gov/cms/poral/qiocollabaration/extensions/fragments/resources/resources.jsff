@@ -309,7 +309,7 @@
     <af:spacer width="10" height="20" id="s12"/>
     <af:panelGroupLayout id="pgl4" layout="horizontal" halign="left"
                          valign="top"
-                         partialTriggers="cb2 cb1">
+                         partialTriggers="cb2 cb1" styleClass="AFStretchWidth">
       <af:panelGroupLayout id="pgl5" layout="vertical"
                            inlineStyle="width:200px;" valign="top">
         <af:panelGroupLayout id="pgl22" layout="vertical"
@@ -366,13 +366,36 @@
       </af:panelGroupLayout>
       <af:panelGroupLayout id="pgl17" layout="vertical" valign="top" halign="left"
                            styleClass="AFStretchWidth" partialTriggers="cb2 cb1 soc4 i1:cil1 soc7">
-        <af:panelGridLayout id="pgl9">
+        <af:panelGroupLayout id="pgl18" styleClass="AFStretchWidth"
+                             layout="horizontal" halign="end">
+          <af:commandButton text="View Task Calendar and Contacts" id="cb3"
+                            styleClass="QIUButton" inlineStyle="width:230px"
+                            actionListener="#{navigationContext.processAction}"
+                            action="pprnav"
+                            rendered="#{pageFlowScope.pageType eq 'EducationNTraining'}">
+            <f:attribute name="node"
+                         value="#{navigationContext.defaultNavigationModel.node[pageFlowScope.viewTaskCalendarandContactsPath]}"/>
+          </af:commandButton>
+          <af:spacer width="10" height="10" id="s20"/>
+          <af:commandButton text="Upload Resource" id="cb6"
+                            styleClass="ResourceUploadButton"
+                            actionListener="#{navigationContext.processAction}"
+                            action="pprnav">
+            <f:attribute name="node"
+                         value="#{navigationContext.defaultNavigationModel.node[pageFlowScope.uploadResourcesPath]}"/>
+          </af:commandButton>
+        </af:panelGroupLayout>
+        <af:panelGroupLayout id="pgl9" layout="horizontal" styleClass="AFStretchWidth" >
+            <af:outputText value="Topic: #{viewScope.ResourcesBackingBean.currentTopicBean.topicName} (#{viewScope.ResourcesBackingBean.currentTopicBean.topicTaskTag})"
+                             id="ot7" styleClass="TopicLabel"/>
+        </af:panelGroupLayout>
+        <!--<af:panelGridLayout id="pgl9" styleClass="AFStretchWidth">
           <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr1">
             <af:gridCell marginStart="5px" width="50%" id="gc1">
               <af:outputText value="Topic: #{viewScope.ResourcesBackingBean.currentTopicBean.topicName} (#{viewScope.ResourcesBackingBean.currentTopicBean.topicTaskTag})"
                              id="ot7" styleClass="TopicLabel"/>
-              <af:spacer width="500" height="10" id="s7"/>
             </af:gridCell>
+            <af:gridCell id="flexibleSpace" width="100%"/>
             <af:gridCell marginStart="5px" width="50%" marginEnd="5px" id="gc2"
                          halign="end">
               <af:commandButton text="View Task Calendar and Contacts" id="cb3"
@@ -393,7 +416,7 @@
               </af:commandButton>
             </af:gridCell>
           </af:gridRow>
-        </af:panelGridLayout>
+        </af:panelGridLayout>-->
         <!--<af:panelGroupLayout id="pgl17" layout="vertical"
                              styleClass="ResourceTopBox">
           <af:outputText value="Featured #{pageFlowScope.pageTitle}"
@@ -492,13 +515,13 @@
                                id="ot13" styleClass="ResourceItemText"/>
                 <af:spacer width="10" height="10" id="s4"/>
                 <af:panelGroupLayout id="pgl12" layout="horizontal">
-                  <af:outputText escape="false" value="&lt;a href='#{request.scheme}://#{request.serverName}//#{resource.resourceWebUrl}' download>Download&lt;/a>"
+                  <af:outputText escape="false" value="&lt;a href='#{request.scheme}://#{request.serverName}:8888/webcenter/#{resource.resourceWebUrl}' download>Download&lt;/a>"
                                  id="ot16"/>
                   <af:commandLink text="Print" id="cil2" partialSubmit="true"
                                   clientComponent="true">
                     <af:clientListener method="showPdfInNewWindowWithPrint"
                                        type="click"/>
-                    <af:clientAttribute name="path" value="#{request.scheme}://#{request.serverName}//#{resource.resourceWebUrl}"/>
+                    <af:clientAttribute name="path" value="#{request.scheme}://#{request.serverName}:8888/webcenter/#{resource.resourceWebUrl}"/>
                   </af:commandLink>
                   <f:facet name="separator">
                     <af:panelGroupLayout id="pgl13" halign="center"
@@ -540,12 +563,13 @@
                var source = event.getSource();
                var title = source.getProperty('name');
                var path = source.getProperty('path');
-               newPath = path.replace('hovm1014_content', 'hovm1014_content/path');
+               //newPath = path.replace('hovm1014_content', 'hovm1014_content/path');
                
                var pw1 = source.findComponent('::pw1');
                pw1.setTitle(title);
                var popupinlineFrame1 = source.findComponent('::inlineFrame1');
-               popupinlineFrame1.setSource('/webcenter/content/conn' + newPath);
+              //popupinlineFrame1.setSource('/webcenter/content/conn' + newPath);
+              popupinlineFrame1.setSource('path');
                  
                var popup = source.findComponent('::p1');
                var hints = {
@@ -553,13 +577,20 @@
                popup.show(hints);             
            }
            
-           showPdfInNewWindowWithPrint = function (event) {
-               /*
+          // showPdfInNewWindowWithPrint = function (event) {
+               
+             //  var source = event.getSource();
+             //  var path = source.getProperty('path');
+              //newPath = '/webcenter/content/conn' + (path.replace('hovm1014_content', 'hovm1014_content/path'));
+               
+             //  window.open(path).print();
+               
+                 showPdfInNewWindowWithPrint = function (event) {
                var source = event.getSource();
                var path = source.getProperty('path');
-               newPath = '/webcenter/content/conn' + (path.replace('hovm1014_content', 'hovm1014_content/path'));
-               */
-               window.open(newPath).print();
+               //newPath = '/webcenter/content/conn' + (path.replace('hovm1014_content', 'hovm1014_content/path'));               
+               //window.open(newPath).print();
+               window.open(path).print();
            }
            
          </af:resource>
