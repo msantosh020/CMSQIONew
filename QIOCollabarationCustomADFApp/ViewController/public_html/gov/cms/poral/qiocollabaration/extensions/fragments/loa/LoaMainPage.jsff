@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" layout="vertical" partialTriggers="soc7">
+    <af:listView id="lv1" var="topic"
+                 value="#{viewScope.LOAMainBackingBean.currentPageTopics}">
+      <af:listItem id="li1" styleClass="ResourceGrid">
+        <af:panelGroupLayout id="pgl10" layout="vertical"
+                             styleClass="LOAPanelBox">
+          <af:outputText value="#{topic.topicName}" id="ot1"
+                         styleClass="LOATopicName"/>
+          <af:spacer width="10" height="10" id="s1"/>
+          <af:panelGroupLayout id="pgl2" layout="horizontal" halign="center"
+                               styleClass="AFStretchWidth">
+            <af:commandButton text="View Packet" id="cb1" action="pprnav"
+                              styleClass="LOAViewPacketButton"
+                              actionListener="#{navigationContext.processAction}">
+              <f:attribute name="node"
+                           value="#{navigationContext.defaultNavigationModel.node['Home/page12/page143/page153']}"/>
+              <af:setPropertyListener from="#{topic.collectionId}" to="#{sessionScope.selectedLOATopicCollectionId}" type="action"/>
+            </af:commandButton>
+          </af:panelGroupLayout>
+        </af:panelGroupLayout>
+      </af:listItem>
+    </af:listView>
+    <af:spacer width="10" height="20" id="s2"/>
+    <af:panelGroupLayout id="pgl16" layout="horizontal" halign="center">
+      <af:selectOneChoice label="Page : " id="soc7"
+                          value="#{viewScope.LOAMainBackingBean.currentPageIndex}"
+                          autoSubmit="true"
+                          valueChangeListener="#{viewScope.LOAMainBackingBean.onPageNumberSelection}">
+        <f:selectItems id="si9"
+                       value="#{viewScope.LOAMainBackingBean.pagesSI}"/>
+      </af:selectOneChoice>
+      <af:outputText value="of #{viewScope.LOAMainBackingBean.totalPagesSize}"
+                     id="ot15"/>
+    </af:panelGroupLayout>
+  </af:panelGroupLayout>
+</jsp:root>

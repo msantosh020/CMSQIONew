@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" layout="vertical">
+    <af:iterator id="i1" var="category" varStatus="vs"
+                 value="#{viewScope.LOATopicPageBackingBean.loaTopicCategoryList}">
+      <af:panelBox text="#{category.categoryName}" id="pb1">
+        <f:facet name="toolbar"/>
+        <af:panelGroupLayout id="pgl2" layout="vertical">
+          <af:iterator id="i2" var="resourceBean" varStatus="vs"
+                       value="#{category.resources}">
+            <af:outputText value="#{resourceBean.resourceTitle}" id="cl1"/>  
+            <af:spacer width="10" height="10" id="s1"/>
+          </af:iterator>
+        </af:panelGroupLayout>
+      </af:panelBox>
+    </af:iterator>
+  </af:panelGroupLayout>
+</jsp:root>
