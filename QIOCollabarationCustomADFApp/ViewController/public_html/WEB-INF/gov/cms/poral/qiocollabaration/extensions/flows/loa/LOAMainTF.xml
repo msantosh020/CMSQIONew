@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="LOAMainTF">
+    <default-activity id="__1">LoaMainPage</default-activity>
+    <input-parameter-definition id="__7">
+      <name id="__6">loaMainContentPath</name>
+      <value>#{pageFlowScope.loaMainContentPath}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__2">
+      <managed-bean-name id="__4">LOAMainBackingBean</managed-bean-name>
+      <managed-bean-class id="__5">gov.cms.portal.qiocollabaration.extension.view.loa.backingbeans.LOAMainBackingBean</managed-bean-class>
+      <managed-bean-scope id="__3">view</managed-bean-scope>
+    </managed-bean>
+    <view id="LoaMainPage">
+      <page>/gov/cms/poral/qiocollabaration/extensions/fragments/loa/LoaMainPage.jsff</page>
+    </view>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

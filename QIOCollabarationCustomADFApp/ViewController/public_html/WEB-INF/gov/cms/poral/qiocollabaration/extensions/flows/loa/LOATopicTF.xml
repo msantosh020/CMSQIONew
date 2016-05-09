@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="LOATopicTF">
+    <input-parameter-definition id="__7">
+      <name id="__6">loaTopicCSParentFolderPath</name>
+      <value>#{pageFlowScope.loaTopicCSParentFolderPath}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__4">
+      <managed-bean-name id="__2">LOATopicPageBackingBean</managed-bean-name>
+      <managed-bean-class id="__3">gov.cms.portal.qiocollabaration.extension.view.loa.backingbeans.LOATopicPageBackingBean</managed-bean-class>
+      <managed-bean-scope id="__5">view</managed-bean-scope>
+    </managed-bean>
+    <view id="QIUTopicPage">
+      <page>/gov/cms/poral/qiocollabaration/extensions/fragments/loa/LOATopicPage.jsff</page>
+    </view>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>
