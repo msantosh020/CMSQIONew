@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">QIUTopicPage</property>
+      <property
+         name="page">/gov/cms/poral/qiocollabaration/extensions/fragments/loa/LOATopicPage.jsff</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>QIUTopicPage&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">71.79883</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">64.35156</property>
+   </View>
+</SDM>
