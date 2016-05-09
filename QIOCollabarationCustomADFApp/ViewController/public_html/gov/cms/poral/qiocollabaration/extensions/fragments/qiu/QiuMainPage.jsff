@@ -18,8 +18,7 @@
                               actionListener="#{navigationContext.processAction}">
               <f:attribute name="node"
                            value="#{navigationContext.defaultNavigationModel.node['Home/page12/page168/page1217']}"/>
-              <!--<af:setActionListener from="#{topic.collectionId}"
-                                    to="#{sessionScope.selectedQIUTopicCollectionId}"/>-->
+              <af:setPropertyListener from="#{topic.collectionId}" to="#{sessionScope.selectedQIUTopicCollectionId}" type="action"/>
             </af:commandButton>
           </af:panelGroupLayout>
         </af:panelGroupLayout>
