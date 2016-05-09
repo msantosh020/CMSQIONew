@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
           xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
-          xmlns:f="http://java.sun.com/jsf/core">
+          xmlns:f="http://java.sun.com/jsf/core" 
+          xmlns:fn="http://java.sun.com/jsp/jstl/functions">
   <af:panelGroupLayout id="pgl1" layout="vertical" partialTriggers="cb1 cb2">
     <af:panelGroupLayout id="pgl14" layout="horizontal">
       <af:spacer width="170" height="10" id="s9"/>
@@ -495,10 +496,10 @@
                 <af:commandImageLink icon="/images/profile_pic_not_available.jpg"
                                      id="cil3" partialSubmit="true"
                                      clientComponent="true">
-                  <!--<af:clientListener method="showPdfInPopup" type="click"/>-->
-                  <!--<af:clientAttribute name="path" value="#{node.path}"/>-->
-                  <!--<af:clientAttribute name="name"
-                                      value="#{fn:substringBefore(node.name,'.pdf')}"/>-->
+                  <af:clientListener method="showPdfInPopup" type="click"/>
+                 <af:clientAttribute name="path" value="#{request.scheme}://#{request.serverName}:8888/webcenter/#{resource.resourceWebUrl}"/>
+                  <af:clientAttribute name="name"
+                                      value="#{fn:substringBefore(resource.resourceWebUrl,'.pdf')}"/>
                 </af:commandImageLink>
                 <af:spacer width="10" height="10" id="s3"/>
                 <af:outputText value="#{resource.resourceTitle}" id="ot8"
@@ -557,19 +558,22 @@
                          id="ot15"/>
         </af:panelGroupLayout>
       </af:panelGroupLayout>
+       <af:popup id="p1" contentDelivery="immediate" clientComponent="true">
+            <af:panelWindow id="pw1" modal="true" resize="on" contentHeight="800" contentWidth="800" clientComponent="true">
+               <af:inlineFrame id="inlineFrame1" clientComponent="true" inlineStyle="width:100%;height:100%"/>
+            </af:panelWindow>
+         </af:popup>
     </af:panelGroupLayout>
     <af:resource type="javascript">
            showPdfInPopup = function (event) {
-               var source = event.getSource();
+              var source = event.getSource();
                var title = source.getProperty('name');
                var path = source.getProperty('path');
-               //newPath = path.replace('hovm1014_content', 'hovm1014_content/path');
-               
+                 
                var pw1 = source.findComponent('::pw1');
                pw1.setTitle(title);
                var popupinlineFrame1 = source.findComponent('::inlineFrame1');
-              //popupinlineFrame1.setSource('/webcenter/content/conn' + newPath);
-              popupinlineFrame1.setSource('path');
+               popupinlineFrame1.setSource(path);          
                  
                var popup = source.findComponent('::p1');
                var hints = {
@@ -585,7 +589,7 @@
                
              //  window.open(path).print();
                
-                 showPdfInNewWindowWithPrint = function (event) {
+            showPdfInNewWindowWithPrint = function (event) {
                var source = event.getSource();
                var path = source.getProperty('path');
                //newPath = '/webcenter/content/conn' + (path.replace('hovm1014_content', 'hovm1014_content/path'));               
