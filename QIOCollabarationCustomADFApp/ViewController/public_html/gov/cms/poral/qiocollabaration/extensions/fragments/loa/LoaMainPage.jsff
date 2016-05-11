@@ -2,39 +2,106 @@
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
           xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
           xmlns:f="http://java.sun.com/jsf/core">
-  <af:panelGroupLayout id="pgl1" layout="vertical" partialTriggers="soc7">
-    <af:listView id="lv1" var="topic"
-                 value="#{viewScope.LOAMainBackingBean.currentPageTopics}">
-      <af:listItem id="li1" styleClass="ResourceGrid">
-        <af:panelGroupLayout id="pgl10" layout="vertical"
-                             styleClass="LOAPanelBox">
-          <af:outputText value="#{topic.topicName}" id="ot1"
-                         styleClass="LOATopicName"/>
-          <af:spacer width="10" height="10" id="s1"/>
-          <af:panelGroupLayout id="pgl2" layout="horizontal" halign="center"
-                               styleClass="AFStretchWidth">
-            <af:commandButton text="View Packet" id="cb1" action="pprnav"
-                              styleClass="LOAViewPacketButton"
-                              actionListener="#{navigationContext.processAction}">
-              <f:attribute name="node"
-                           value="#{navigationContext.defaultNavigationModel.node['Home/page12/page143/page153']}"/>
-              <af:setPropertyListener from="#{topic.collectionId}" to="#{sessionScope.selectedLOATopicCollectionId}" type="action"/>
-            </af:commandButton>
-          </af:panelGroupLayout>
+  <af:panelGroupLayout id="pgl1" layout="vertical">
+    <af:panelGroupLayout id="pgl3" layout="vertical">
+      <af:panelGroupLayout id="pgl4" layout="horizontal" halign="end"
+                           styleClass="AFstretchWidth"
+                           inlineStyle="width:500px">
+        <af:commandLink text="Download Syllabus(PDF)" id="cl2"
+                        partialSubmit="true"
+                        styleClass="selectedContactTabLink"/>
+        <af:spacer width="10" height="10" id="s5"/>
+        <af:commandLink text="View Program Resources" id="cl4"
+                        partialSubmit="true"
+                        styleClass="selectedContactTabLink"/>
+      </af:panelGroupLayout>
+      <af:spacer width="10" height="10" id="s7"/>
+      <af:panelGroupLayout id="pgl8" layout="horizontal"
+                           partialTriggers="i1:cl1">
+        <af:iterator id="i1" var="loaPart" varStatus="vs"
+                     value="#{pageFlowScope.LOAMainBackingBean.loaPartList}">
+          <af:commandLink text="#{loaPart.partName}" id="cl1"
+                          partialSubmit="true"
+                          styleClass="#{vs.index eq pageFlowScope.LOAMainBackingBean.selectedPartIndex ? 'selectedContactTabLink' : 'ContactTypeLink'}"
+                          actionListener="#{pageFlowScope.LOAMainBackingBean.onLOAPartSelection}">
+            <af:setActionListener from="#{vs.index}"
+                                  to="#{pageFlowScope.LOAMainBackingBean.selectedPartIndex}"/>
+          </af:commandLink>
+          <af:spacer width="10" height="10" id="s6"/>
+        </af:iterator>
+      </af:panelGroupLayout>
+      <af:spacer width="10" height="10" id="s8"/>
+      <af:panelGroupLayout id="pgl5" layout="vertical"
+                           styleClass="ContactTypeOuterBox"
+                           partialTriggers="i1:cl1 cl5 cl3">
+        <af:panelGroupLayout id="pgl9" layout="horizontal">
+          <af:commandLink text="Modules" id="cl5" partialSubmit="true"
+                          styleClass="#{'MODULES' eq pageFlowScope.LOAMainBackingBean.selectedPartType ? 'selectedContactTabLink' : 'ContactTypeLink'}">
+            <af:setActionListener from="#{'MODULES'}"
+                                  to="#{pageFlowScope.LOAMainBackingBean.selectedPartType}"/>
+            <af:setActionListener from="#{null}"
+                                  to="#{pageFlowScope.LOAMainBackingBean.currentPageModules}"/>
+            <af:setActionListener from="#{1}"
+                                  to="#{pageFlowScope.LOAMainBackingBean.currentPageIndex}"/>
+          </af:commandLink>
+          <af:spacer width="10" height="10" id="s9"/>
+          <af:commandLink text="Skill Sessions" id="cl3" partialSubmit="true"
+                          styleClass="#{'SKILL_SESSIONS' eq pageFlowScope.LOAMainBackingBean.selectedPartType ? 'selectedContactTabLink' : 'ContactTypeLink'}">
+            <af:setActionListener from="#{'SKILL_SESSIONS'}"
+                                  to="#{pageFlowScope.LOAMainBackingBean.selectedPartType}"/>
+          </af:commandLink>
         </af:panelGroupLayout>
-      </af:listItem>
-    </af:listView>
-    <af:spacer width="10" height="20" id="s2"/>
-    <af:panelGroupLayout id="pgl16" layout="horizontal" halign="center">
-      <af:selectOneChoice label="Page : " id="soc7"
-                          value="#{viewScope.LOAMainBackingBean.currentPageIndex}"
-                          autoSubmit="true"
-                          valueChangeListener="#{viewScope.LOAMainBackingBean.onPageNumberSelection}">
-        <f:selectItems id="si9"
-                       value="#{viewScope.LOAMainBackingBean.pagesSI}"/>
-      </af:selectOneChoice>
-      <af:outputText value="of #{viewScope.LOAMainBackingBean.totalPagesSize}"
-                     id="ot15"/>
+        <af:spacer width="10" height="10" id="s10"/>
+        <af:switcher facetName="#{pageFlowScope.LOAMainBackingBean.selectedPartType}"
+                     defaultFacet="MODULES" id="s1">
+          <f:facet name="MODULES">
+            <af:panelGroupLayout id="pgl6" layout="vertical"
+                                 partialTriggers="soc7">
+              <af:listView id="lv1" var="module"
+                           value="#{pageFlowScope.LOAMainBackingBean.currentPageModules}">
+                <af:listItem id="li1" styleClass="ResourceGrid">
+                  <af:panelGroupLayout id="pgl10" layout="vertical"
+                                       styleClass="LOAPanelBox">
+                    <af:image source="/images/profile_pic_not_available.jpg"
+                              id="i2"/>
+                    <af:spacer width="10" height="10" id="s4"/>
+                    <af:outputText value="#{module.moduleName}" id="ot1"
+                                   styleClass="LOATopicName"/>
+                    <af:spacer width="10" height="10" id="spacer1"/>
+                    <af:outputText value="#{module.moduleDesc}" id="ot2"
+                                   styleClass="LOATopicName"/>
+                    <af:spacer width="10" height="10" id="s3"/>
+                    <af:panelGroupLayout id="pgl2" layout="horizontal"
+                                         halign="center"
+                                         styleClass="AFStretchWidth">
+                      <af:commandButton text="View Module" id="cb1"
+                                        styleClass="LOAViewPacketButton"></af:commandButton>
+                    </af:panelGroupLayout>
+                  </af:panelGroupLayout>
+                </af:listItem>
+              </af:listView>
+              <af:spacer width="10" height="20" id="s2"/>
+              <af:panelGroupLayout id="pgl16" layout="horizontal"
+                                   halign="center">
+                <af:selectOneChoice label="Page : " id="soc7"
+                                    value="#{pageFlowScope.LOAMainBackingBean.currentPageIndex}"
+                                    autoSubmit="true"
+                                    valueChangeListener="#{pageFlowScope.LOAMainBackingBean.onPageNumberSelection}">
+                  <f:selectItems id="si9"
+                                 value="#{pageFlowScope.LOAMainBackingBean.pagesSI}"/>
+                </af:selectOneChoice>
+                <af:outputText value="of #{pageFlowScope.LOAMainBackingBean.totalPagesSize}"
+                               id="ot15"/>
+              </af:panelGroupLayout>
+            </af:panelGroupLayout>
+          </f:facet>
+          <f:facet name="SKILL_SESSIONS">
+            <af:panelGroupLayout id="pgl7">
+              <af:outputLabel value="SKILL_SESSIONS related Info" id="ol1"/>
+            </af:panelGroupLayout>
+          </f:facet>
+        </af:switcher>
+      </af:panelGroupLayout>
     </af:panelGroupLayout>
   </af:panelGroupLayout>
 </jsp:root>

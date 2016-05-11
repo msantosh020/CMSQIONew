@@ -7,10 +7,10 @@ import java.io.Serializable;
 
 import java.util.List;
 
-public class LOATopicCategoryBean  implements Serializable {
+public class LOAModuleCategoryBean  implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public LOATopicCategoryBean() {
+    public LOAModuleCategoryBean() {
         super();
     }
     
@@ -19,6 +19,7 @@ public class LOATopicCategoryBean  implements Serializable {
     private String collectionPath;
     private String collectionId;
     private List<ResourceBean> resources;
+    private String categoryType;
 
     public void setResources(List<ResourceBean> resources) {
         this.resources = resources;
@@ -58,5 +59,13 @@ public class LOATopicCategoryBean  implements Serializable {
 
     public String getCollectionId() {
         return collectionId;
+    }
+
+    public void setCategoryType(String categoryType) {
+        this.categoryType = categoryType;
+    }
+
+    public String getCategoryType() {
+        return categoryType;
     }
 }

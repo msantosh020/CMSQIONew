@@ -34,7 +34,7 @@
   </context-param>
   <context-param>
     <param-name>org.apache.myfaces.trinidad.CHANGE_PERSISTENCE</param-name>
-    <param-value>oracle.adf.view.rich.change.MDSDocumentChangeManager</param-value>
+    <param-value>oracle.adf.view.page.editor.change.ComposerChangeManager</param-value>
   </context-param>
   <filter>
     <filter-name>JpsFilter</filter-name>

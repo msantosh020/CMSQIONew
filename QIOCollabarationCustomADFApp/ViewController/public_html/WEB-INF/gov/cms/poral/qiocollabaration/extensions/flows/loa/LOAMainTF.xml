@@ -10,7 +10,7 @@
     <managed-bean id="__2">
       <managed-bean-name id="__4">LOAMainBackingBean</managed-bean-name>
       <managed-bean-class id="__5">gov.cms.portal.qiocollabaration.extension.view.loa.backingbeans.LOAMainBackingBean</managed-bean-class>
-      <managed-bean-scope id="__3">view</managed-bean-scope>
+      <managed-bean-scope id="__3">pageFlow</managed-bean-scope>
     </managed-bean>
     <view id="LoaMainPage">
       <page>/gov/cms/poral/qiocollabaration/extensions/fragments/loa/LoaMainPage.jsff</page>

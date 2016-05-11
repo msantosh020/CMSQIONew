@@ -6,10 +6,10 @@ import gov.cms.portal.qiocollabaration.extension.view.resources.beans.CommunityB
 import gov.cms.portal.qiocollabaration.extension.view.resources.beans.ResourceBean;
 import gov.cms.portal.qiocollabaration.extension.view.resources.beans.TopicBean;
 
-import gov.cms.portal.qiocollabaration.extension.view.resources.util.ContainsSearchPredicate;
+import gov.cms.portal.qiocollabaration.extension.view.common.util.ContainsSearchPredicate;
 import gov.cms.portal.qiocollabaration.extension.view.resources.util.ResourceContentUtil;
 
-import gov.cms.portal.qiocollabaration.extension.view.resources.util.StringUtil;
+import gov.cms.portal.qiocollabaration.extension.view.common.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;

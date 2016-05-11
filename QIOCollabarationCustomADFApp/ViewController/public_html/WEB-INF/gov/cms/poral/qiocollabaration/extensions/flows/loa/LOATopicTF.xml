@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="windows-1252" ?>
 <adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
   <task-flow-definition id="LOATopicTF">
+    <default-activity id="__1">QIUTopicPage</default-activity>
     <input-parameter-definition id="__7">
-      <name id="__6">loaTopicCSParentFolderPath</name>
-      <value>#{pageFlowScope.loaTopicCSParentFolderPath}</value>
+      <name id="__6">loaModuleCSParentFolderPath</name>
+      <value>#{pageFlowScope.loaModuleCSParentFolderPath}</value>
       <class>java.lang.String</class>
     </input-parameter-definition>
     <managed-bean id="__4">

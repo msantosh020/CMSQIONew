@@ -10,6 +10,12 @@ public class ResourceBean implements Serializable {
     public ResourceBean() {
         super();
     }
+    
+    public ResourceBean(String resourceTitle, String resourceDescriptiont) {
+        super();
+        this.resourceTitle = resourceTitle;
+        this.resourceDescription = resourceDescriptiont;
+    }
 
     public ResourceBean(String resourceTitle, String resourceDescription, String resourceFormat, String length, Date addedDate, Date updatedDate, String uploadedOrganization, String author,
                         String thumbnailImageUrl, String resourceUrl, String community) {
@@ -40,6 +46,7 @@ public class ResourceBean implements Serializable {
     private String resourceWebUrl;
     private String resourceNativeWebUrl;
     private String community;
+    private String resourceImageUrl;
 
     public void setResourceTitle(String resourceTitle) {
         this.resourceTitle = resourceTitle;
@@ -143,5 +150,13 @@ public class ResourceBean implements Serializable {
 
     public String getResourceNativeWebUrl() {
         return resourceNativeWebUrl;
+    }
+
+    public void setResourceImageUrl(String resourceImageUrl) {
+        this.resourceImageUrl = resourceImageUrl;
+    }
+
+    public String getResourceImageUrl() {
+        return resourceImageUrl;
     }
 }

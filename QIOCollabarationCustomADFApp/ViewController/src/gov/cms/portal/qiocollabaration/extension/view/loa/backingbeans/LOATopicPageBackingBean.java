@@ -2,10 +2,10 @@ package gov.cms.portal.qiocollabaration.extension.view.loa.backingbeans;
 
 
 import gov.cms.portal.qiocollabaration.extension.view.common.util.Util;
-import gov.cms.portal.qiocollabaration.extension.view.loa.beans.LOATopicCategoryBean;
-import gov.cms.portal.qiocollabaration.extension.view.resources.util.LOAContentUtil;
+import gov.cms.portal.qiocollabaration.extension.view.loa.beans.LOAModuleBean;
+import gov.cms.portal.qiocollabaration.extension.view.loa.beans.LOAModuleCategoryBean;
 
-import gov.cms.portal.qiocollabaration.extension.view.resources.util.QIUContentUtil;
+import gov.cms.portal.qiocollabaration.extension.view.loa.util.LOAContentUtil;
 
 import java.util.List;
 
@@ -15,32 +15,32 @@ public class LOATopicPageBackingBean {
         super();
     }
 
-    private List<LOATopicCategoryBean> loaTopicCategoryList;
-    private String loaTopicCSParentFolderPath;
+    private LOAModuleBean loaModule;
+    private String loaModuleCSParentFolderPath;
 
-    public void setLoaTopicCategoryList(List<LOATopicCategoryBean> loaTopicCategoryList) {
-        this.loaTopicCategoryList = loaTopicCategoryList;
+    public void setLoaModule(LOAModuleBean loaModule) {
+        this.loaModule = loaModule;
     }
 
-    public List<LOATopicCategoryBean> getLoaTopicCategoryList() {
-        if (loaTopicCategoryList == null) {
-            loaTopicCategoryList = LOAContentUtil.getLoaTopicCategoryList(getLoaTopicCSParentFolderPath());
+    public LOAModuleBean getLoaModule() {
+        if (loaModule == null) {
+            loaModule = LOAContentUtil.getLOAModule(getLoaModuleCSParentFolderPath());
         }
-        return loaTopicCategoryList;
+        return loaModule;
     }
 
-    public void setLoaTopicCSParentFolderPath(String loaTopicCSParentFolderPath) {
-        this.loaTopicCSParentFolderPath = loaTopicCSParentFolderPath;
+    public void setLoaModuleCSParentFolderPath(String loaModuleCSParentFolderPath) {
+        this.loaModuleCSParentFolderPath = loaModuleCSParentFolderPath;
     }
 
-    public String getLoaTopicCSParentFolderPath() {
-        if (loaTopicCSParentFolderPath == null) {
-            loaTopicCSParentFolderPath = Util.getPageFlowScopeParamValue("loaTopicCSParentFolderPath");
-            if (loaTopicCSParentFolderPath == null) {
-                loaTopicCSParentFolderPath = "/WebCenterSpaces-Root/LOA/";
+    public String getLoaModuleCSParentFolderPath() {
+        if (loaModuleCSParentFolderPath == null) {
+            loaModuleCSParentFolderPath = Util.getPageFlowScopeParamValue("loaModuleCSParentFolderPath");
+            if (loaModuleCSParentFolderPath == null) {
+                loaModuleCSParentFolderPath = "/WebCenterSpaces-Root/LOA/";
             }
         }
-        return loaTopicCSParentFolderPath;
+        return loaModuleCSParentFolderPath;
     }
 }
 

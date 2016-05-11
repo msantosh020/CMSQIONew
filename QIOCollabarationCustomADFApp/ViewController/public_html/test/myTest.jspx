@@ -1,25 +1,270 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
-          xmlns:f="http://java.sun.com/jsf/core"
-          xmlns:h="http://java.sun.com/jsf/html"
-          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
-  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-  <f:view>
-    <af:document id="d1">
-      <af:form id="f1">
-        <af:pageTemplate viewId="/oracle/templates/threeColumnTemplate.jspx"
-                         id="pt1">
-          <f:facet name="center">
-            <af:region value="#{bindings.ResourcesTF1.regionModel}" id="r1"/>
-          </f:facet>
-          <f:facet name="header"/>
-          <f:facet name="end"/>
-          <f:facet name="start"/>
-          <f:facet name="branding"/>
-          <f:facet name="copyright"/>
-          <f:facet name="status"/>
-        </af:pageTemplate>
-      </af:form>
-    </af:document>
-  </f:view>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:pe="http://xmlns.oracle.com/adf/pageeditor" xmlns:cust="http://xmlns.oracle.com/adf/faces/customizable" xmlns:f="http://java.sun.com/jsf/core" xmlns:trh="http://myfaces.apache.org/trinidad/html" xmlns:af="http://xmlns.oracle.com/adf/faces/rich" version="2.1">
+   <jsp:directive.page deferredSyntaxAllowedAsLiteral="true"/>
+   <jsp:directive.page contentType="text/html;charset=utf-8"/>
+   <f:view>
+      <af:document title="#{pageDocBean.title}" id="docrt">
+         <f:facet name="metaContainer">
+            <trh:meta name="keywords" content="#{bindings.SEO_KEYWORDS}"/>
+         </f:facet>
+         <af:form usesUpload="true" id="f1">
+            <af:pageTemplate value="#{bindings.shellTemplateBinding.templateModel}" id="T">
+               <f:facet name="content">
+                  <pe:pageCustomizable id="pcl1">
+                     <af:panelGroupLayout id="pgl1" layout="scroll" styleClass="WCSchemeCustom" inlineStyle="">
+                        <cust:panelCustomizable id="hm_pnchdr" rendered="#{bindings.showHeader}" layout="vertical" showTabAction="true"/>
+                        <af:panelGroupLayout id="pgl2" layout="vertical" styleClass="AFStretchWidth">
+                           <trh:tableLayout id="tl1" width="100%">
+                              <trh:rowLayout id="rl1">
+                                 <trh:cellFormat id="cf1" rendered="#{bindings.leftWidth != '' and bindings.leftWidth != '0%'}" width="#{bindings.leftWidth}" valign="top">
+                                    <cust:panelCustomizable id="hm_pnc1" layout="scroll" showTabAction="true"/>
+                                 </trh:cellFormat>
+                                 <trh:cellFormat id="cf2" rendered="#{bindings.centerWidth != '' and bindings.centerWidth != '0%'}" width="#{bindings.centerWidth}" valign="top">
+                                    <af:panelGroupLayout id="pgl3" layout="vertical" partialTriggers="cl1 cl2 cl3 cl4 cl9 cl10 ">
+                                       <af:panelGroupLayout id="pgl4" layout="horizontal">
+                                          <af:commandLink text="BFCC" id="cl1" partialSubmit="true" styleClass="#{empty sessionScope.selectedNewsInfoTab or 'BFCC' eq sessionScope.selectedNewsInfoTab ? 'selectedContactTabLink' : 'ContactTypeLink'}">
+                                             <af:setActionListener from="#{'BFCC'}" to="#{sessionScope.selectedNewsInfoTab}"/>
+                                          </af:commandLink>
+                                          <af:commandLink text="BFCC Advisory Group" id="cl2" partialSubmit="true" styleClass="#{'BFCC Advisory Group' eq sessionScope.selectedNewsInfoTab ? 'selectedContactTabLink' : 'ContactTypeLink'}">
+                                             <af:setActionListener from="#{'BFCC Advisory Group'}" to="#{sessionScope.selectedNewsInfoTab}"/>
+                                          </af:commandLink>
+                                          <af:commandLink text="BFCC Work Group" id="cl9" partialSubmit="true" styleClass="#{'BFCC Work Group' eq sessionScope.selectedNewsInfoTab ? 'selectedContactTabLink' : 'ContactTypeLink'}">
+                                             <af:setActionListener from="#{'BFCC Work Group'}" to="#{sessionScope.selectedNewsInfoTab}"/>
+                                          </af:commandLink>
+                                          <af:commandLink text="PAM® Users Group" id="cl10" partialSubmit="true" styleClass="#{'PAM Users Group' eq sessionScope.selectedNewsInfoTab ? 'selectedContactTabLink' : 'ContactTypeLink'}">
+                                             <af:setActionListener from="#{'PAM Users Group'}" to="#{sessionScope.selectedNewsInfoTab}"/>
+                                          </af:commandLink>
+                                          <af:commandLink text="PCC-IC" id="cl3" partialSubmit="true" styleClass="#{'PCC-IC' eq sessionScope.selectedNewsInfoTab ? 'selectedContactTabLink' : 'ContactTypeLink'}">
+                                             <af:setActionListener from="#{'PCC-IC'}" to="#{sessionScope.selectedNewsInfoTab}"/>
+                                          </af:commandLink>
+                                          <af:commandLink text="QIN-QIO" id="cl4" partialSubmit="true" styleClass="#{'QIN-QIO' eq sessionScope.selectedNewsInfoTab ? 'selectedContactTabLink' : 'ContactTypeLink'}">
+                                             <af:setActionListener from="#{'QIN-QIO'}" to="#{sessionScope.selectedNewsInfoTab}"/>
+                                          </af:commandLink>
+                                       </af:panelGroupLayout>
+                                       <af:panelGroupLayout id="pgl5" layout="vertical" styleClass="ContactTypeOuterBox" partialTriggers="cl1 cl2 cl3 cl4 cl9 cl10">
+                                          <af:panelGroupLayout id="pgl14" layout="vertical" rendered="#{empty sessionScope.selectedNewsInfoTab or sessionScope.selectedNewsInfoTab eq 'BFCC'}">
+                                             <panelGroupLayout id="pgl7295880369" layout="horizontal" styleClass="ComposerSplitHorz AFStretchWidth ContactTypeInnerBox" valign="top" xmlns="http://xmlns.oracle.com/adf/faces/rich">
+                                                <attribute name="composer_split" value="true" xmlns="http://java.sun.com/jsf/core"/>
+                                                <panelGroupLayout id="pgl1055399580" layout="vertical" styleClass="ComposerSplitVert">
+                                                   <attribute name="composer_split" value="true" xmlns="http://java.sun.com/jsf/core"/>
+                                                   <panelCustomizable id="pc9013218913" xmlns="http://xmlns.oracle.com/adf/faces/customizable" layout="vertical">
+                                                      <showDetailFrame id="sdf_for_oc_9792896795region1" text="Feature" displayHeader="true" stretchContent="false" showMinimizeAction="none" background="#{changeModeBean.inEditMode ? 'medium' : 'light'}" showResizer="never" styleClass="QIOCollShowDetailFrame">
+                                                         <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_9792896795region1" value="#{bindings.rblWTmpO4oD1.regionModel}"/>
+                                                      </showDetailFrame>
+                                                   </panelCustomizable>
+                                                   <panelCustomizable id="pc3425024814" xmlns="http://xmlns.oracle.com/adf/faces/customizable">
+                                                      <showDetailFrame id="sdf_for_oc_9839082419region1" text="Recent Newsletters" displayHeader="true" stretchContent="false" showMinimizeAction="none" background="#{changeModeBean.inEditMode ? 'medium' : 'light'}" showResizer="never" styleClass="QIOCollShowDetailFrame">
+                                                         <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_9839082419region1" value="#{bindings.rb2gcvLy1Jk1.regionModel}"/>
+                                                      </showDetailFrame>
+                                                   </panelCustomizable>
+                                                </panelGroupLayout>
+                                                <panelGroupLayout id="pgl5408259745" layout="vertical" styleClass="ComposerSplitVert">
+                                                   <cust:panelCustomizable id="__oc_p_5944815638" layout="auto" xmlns:cust="http://xmlns.oracle.com/adf/faces/customizable" inlineStyle="height:;width:;">
+                                                      <showDetailFrame id="sdf_for_oc_7972166249region1" text="Announcements" stretchContent="auto" showResizer="never" showMinimizeAction="none" styleClass="QIOCollShowDetailFrame" xmlns="http://xmlns.oracle.com/adf/faces/customizable">
+                                                         <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_7972166249region1" value="#{bindings.rbNJJiYmlFP1.regionModel}"/>
+                                                      </showDetailFrame>
+                                                   </cust:panelCustomizable>
+                                                   <attribute name="composer_split" value="true" xmlns="http://java.sun.com/jsf/core"/>
+                                                   <panelCustomizable id="pc9773311763" xmlns="http://xmlns.oracle.com/adf/faces/customizable"/>
+                                                   <panelCustomizable id="pc4653324724" xmlns="http://xmlns.oracle.com/adf/faces/customizable"/>
+                                                </panelGroupLayout>
+                                             </panelGroupLayout>
+                                             <panelCustomizable id="pc8960930413" xmlns="http://xmlns.oracle.com/adf/faces/customizable" inlineStyle="width:500px;" rendered="false"/>
+                                             <panelCustomizable id="pc6471502021" xmlns="http://xmlns.oracle.com/adf/faces/customizable">
+                                                <showDetailFrame id="sdf_for_oc_709576411region1" text="Community Lead Contacts" displayHeader="true" stretchContent="false" showMinimizeAction="none" background="#{changeModeBean.inEditMode ? 'medium' : 'light'}" showResizer="never" styleClass="QIOCollShowDetailFrame">
+                                                   <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_709576411region1" value="#{bindings.rbu7IZztem51.regionModel}"/>
+                                                </showDetailFrame>
+                                             </panelCustomizable>
+                                             <panelCustomizable id="pc1943082854" xmlns="http://xmlns.oracle.com/adf/faces/customizable" inlineStyle="width:;">
+                                                <showDetailFrame id="sdf_for_oc_1386497985region1" text="#{uib_o_w_s_r_DefaultGroupSpaceCatalog['DOCLIB_BLOG_MAIN_VIEW.TITLE']}" stretchContent="auto" showResizer="never" xmlns="http://xmlns.oracle.com/adf/faces/customizable" styleClass="QIOCollShowDetailFrame">
+                                                   <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_1386497985region1" value="#{bindings.rbkuLhSGnxI1.regionModel}"/>
+                                                </showDetailFrame>
+                                             </panelCustomizable>
+                                          </af:panelGroupLayout>
+                                          <af:panelGroupLayout id="pgl6258873113" layout="vertical" styleClass="ComposerSplitHorz AFStretchWidth ContactTypeInnerBox" rendered="#{sessionScope.selectedNewsInfoTab eq 'BFCC Advisory Group'}" valign="top" xmlns="http://xmlns.oracle.com/adf/faces/rich">
+                                             <panelGroupLayout id="pgl72958803691" layout="horizontal" styleClass="ComposerSplitHorz AFStretchWidth ContactTypeInnerBox" valign="top" xmlns="http://xmlns.oracle.com/adf/faces/rich">
+                                                <panelGroupLayout id="pgl812852339" layout="vertical" styleClass="ComposerSplitVert">
+                                                   <cust:panelCustomizable id="hm_pnc2" layout="vertical" showTabAction="true">
+                                                      <showDetailFrame id="sdf_for_oc_2185835108region1" text="Feature" displayHeader="true" stretchContent="false" showMinimizeAction="none" background="#{changeModeBean.inEditMode ? 'medium' : 'light'}" showResizer="never" xmlns="http://xmlns.oracle.com/adf/faces/customizable" styleClass="QIOCollShowDetailFrame">
+                                                         <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_2185835108region1" value="#{bindings.rbOup2vNsM_1.regionModel}"/>
+                                                      </showDetailFrame>
+                                                   </cust:panelCustomizable>
+                                                   <panelCustomizable id="pc2177086138" xmlns="http://xmlns.oracle.com/adf/faces/customizable">
+                                                      <showDetailFrame id="sdf_for_oc_7886577804region1" text="Recent Newsletters" displayHeader="true" stretchContent="false" showMinimizeAction="none" background="#{changeModeBean.inEditMode ? 'medium' : 'light'}" showResizer="never" xmlns="http://xmlns.oracle.com/adf/faces/customizable" styleClass="QIOCollShowDetailFrame" rendered="true">
+                                                         <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_7886577804region1" value="#{bindings.rbWXl5wbPVM1.regionModel}"/>
+                                                      </showDetailFrame>
+                                                   </panelCustomizable>
+                                                </panelGroupLayout>
+                                                <panelGroupLayout id="pgl5441612476" layout="vertical" styleClass="ComposerSplitVert">
+                                                   <panelCustomizable id="pc2156488104" xmlns="http://xmlns.oracle.com/adf/faces/customizable" layout="auto">
+                                                      <showDetailFrame id="sdf_for_oc_4850797355region1" text="#{uib_o_w_s_r_DefaultGroupSpaceCatalog['ANNOUNCEMENTS.TITLE']}" stretchContent="auto" showResizer="never" xmlns="http://xmlns.oracle.com/adf/faces/customizable" styleClass="QIOCollShowDetailFrame">
+                                                         <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_4850797355region1" value="#{bindings.rbPJd8xXOM31.regionModel}"/>
+                                                      </showDetailFrame>
+                                                   </panelCustomizable>
+                                                </panelGroupLayout>
+                                             </panelGroupLayout>
+                                             <panelCustomizable id="pc2724701181" xmlns="http://xmlns.oracle.com/adf/faces/customizable">
+                                                <showDetailFrame id="sdf_for_oc_7659467280region1" text="Community Lead Contacts" displayHeader="true" stretchContent="false" showMinimizeAction="none" background="#{changeModeBean.inEditMode ? 'medium' : 'light'}" showResizer="never" xmlns="http://xmlns.oracle.com/adf/faces/customizable" styleClass="QIOCollShowDetailFrame">
+                                                   <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_7659467280region1" value="#{bindings.rb2qA_eVsPF1.regionModel}"/>
+                                                </showDetailFrame>
+                                             </panelCustomizable>
+                                             <panelCustomizable id="pc19430828541" xmlns="http://xmlns.oracle.com/adf/faces/customizable" inlineStyle="width:;">
+                                                <showDetailFrame id="sdf_for_oc_6446639877region1" text="#{uib_o_w_s_r_DefaultGroupSpaceCatalog['DOCLIB_BLOG_MAIN_VIEW.TITLE']}" stretchContent="auto" showResizer="never" xmlns="http://xmlns.oracle.com/adf/faces/customizable" styleClass="QIOCollShowDetailFrame">
+                                                   <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_6446639877region1" value="#{bindings.rbW_ZMcLMqS1.regionModel}"/>
+                                                </showDetailFrame>
+                                             </panelCustomizable>
+                                          </af:panelGroupLayout>
+                                          <panelGroupLayout id="pgl1420041595" layout="vertical" styleClass="ComposerSplitHorz AFStretchWidth ContactTypeInnerBox" rendered="#{sessionScope.selectedNewsInfoTab eq 'BFCC Work Group'}" valign="top" xmlns="http://xmlns.oracle.com/adf/faces/rich">
+                                             <panelGroupLayout id="pgl729588036912" layout="horizontal" styleClass="ComposerSplitHorz AFStretchWidth ContactTypeInnerBox" valign="top" xmlns="http://xmlns.oracle.com/adf/faces/rich">
+                                                <panelGroupLayout id="pgl3126446404" layout="vertical" styleClass="ComposerSplitVert">
+                                                   <cust:panelCustomizable id="__oc_p_3631105539" layout="scroll" xmlns:cust="http://xmlns.oracle.com/adf/faces/customizable">
+                                                      <showDetailFrame id="sdf_for_oc_1122950921region1" text="Feature" displayHeader="true" stretchContent="false" showMinimizeAction="none" background="#{changeModeBean.inEditMode ? 'medium' : 'light'}" showResizer="never" xmlns="http://xmlns.oracle.com/adf/faces/customizable" styleClass="QIOCollShowDetailFrame">
+                                                         <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_1122950921region1" value="#{bindings.rbrMdLRIoWk1.regionModel}"/>
+                                                      </showDetailFrame>
+                                                   </cust:panelCustomizable>
+                                                   <panelCustomizable id="pc4171213666" xmlns="http://xmlns.oracle.com/adf/faces/customizable">
+                                                      <showDetailFrame id="sdf_for_oc_1192960377region1" text="Recent Newsletters" displayHeader="true" stretchContent="false" showMinimizeAction="none" background="#{changeModeBean.inEditMode ? 'medium' : 'light'}" showResizer="never" styleClass="QIOCollShowDetailFrame">
+                                                         <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_1192960377region1" value="#{bindings.rbQGXwetPiP1.regionModel}"/>
+                                                      </showDetailFrame>
+                                                   </panelCustomizable>
+                                                </panelGroupLayout>
+                                                <panelGroupLayout id="pgl8833019844" layout="vertical" styleClass="ComposerSplitVert">
+                                                   <panelCustomizable id="pc9814935392" xmlns="http://xmlns.oracle.com/adf/faces/customizable">
+                                                      <showDetailFrame id="sdf_for_oc_3424455940region1" text="#{uib_o_w_s_r_DefaultGroupSpaceCatalog['ANNOUNCEMENTS.TITLE']}" stretchContent="auto" showResizer="never" styleClass="QIOCollShowDetailFrame">
+                                                         <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_3424455940region1" value="#{bindings.rbtNktJFuzK1.regionModel}"/>
+                                                      </showDetailFrame>
+                                                   </panelCustomizable>
+                                                </panelGroupLayout>
+                                             </panelGroupLayout>
+                                             <panelGroupLayout id="pgl5768131072" layout="vertical" styleClass="ComposerSplitVert">
+                                                <panelCustomizable id="pc27247011811" xmlns="http://xmlns.oracle.com/adf/faces/customizable">
+                                                   <showDetailFrame id="sdf_for_oc_4431047305region1" text="Community Lead Contacts" displayHeader="true" stretchContent="false" showMinimizeAction="none" background="#{changeModeBean.inEditMode ? 'medium' : 'light'}" showResizer="never" styleClass="QIOCollShowDetailFrame">
+                                                      <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_4431047305region1" value="#{bindings.rbFcumBDpWr1.regionModel}"/>
+                                                   </showDetailFrame>
+                                                </panelCustomizable>
+                                                <attribute name="composer_split" value="true" xmlns="http://java.sun.com/jsf/core"/>
+                                                <panelCustomizable id="pc8040310660" xmlns="http://xmlns.oracle.com/adf/faces/customizable">
+                                                   <showDetailFrame id="sdf_for_oc_9804645356region1" text="BFCC Working Group Blogs" stretchContent="auto" showResizer="never" showMinimizeAction="none">
+                                                      <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_9804645356region1" value="#{bindings.rb55QaPEw0c1.regionModel}"/>
+                                                   </showDetailFrame>
+                                                </panelCustomizable>
+                                             </panelGroupLayout>
+                                          </panelGroupLayout>
+                                          <panelGroupLayout id="pgl6" layout="vertical" styleClass="ComposerSplitHorz AFStretchWidth ContactTypeInnerBox" rendered="#{sessionScope.selectedNewsInfoTab eq 'PAM Users Group'}" valign="top" xmlns="http://xmlns.oracle.com/adf/faces/rich">
+                                             <panelGroupLayout id="pgl729588036913" layout="horizontal" styleClass="ComposerSplitHorz AFStretchWidth ContactTypeInnerBox" valign="top" xmlns="http://xmlns.oracle.com/adf/faces/rich">
+                                                <panelGroupLayout id="pgl7" layout="vertical" styleClass="ComposerSplitVert">
+                                                   <cust:panelCustomizable id="pc5" layout="scroll" xmlns:cust="http://xmlns.oracle.com/adf/faces/customizable">
+                                                      <showDetailFrame id="sdf_for_oc_2173022913region1" text="Feature" displayHeader="true" stretchContent="false" showMinimizeAction="none" background="#{changeModeBean.inEditMode ? 'medium' : 'light'}" showResizer="never" xmlns="http://xmlns.oracle.com/adf/faces/customizable" styleClass="QIOCollShowDetailFrame">
+                                                         <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_2173022913region1" value="#{bindings.rbmmY2c0QfJ1.regionModel}"/>
+                                                      </showDetailFrame>
+                                                   </cust:panelCustomizable>
+                                                   <panelCustomizable id="pc2" xmlns="http://xmlns.oracle.com/adf/faces/customizable">
+                                                      <showDetailFrame id="sdf_for_oc_1272759737region1" text="Recent Newsletters" displayHeader="true" stretchContent="false" showMinimizeAction="none" background="#{changeModeBean.inEditMode ? 'medium' : 'light'}" showResizer="never" styleClass="QIOCollShowDetailFrame">
+                                                         <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_1272759737region1" value="#{bindings.rbjb_IxTqBV1.regionModel}"/>
+                                                      </showDetailFrame>
+                                                   </panelCustomizable>
+                                                </panelGroupLayout>
+                                                <panelGroupLayout id="pgl8" layout="vertical" styleClass="ComposerSplitVert">
+                                                   <panelCustomizable id="pc6" xmlns="http://xmlns.oracle.com/adf/faces/customizable">
+                                                      <showDetailFrame id="sdf_for_oc_7328291897region1" text="#{uib_o_w_s_r_DefaultGroupSpaceCatalog['ANNOUNCEMENTS.TITLE']}" stretchContent="auto" showResizer="never" styleClass="QIOCollShowDetailFrame">
+                                                         <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_7328291897region1" value="#{bindings.rbb2GKEib701.regionModel}"/>
+                                                      </showDetailFrame>
+                                                   </panelCustomizable>
+                                                </panelGroupLayout>
+                                             </panelGroupLayout>
+                                             <panelGroupLayout id="pgl4209284476" layout="vertical" styleClass="ComposerSplitVert">
+                                                <panelCustomizable id="pc27247011813" xmlns="http://xmlns.oracle.com/adf/faces/customizable">
+                                                   <showDetailFrame id="sdf_for_oc_6139494618region1" text="Community Lead Contacts" displayHeader="true" stretchContent="false" showMinimizeAction="none" background="#{changeModeBean.inEditMode ? 'medium' : 'light'}" showResizer="never" styleClass="QIOCollShowDetailFrame">
+                                                      <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_6139494618region1" value="#{bindings.rbdPYOiDPUN1.regionModel}"/>
+                                                   </showDetailFrame>
+                                                </panelCustomizable>
+                                                <attribute name="composer_split" value="true" xmlns="http://java.sun.com/jsf/core"/>
+                                                <panelCustomizable id="pc5596970726" xmlns="http://xmlns.oracle.com/adf/faces/customizable">
+                                                   <showDetailFrame id="sdf_for_oc_5034422646region1" text="" stretchContent="auto" showResizer="never" showMinimizeAction="none" background="coreDefault">
+                                                      <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_5034422646region1" value="#{bindings.rbVyFujKCln1.regionModel}"/>
+                                                   </showDetailFrame>
+                                                </panelCustomizable>
+                                             </panelGroupLayout>
+                                          </panelGroupLayout>
+                                          <panelGroupLayout id="pgl10" layout="vertical" styleClass="ComposerSplitHorz AFStretchWidth ContactTypeInnerBox" rendered="#{sessionScope.selectedNewsInfoTab eq 'PCC-IC'}" valign="top" xmlns="http://xmlns.oracle.com/adf/faces/rich">
+                                             <panelGroupLayout id="pgl729588036914" layout="horizontal" styleClass="ComposerSplitHorz AFStretchWidth ContactTypeInnerBox" valign="top" xmlns="http://xmlns.oracle.com/adf/faces/rich">
+                                                <panelGroupLayout id="pgl11" layout="vertical" styleClass="ComposerSplitVert">
+                                                   <cust:panelCustomizable id="pc7" layout="vertical" showTabAction="true">
+                                                      <showDetailFrame id="sdf7" text="Feature" displayHeader="true" stretchContent="false" showMinimizeAction="none" background="#{changeModeBean.inEditMode ? 'medium' : 'light'}" showResizer="never" xmlns="http://xmlns.oracle.com/adf/faces/customizable" styleClass="QIOCollShowDetailFrame">
+                                                         <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_9276193707region1" value="#{bindings.rbwEUf8pA2a1.regionModel}"/>
+                                                      </showDetailFrame>
+                                                   </cust:panelCustomizable>
+                                                   <panelCustomizable id="pc9" xmlns="http://xmlns.oracle.com/adf/faces/customizable">
+                                                      <showDetailFrame id="sdf9" text="Recent Newsletters" displayHeader="true" stretchContent="false" showMinimizeAction="none" background="#{changeModeBean.inEditMode ? 'medium' : 'light'}" showResizer="never" xmlns="http://xmlns.oracle.com/adf/faces/customizable" styleClass="QIOCollShowDetailFrame">
+                                                         <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_3291094104region1" value="#{bindings.rbKRA3uvS_31.regionModel}"/>
+                                                      </showDetailFrame>
+                                                   </panelCustomizable>
+                                                </panelGroupLayout>
+                                                <panelGroupLayout id="pgl12" layout="vertical" styleClass="ComposerSplitVert">
+                                                   <panelCustomizable id="pc10" xmlns="http://xmlns.oracle.com/adf/faces/customizable">
+                                                      <showDetailFrame id="sdf8" text="#{uib_o_w_s_r_DefaultGroupSpaceCatalog['ANNOUNCEMENTS.TITLE']}" stretchContent="auto" showResizer="never" xmlns="http://xmlns.oracle.com/adf/faces/customizable" styleClass="QIOCollShowDetailFrame">
+                                                         <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_3918933543region1" value="#{bindings.rb9NUq1S78_1.regionModel}"/>
+                                                      </showDetailFrame>
+                                                   </panelCustomizable>
+                                                </panelGroupLayout>
+                                             </panelGroupLayout>
+                                             <panelCustomizable id="pc12" xmlns="http://xmlns.oracle.com/adf/faces/customizable">
+                                                <showDetailFrame id="sdf12" text="Community Lead Contacts" displayHeader="true" stretchContent="false" showMinimizeAction="none" background="#{changeModeBean.inEditMode ? 'medium' : 'light'}" showResizer="never" xmlns="http://xmlns.oracle.com/adf/faces/customizable" styleClass="QIOCollShowDetailFrame">
+                                                   <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_1768189346region1" value="#{bindings.rbziPoiWzmw1.regionModel}"/>
+                                                </showDetailFrame>
+                                             </panelCustomizable>
+                                             <panelCustomizable id="pc27247011814" xmlns="http://xmlns.oracle.com/adf/faces/customizable">
+                                                <showDetailFrame id="sdf10" text="#{uib_o_w_s_r_DefaultGroupSpaceCatalog['DOCLIB_BLOG_VIEWER.TITLE']}" displayHeader="false" stretchContent="auto" showResizer="never">
+                                                   <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_6966964488region1" value="#{bindings.rbWt1i9Zt5h1.regionModel}"/>
+                                                </showDetailFrame>
+                                             </panelCustomizable>
+                                          </panelGroupLayout>
+                                          <panelGroupLayout id="pgl1308517185" layout="vertical" styleClass="ComposerSplitHorz AFStretchWidth ContactTypeInnerBox" rendered="#{sessionScope.selectedNewsInfoTab eq 'QIN-QIO'}" valign="top" xmlns="http://xmlns.oracle.com/adf/faces/rich">
+                                             <panelGroupLayout id="pgl729588036915" layout="horizontal" styleClass="ComposerSplitHorz AFStretchWidth ContactTypeInnerBox" valign="top" xmlns="http://xmlns.oracle.com/adf/faces/rich">
+                                                <panelGroupLayout id="pgl1953804617" layout="vertical" styleClass="ComposerSplitVert">
+                                                   <cust:panelCustomizable id="__oc_p_6391867002" layout="vertical" showTabAction="true">
+                                                      <showDetailFrame id="sdf_for_oc_7612550936region1" text="Feature" displayHeader="true" stretchContent="false" showMinimizeAction="none" background="#{changeModeBean.inEditMode ? 'medium' : 'light'}" showResizer="never" xmlns="http://xmlns.oracle.com/adf/faces/customizable" styleClass="QIOCollShowDetailFrame">
+                                                         <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_7612550936region1" value="#{bindings.rbLEkTmYE1l1.regionModel}"/>
+                                                      </showDetailFrame>
+                                                   </cust:panelCustomizable>
+                                                   <panelCustomizable id="pc8568035893" xmlns="http://xmlns.oracle.com/adf/faces/customizable">
+                                                      <showDetailFrame id="sdf_for_oc_5096866305region1" text="Recent Newsletters" displayHeader="true" stretchContent="false" showMinimizeAction="none" background="#{changeModeBean.inEditMode ? 'medium' : 'light'}" showResizer="never" xmlns="http://xmlns.oracle.com/adf/faces/customizable" styleClass="QIOCollShowDetailFrame">
+                                                         <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_5096866305region1" value="#{bindings.rbbfgY6TI8N1.regionModel}"/>
+                                                      </showDetailFrame>
+                                                   </panelCustomizable>
+                                                </panelGroupLayout>
+                                                <panelGroupLayout id="pgl3465257313" layout="vertical" styleClass="ComposerSplitVert">
+                                                   <panelCustomizable id="pc164575588" xmlns="http://xmlns.oracle.com/adf/faces/customizable" layout="auto">
+                                                      <showDetailFrame id="sdf_for_oc_7906343270region1" text="#{uib_o_w_s_r_DefaultGroupSpaceCatalog['ANNOUNCEMENTS.TITLE']}" stretchContent="auto" showResizer="never" xmlns="http://xmlns.oracle.com/adf/faces/customizable" styleClass="QIOCollShowDetailFrame">
+                                                         <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_7906343270region1" value="#{bindings.rbqWT0Tac6j1.regionModel}"/>
+                                                      </showDetailFrame>
+                                                   </panelCustomizable>
+                                                </panelGroupLayout>
+                                             </panelGroupLayout>
+                                             <panelCustomizable id="pc9676481187" xmlns="http://xmlns.oracle.com/adf/faces/customizable">
+                                                <showDetailFrame id="sdf_for_oc_9555626436region1" text="Community Lead Contacts" displayHeader="true" stretchContent="false" showMinimizeAction="none" background="#{changeModeBean.inEditMode ? 'medium' : 'light'}" showResizer="never" xmlns="http://xmlns.oracle.com/adf/faces/customizable" styleClass="QIOCollShowDetailFrame">
+                                                   <af:region xmlns:af="http://xmlns.oracle.com/adf/faces/rich" id="oc_9555626436region1" value="#{bindings.rbBDAuavuBo1.regionModel}"/>
+                                                </showDetailFrame>
+                                             </panelCustomizable>
+                                          </panelGroupLayout>
+                                       </af:panelGroupLayout>
+                                    </af:panelGroupLayout>
+                                 </trh:cellFormat>
+                                 <trh:cellFormat id="cf3" rendered="#{bindings.rightWidth != '' and bindings.rightWidth != '0%'}" width="#{bindings.rightWidth}" valign="top">
+                                    <cust:panelCustomizable id="hm_pnc3" layout="scroll" showTabAction="true"/>
+                                 </trh:cellFormat>
+                              </trh:rowLayout>
+                           </trh:tableLayout>
+                        </af:panelGroupLayout>
+                        <cust:panelCustomizable id="hm_pncftr" rendered="#{bindings.showFooter}" layout="vertical" showTabAction="true"/>
+                     </af:panelGroupLayout>
+                     <f:facet name="editor">
+                        <pe:pageEditorPanel id="pep1"/>
+                     </f:facet>
+                  </pe:pageCustomizable>
+               </f:facet>
+            </af:pageTemplate>
+         </af:form>
+      </af:document>
+   </f:view>
 </jsp:root>

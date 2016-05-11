@@ -56,6 +56,9 @@
       <string v="oracle.toplink.workbench.addin/toplinkContentSet"/>
    </list>
    <value n="defaultPackage" v="gov.cms.portal.qiocollabaration.extension.view"/>
+   <hash n="oracle.adfdtinternal.model.ide.settings.ADFMSettings">
+      <value n="hasDataControls" v="true"/>
+   </hash>
    <hash n="oracle.ide.model.DependencyConfiguration">
       <list n="dependencyList">
          <hash>
@@ -225,6 +228,7 @@
       <hash n="runConfigurationDefinitions">
          <hash n="Default">
             <value n="custom" v="false"/>
+            <value n="javaOptions" v="-Doracle.adfm.usemds=true"/>
             <value n="name" v="Default"/>
          </hash>
       </hash>
@@ -382,6 +386,58 @@
             <value n="id" v="RIDC Library"/>
             <value n="isJDK" v="false"/>
          </hash>
+         <hash>
+            <value n="id" v="WebCenter Customizable Components Skin"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="WebCenter IM and Presence Service Skin"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="ADF Faces Change Manager Runtime 11"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="WebCenter Customizable Components"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Oracle Composer"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="ADF Model Generic Runtime"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Resource Catalog Service"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Resource Catalog Viewer"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Oracle Composer Portlet Extension"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Oracle Composer Tag Library"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Resource Bundle Support"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Resource Bundle Variable Resolver"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="WebCenter Customizable Components Tag Library"/>
+            <value n="isJDK" v="false"/>
+         </hash>
       </list>
       <hash n="internalDefinitions">
          <list n="libraryDefinitions">
@@ -393,6 +449,13 @@
                <value n="description" v="Oracle-ridc-client-10g.jar"/>
                <value n="id" v="Oracle-ridc-client-10g.jar"/>
                <value n="locked" v="true"/>
+            </hash>
+            <hash>
+               <list n="classPath">
+                  <url protocol="jar" path="file:/F:/JDevelopers/JDeveloper11.1.1.9/jdeveloper/webcenter/modules/oracle.portlet.server_11.1.1/composer-decl-comp.jar!/"/>
+               </list>
+               <value n="description" v="Library1"/>
+               <value n="id" v="Library1"/>
             </hash>
          </list>
       </hash>
@@ -545,6 +608,58 @@
             <value n="id" v="RIDC Library"/>
             <value n="isJDK" v="false"/>
          </hash>
+         <hash>
+            <value n="id" v="WebCenter Customizable Components Skin"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="WebCenter IM and Presence Service Skin"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="ADF Faces Change Manager Runtime 11"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="WebCenter Customizable Components"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Oracle Composer"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="ADF Model Generic Runtime"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Resource Catalog Service"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Resource Catalog Viewer"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Oracle Composer Portlet Extension"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Oracle Composer Tag Library"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Resource Bundle Support"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="Resource Bundle Variable Resolver"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="WebCenter Customizable Components Tag Library"/>
+            <value n="isJDK" v="false"/>
+         </hash>
       </list>
    </hash>
    <hash n="oracle.jdevimpl.config.JProjectPaths">
@@ -595,6 +710,39 @@
             <value n="tldURL" v="@oracle.home@../oracle_common/modules/oracle.adf.view_11.1.1/dvt-faces.jar!/META-INF/bi.tld"/>
             <value n="URI" v="http://xmlns.oracle.com/dss/adf/faces"/>
             <value n="version" v="1.1"/>
+         </hash>
+         <hash>
+            <value n="jspVersion" v="2.1"/>
+            <value n="libraries" v="ocdecl 1.0 Tag Libraries"/>
+            <value n="name" v="ocdecl"/>
+            <value n="prefix" v="pedc"/>
+            <value n="runInEditor" v="true"/>
+            <value n="showInPalette" v="true"/>
+            <value n="tldURL" v="/F:/JDevelopers/JDeveloper11.1.1.9/jdeveloper/webcenter/modules/oracle.portlet.server_11.1.1/composer-decl-comp.jar!/META-INF/ocdecl.tld"/>
+            <value n="URI" v="http://xmlns.oracle.com/adf/pageeditor/declarativecomp"/>
+            <value n="version" v="1.0"/>
+         </hash>
+         <hash>
+            <hash n="baseLibrary">
+               <value n="name" v="WebCenter Customizable Components Rich"/>
+               <value n="version" v="11"/>
+            </hash>
+            <value n="jspVersion" v="2.1"/>
+            <value n="name" v="WebCenter Customizable Components Rich"/>
+            <value n="tldURL" v="@oracle.home@webcenter/modules/oracle.portlet.server_11.1.1/custComps.jar!/META-INF/afcust.tld"/>
+            <value n="URI" v="http://xmlns.oracle.com/adf/faces/customizable"/>
+            <value n="version" v="11"/>
+         </hash>
+         <hash>
+            <hash n="baseLibrary">
+               <value n="name" v="Customizable Components (HTML)"/>
+               <value n="version" v="11"/>
+            </hash>
+            <value n="jspVersion" v="2.1"/>
+            <value n="name" v="Customizable Components (HTML)"/>
+            <value n="tldURL" v="@oracle.home@webcenter/modules/oracle.portlet.server_11.1.1/custComps.jar!/META-INF/afcusth.tld"/>
+            <value n="URI" v="http://xmlns.oracle.com/adf/faces/customizable/html"/>
+            <value n="version" v="11"/>
          </hash>
       </list>
    </hash>

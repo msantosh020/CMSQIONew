@@ -1,20 +1,82 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
           xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
-          xmlns:f="http://java.sun.com/jsf/core">
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:cust="http://xmlns.oracle.com/adf/faces/customizable">
   <af:panelGroupLayout id="pgl1" layout="vertical">
+    <af:panelGroupLayout id="pgl3" layout="horizontal">
+      <af:outputText value="#{viewScope.LOATopicPageBackingBean.loaModule.moduleName}"
+                     styleClass="LOAModuleTitle" id="ot1"/>
+      <af:spacer width="10" height="10" id="s2"/>
+      <af:image source="#{viewScope.LOATopicPageBackingBean.loaModule.moduleIconUrl}"
+                id="i3"/>
+    </af:panelGroupLayout>
+    <af:spacer width="10" height="20" id="s3"/>
+    <af:outputText value="#{viewScope.LOATopicPageBackingBean.loaModule.moduleTitleDesc}"
+                   styleClass="LOAModuleTitleDesc" id="ot2"/>
+    <af:spacer width="10" height="10" id="s8"/>
+    <af:outputText value="Description" styleClass="LOAModuleDescriptionHeading"
+                   id="ot3"/>
+    <af:spacer width="10" height="20" id="s4"/>
+    <af:outputText value="#{viewScope.LOATopicPageBackingBean.loaModule.moduleDesc}"
+                   styleClass="LOAModuleDesc" id="ot4"/>
+    <af:spacer width="10" height="20" id="s5"/>
+    <af:outputText value="Learing Objects"
+                   styleClass="LOAModuleDescriptionHeading" id="ot5"/>
+    <af:spacer width="10" height="10" id="s6"/>
+    <af:outputText value="#{viewScope.LOATopicPageBackingBean.loaModule.moduleDesc}"
+                   styleClass="LOAModuleDesc" id="ot6"/>
+    <af:spacer width="10" height="10" id="s7"/>
     <af:iterator id="i1" var="category" varStatus="vs"
-                 value="#{viewScope.LOATopicPageBackingBean.loaTopicCategoryList}">
-      <af:panelBox text="#{category.categoryName}" id="pb1">
-        <f:facet name="toolbar"/>
-        <af:panelGroupLayout id="pgl2" layout="vertical">
-          <af:iterator id="i2" var="resourceBean" varStatus="vs"
-                       value="#{category.resources}">
-            <af:outputText value="#{resourceBean.resourceTitle}" id="cl1"/>  
-            <af:spacer width="10" height="10" id="s1"/>
-          </af:iterator>
-        </af:panelGroupLayout>
-      </af:panelBox>
+                 value="#{viewScope.LOATopicPageBackingBean.loaModule.moduleCategoryList}">
+      <cust:showDetailFrame text="#{category.categoryName}" id="sdf1"
+                            displayHeader="true" stretchContent="false"
+                            showMinimizeAction="none"
+                            background="#{changeModeBean.inEditMode ? 'medium' : 'light'}"
+                            showResizer="never"
+                            styleClass="QIOCollShowDetailFrame">
+        <af:switcher facetName="#{category.categoryType}" defaultFacet="LINKS"
+                     id="s1">
+          <f:facet name="TEXT">
+            <af:panelGroupLayout id="pgl5" layout="vertical">
+              <af:iterator id="i2" var="resourceBean" varStatus="vs"
+                           value="#{category.resources}">
+                <af:outputText value="#{resourceBean.resourceTitle} : #{resourceBean.resourceDescription}"
+                               id="cl1"/>
+                <af:spacer width="10" height="10" id="s9"/>
+              </af:iterator>
+            </af:panelGroupLayout>
+          </f:facet>
+          <f:facet name="LINKS">
+            <af:panelGroupLayout id="pgl6" layout="vertical">
+              <af:iterator id="i4" var="resourceBean" varStatus="vs"
+                           value="#{category.resources}">
+                <af:goLink text="#{resourceBean.resourceTitle}"
+                           destination="#{resourceBean.resourceWebUrl}"
+                           targetFrame="_blank" id="ot7"/>
+                <af:spacer width="10" height="10" id="s10"/>
+              </af:iterator>
+            </af:panelGroupLayout>
+          </f:facet>
+          <f:facet name="VIDOES">
+            <af:iterator id="i5" var="resourceBean" varStatus="vs"
+                         value="#{category.resources}">
+              <af:panelGroupLayout id="pgl2" layout="horizontal">
+                <af:image source="#{resourceBean.resourceImageUrl}" id="i6"/>
+                <af:panelGroupLayout id="pgl4" layout="vertical">
+                  <af:goLink text="#{resourceBean.resourceTitle}"
+                             destination="#{resourceBean.resourceWebUrl}"
+                             targetFrame="_blank" id="gl1"/>
+                  <af:spacer width="10" height="10" id="s11"/>
+                  <af:outputText value="#{resourceBean.resourceDescription}"
+                                 id="ot8"/>
+                </af:panelGroupLayout>
+                <af:spacer width="10" height="10" id="s12"/>
+              </af:panelGroupLayout>
+            </af:iterator>
+          </f:facet>
+        </af:switcher>
+      </cust:showDetailFrame>
     </af:iterator>
   </af:panelGroupLayout>
 </jsp:root>

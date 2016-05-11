@@ -1,4 +1,4 @@
-package gov.cms.portal.qiocollabaration.extension.view.resources.util;
+package gov.cms.portal.qiocollabaration.extension.view.qiu.util;
 
 import gov.cms.portal.qiocollabaration.content.beans.ContentFolderBean;
 import gov.cms.portal.qiocollabaration.content.beans.ContentItemBean;

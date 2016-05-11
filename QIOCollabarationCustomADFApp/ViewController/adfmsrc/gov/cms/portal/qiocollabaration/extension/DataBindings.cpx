@@ -16,6 +16,8 @@
           usageId="gov_cms_portal_qiocollabaration_extension_educationNTrainingPageDef"/>
     <page path="/test/qiu.jspx"
           usageId="gov_cms_portal_qiocollabaration_extension_qiuPageDef"/>
+    <page path="/test/loaTest.jspx"
+          usageId="gov_cms_portal_qiocollabaration_extension_loaTestPageDef"/>
   </pageMap>
   <pageDefinitionUsages> 
     <page id="gov_cms_portal_qiocollabaration_extension_myTestPageDef"
@@ -26,5 +28,7 @@
           path="test.educationNTrainingPageDef"/>
     <page id="gov_cms_portal_qiocollabaration_extension_qiuPageDef"
           path="test.qiuPageDef"/>
+    <page id="gov_cms_portal_qiocollabaration_extension_loaTestPageDef"
+          path="test.loaTestPageDef"/>
   </pageDefinitionUsages>
 </Application>

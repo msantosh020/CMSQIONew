@@ -1,4 +1,4 @@
-package gov.cms.portal.qiocollabaration.extension.view.resources.util;
+package gov.cms.portal.qiocollabaration.extension.view.common.util;
 
 public class StringUtil {
     public StringUtil() {
