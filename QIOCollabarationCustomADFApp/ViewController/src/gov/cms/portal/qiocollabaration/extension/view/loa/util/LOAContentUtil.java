@@ -26,136 +26,124 @@ public class LOAContentUtil {
         return csUtil;
     }
 
-    public static List<LOAPartBean> getLOAParts(String loaCollectionPath) {
-        return getLOAPartsByCollectionId(null);
-    }
-
-    private static List<LOAPartBean> getLOAPartsByCollectionId(String loaCollectionId) {
-        List<LOAPartBean> partList = new ArrayList<LOAPartBean>();
-        partList.add(new LOAPartBean("Part 1 : LOA Fundamentals", 100));
-        partList.add(new LOAPartBean("Part 2 : Advanced Topics", 60));
-        return partList;
-    }
-
-
-    public static LOAModuleBean getLOAModule(String loaModuleCollectionPath) {
-        LOAModuleBean loaModule = new LOAModuleBean();
-        loaModule.setModuleName("Module 111111");
-        loaModule.setModuleDesc("Module DESCCCCC 111111");
-        loaModule.setModuleTitleDesc("This is title desc.............");
-        List<LOAModuleCategoryBean> moduleCategoryList = new ArrayList<LOAModuleCategoryBean>();
-
-        LOAModuleCategoryBean c1 = new LOAModuleCategoryBean();
-        c1.setCategoryName("Activities");
-        c1.setCategoryType("TEXT");
-        List<ResourceBean> resources = new ArrayList<ResourceBean>();
-        for (int i = 0; i < 5; i++) {
-            resources.add(new ResourceBean("R Title- " + i, "R DDDDDDDDD- " + i));
-        }
-        c1.setResources(resources);
-        moduleCategoryList.add(c1);
-
-
-        LOAModuleCategoryBean c2 = new LOAModuleCategoryBean();
-        c2.setCategoryName("Modules and Materials");
-        c2.setCategoryType("LINKS");
-        List<ResourceBean> resources2 = new ArrayList<ResourceBean>();
-        for (int i = 0; i < 5; i++) {
-            resources2.add(new ResourceBean("R Title- " + i, "R DDDDDDDDD- " + i));
-        }
-        c2.setResources(resources2);
-        moduleCategoryList.add(c2);
-
-
-        LOAModuleCategoryBean c3 = new LOAModuleCategoryBean();
-        c3.setCategoryName("Lecture and Recordings");
-        c3.setCategoryType("VIDOES");
-        List<ResourceBean> resources3 = new ArrayList<ResourceBean>();
-        for (int i = 0; i < 5; i++) {
-            resources3.add(new ResourceBean("R Title- " + i, "R DDDDDDDDD- " + i));
-        }
-        c3.setResources(resources3);
-        moduleCategoryList.add(c3);
-
-        loaModule.setModuleCategoryList(moduleCategoryList);
-
-        return loaModule;
-    }
-
-    /*
-    public static List<LOATopicBean> loadLOATopics(String loaCSParentFolderPath) {
-        System.out.println("LOAContentUtil.java loadLOATopics() starts executing loaCSParentFolderPath = " + loaCSParentFolderPath);
+    public static List<LOAPartBean> getLOAParts(String loaCSParentFolderPath) {
+        //return getLOAPartsByCollectionId(null);
+        System.out.println("LOAContentUtil.java getLOAParts() starts executing loaCSParentFolderPath = " + loaCSParentFolderPath);
         WCContentUtil csUtil = getWCContentUtil();
-        List<ContentFolderBean> loaTopicFolders = null;
-        List<LOATopicBean> loaTopicList = new ArrayList<LOATopicBean>();
-        LOATopicBean loaTopicBean = null;
+        List<ContentFolderBean> loaPartFolders = null;
+        List<LOAPartBean> loaPartList = new ArrayList<LOAPartBean>();
+        LOAPartBean loaPartBean = null;
         try {
             String collectionId = csUtil.getFolderCollectionId(loaCSParentFolderPath);
-            System.out.println("LOAContentUtil.java loadLOATopics() collectionId = " + collectionId);
-            loaTopicFolders = csUtil.getSubFolders(collectionId);
-            System.out.println("LOAContentUtil.java loadLOATopics() loaTopicFolders = " + loaTopicFolders);
-            for (ContentFolderBean contentFolder : loaTopicFolders) {
-                loaTopicBean = getLOATopicBean(contentFolder);
-                loaTopicList.add(loaTopicBean);
+            System.out.println("LOAContentUtil.java getLOAParts() collectionId = " + collectionId);
+            loaPartFolders = csUtil.getSubFolders(collectionId);
+            System.out.println("LOAContentUtil.java getLOAParts() loaPartFolders = " + loaPartFolders);
+            for (ContentFolderBean contentFolder : loaPartFolders) {
+                loaPartBean = getLOAPartBean(contentFolder);
+                loadLOAPartModules(loaPartBean);
+                loaPartList.add(loaPartBean);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("LOAContentUtil.java loadLOATopics() Exception is " + e);
         }
-        System.out.println("LOAContentUtil.java loadLOATopics() loaTopicList = " + loaTopicList);
-        return loaTopicList;
+        System.out.println("LOAContentUtil.java loadLOATopics() loaTopicList = " + loaPartList);
+        return loaPartList;
     }
 
-    private static LOATopicBean getLOATopicBean(ContentFolderBean contentFolder) {
-        LOATopicBean loaTopicBean = new LOATopicBean();
-        loaTopicBean.setCollectionPath(contentFolder.getCollectionPath());
-        loaTopicBean.setParentCollectionId(contentFolder.getParentCollectionId());
-        loaTopicBean.setCollectionId(contentFolder.getCollectionId());
-        loaTopicBean.setTopicName(contentFolder.getCollectionName());
-        return loaTopicBean;
+    private static LOAPartBean getLOAPartBean(ContentFolderBean loaPartFolder) {
+        LOAPartBean loaPartBean = new LOAPartBean();
+        loaPartBean.setPartName(loaPartFolder.getCollectionName());
+        loaPartBean.setCollectionId(loaPartFolder.getCollectionId());
+        loaPartBean.setCollectionPath(loaPartFolder.getCollectionPath());
+        return loaPartBean;
     }
 
-    public static List<LOAModuleCategoryBean> getLoaTopicCategoryList(String loaTopcCollectionId) {
-        System.out.println("LOAContentUtil.java getLoaTopicCategoryList() starts executing loaTopcCollectionId = " + loaTopcCollectionId);
-        List<LOAModuleCategoryBean> loaTopicCategoryList = new ArrayList<LOAModuleCategoryBean>();
+    private static void loadLOAPartModules(LOAPartBean loaPartBean) {
+        System.out.println("LOAContentUtil.java loadLOAPartModules() starts executing loaPartBean.getCollectionId() = " + loaPartBean.getCollectionId());
         WCContentUtil csUtil = getWCContentUtil();
-        List<ContentFolderBean> loaTopicCategoryFolders = null;
-        LOAModuleCategoryBean loaTopicCategoryBean = null;
+        List<ContentFolderBean> loaPartModuleFolders = null;
+        List<LOAModuleBean> loaPartModuleList = new ArrayList<LOAModuleBean>();
+        LOAModuleBean loaPartModuleBean = null;
         try {
-            loaTopicCategoryFolders = csUtil.getSubFolders(loaTopcCollectionId);
-            System.out.println("LOAContentUtil.java getLoaTopicCategoryList() loaTopicFolders = " + loaTopicCategoryFolders);
-            for (ContentFolderBean contentFolder : loaTopicCategoryFolders) {
-                loaTopicCategoryBean = getLOATopicCategoryBean(contentFolder);
-                loadLOATopicCategoryResources(csUtil, loaTopicCategoryBean);
-                loaTopicCategoryList.add(loaTopicCategoryBean);
+            loaPartModuleFolders = csUtil.getSubFolders(loaPartBean.getCollectionId());
+            System.out.println("LOAContentUtil.java loadLOAPartModules() loaPartModuleFolders = " + loaPartModuleFolders);
+            for (ContentFolderBean contentFolder : loaPartModuleFolders) {
+                loaPartModuleBean = getLOAPartModuleBean(contentFolder);
+                loaPartModuleList.add(loaPartModuleBean);
             }
-
+            loaPartBean.setModuleList(loaPartModuleList);
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("LOAContentUtil.java getLoaTopicCategoryList() Exception is " + e);
+            System.out.println("LOAContentUtil.java loadLOATopics() Exception is " + e);
         }
-        System.out.println("LOAContentUtil.java getLoaTopicCategoryList() loaTopicCategoryList = " + loaTopicCategoryList);
-        return loaTopicCategoryList;
+        System.out.println("LOAContentUtil.java loadLOATopics() loaPartModuleList = " + loaPartModuleList);
     }
 
-    private static LOAModuleCategoryBean getLOATopicCategoryBean(ContentFolderBean contentFolder) {
-        LOAModuleCategoryBean loaTopicCategoryBean = new LOAModuleCategoryBean();
-        loaTopicCategoryBean.setCollectionPath(contentFolder.getCollectionPath());
-        loaTopicCategoryBean.setParentCollectionId(contentFolder.getParentCollectionId());
-        loaTopicCategoryBean.setCollectionId(contentFolder.getCollectionId());
-        loaTopicCategoryBean.setCategoryName(contentFolder.getCollectionName());
-        return loaTopicCategoryBean;
+    private static LOAModuleBean getLOAPartModuleBean(ContentFolderBean loaPartFolder) {
+        LOAModuleBean loaPartModuleBean = new LOAModuleBean();
+        loaPartModuleBean.setModuleName(loaPartFolder.getCollectionName());
+        loaPartModuleBean.setCollectionId(loaPartFolder.getCollectionId());
+        loaPartModuleBean.setCollectionPath(loaPartFolder.getCollectionPath());
+        return loaPartModuleBean;
     }
 
-    private static void loadLOATopicCategoryResources(WCContentUtil csUtil, LOAModuleCategoryBean loaTopicCategoryBean) {
+    public static LOAModuleBean getLOAModule(String loaModuleCollectionId) {
+        System.out.println("LOAContentUtil.java getLOAModule() starts executing loaModuleCollectionId = " + loaModuleCollectionId);
+        WCContentUtil csUtil = getWCContentUtil();
+        LOAModuleBean loaPartModuleBean = null;
+        try {
+            ContentFolderBean contentFolder = csUtil.getFolderInfoFromCollectionId(loaModuleCollectionId);
+            loaPartModuleBean = getLOAPartModuleBean(contentFolder);
+            loadLOAModule(loaPartModuleBean);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("LOAContentUtil.java loadLOATopics() Exception is " + e);
+        }
+        System.out.println("LOAContentUtil.java getLOAModule() loaPartModuleBean = " + loaPartModuleBean);
+        return loaPartModuleBean;
+    }
+
+    private static void loadLOAModule(LOAModuleBean loaPartModuleBean) {
+        System.out.println("LOAContentUtil.java loadLOAModule() starts executing loaPartModuleBean.getCollectionId() = " + loaPartModuleBean.getCollectionId());
+        WCContentUtil csUtil = getWCContentUtil();
+        List<ContentFolderBean> loaModuleCategoryFolders = null;
+        List<LOAModuleCategoryBean> loaModuleCategoryList = new ArrayList<LOAModuleCategoryBean>();
+        LOAModuleCategoryBean loaModuleCategoryBean = null;
+        try {
+            loaModuleCategoryFolders = csUtil.getSubFolders(loaPartModuleBean.getCollectionId());
+            System.out.println("LOAContentUtil.java loadLOAModule() loaModuleCategoryFolders = " + loaModuleCategoryFolders);
+            for (ContentFolderBean contentFolder : loaModuleCategoryFolders) {
+                loaModuleCategoryBean = getLOAModuleCategoryBean(contentFolder);
+                loadLOAModuleCategoryResources(csUtil, loaModuleCategoryBean);
+                loaModuleCategoryList.add(loaModuleCategoryBean);
+            }
+            loaPartModuleBean.setModuleCategoryList(loaModuleCategoryList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("LOAContentUtil.java loadLOAModule() Exception is " + e);
+        }
+        System.out.println("LOAContentUtil.java loadLOAModule() loaPartModuleList = " + loaModuleCategoryList);
+    }
+
+    private static LOAModuleCategoryBean getLOAModuleCategoryBean(ContentFolderBean loaPartFolder) {
+        LOAModuleCategoryBean loaModuleCategoryBean = new LOAModuleCategoryBean();
+        loaModuleCategoryBean.setCategoryName(loaPartFolder.getCollectionName());
+        loaModuleCategoryBean.setCollectionId(loaPartFolder.getCollectionId());
+        loaModuleCategoryBean.setCollectionPath(loaPartFolder.getCollectionPath());
+        //loaModuleCategoryBean.setCategoryType(categoryType);
+        return loaModuleCategoryBean;
+    }
+
+    private static void loadLOAModuleCategoryResources(WCContentUtil csUtil, LOAModuleCategoryBean loaTopicCategoryBean) {
         List<ContentItemBean> categoryContentItems = null;
         try {
             categoryContentItems = csUtil.getFolderContentItemsByCollectionID(loaTopicCategoryBean.getCollectionId());
             loaTopicCategoryBean.setResources(getResources(categoryContentItems));
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("ResourceContentUtil.java loadResourcesListOfTopicFromContentServer() Exception is " + e);
+            System.out.println("LOAContentUtil.java loadLOAModuleCategoryResources() Exception is " + e);
         }
     }
 
@@ -186,13 +174,25 @@ public class LOAContentUtil {
     }
 
     public static void main(String[] args) throws Exception {
-        List<LOATopicBean> loaTopicList = loadLOATopics("/WebCenterSpaces-Root/LOA/");
-        System.out.println("loaTopicList =" + loaTopicList);
-        for (LOATopicBean loaTopic : loaTopicList) {
-            System.out.println("loaTopic.getCollectionId() =" + loaTopic.getCollectionId());
-            List<LOAModuleCategoryBean> loaTopicCategoryList = getLoaTopicCategoryList(loaTopic.getCollectionId());
-            System.out.println("contentList =" + loaTopicCategoryList);
+        //Testig main page
+        List<LOAPartBean> loaPartList = getLOAParts("/WebCenterSpaces-Root/LOA/");
+        System.out.println("loaTopicList =" + loaPartList);
+        for (LOAPartBean loaPartBean : loaPartList) {
+            System.out.println("loaTopic.getCollectionId() =" + loaPartBean.getCollectionId());
+            //List<LOAModuleCategoryBean> loaTopicCategoryList = getLoaTopicCategoryList(loaPartBean.getCollectionId());
+            for (LOAModuleBean loaModuleBean : loaPartList) {
+                System.out.println("ModuleName =" + loaModuleBean.getModuleName() + " --> CollectionId =" + loaModuleBean.getCollectionId());
+            }
+        }
+
+        // Testing module page
+        String loaModuleCollectionId = "";
+        LOAModuleBean loaModuleBean = getLOAModule(loaModuleCollectionId);
+        for (LOAModuleCategoryBean loaModuleCategoryBean : loaModuleBean.getModuleCategoryList()) {
+            System.out.println("ModuleCategoryName =" + loaModuleCategoryBean.getCategoryName() + "CollectionId =" + loaModuleCategoryBean.getCollectionId());
+            for (ResourceBean resourceBean : loaModuleCategoryBean.getResources()) {
+                System.out.println("ModuleName =" + resourceBean.getResourceTitle() + " --> CollectionId =" + resourceBean.getResourceDescription());
+            }
         }
     }
-    */
 }

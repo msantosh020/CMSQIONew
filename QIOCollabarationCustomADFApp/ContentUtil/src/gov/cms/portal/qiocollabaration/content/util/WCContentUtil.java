@@ -1025,6 +1025,41 @@ public class WCContentUtil implements Serializable {
         }
         return folder;
     }
+    
+    public ContentFolderBean getFolderInfoFromCollectionId(String parentFolderID) throws IdcClientException, NamingException, ParseException {
+        ServiceResponse response = null;
+        ContentFolderBean folder = null;
+        DataBinder dataBinder = null;
+        if (parentFolderID != null) {
+            try {
+                dataBinder = this.idcClient.createBinder();
+                dataBinder.putLocal(IDCSERVICE, SUBFOLDERS_SERVICE);
+                dataBinder.putLocal(hasCollectionID, TRUE);
+                dataBinder.putLocal(dCollectionID, parentFolderID);
+                IdcContext userContext = null;
+                String connName = utils.getDefaultConnectionName();
+                userContext = utils.getDefaultIdcContext(connName);
+                response = idcClient.sendRequest(userContext, dataBinder);
+                DataBinder serverBinder = response.getResponseAsBinder();
+                DataResultSet resultSet = serverBinder.getResultSet("PATH");
+                DataObject obj = resultSet.getRows().get(resultSet.getRows().size() - 1);
+                folder = getPopulatedContentFolder(obj);
+            } catch (IdcClientException e) {
+                //logger.severe("Unable to get folder information due to : " + e.getMessage());
+                e.printStackTrace();
+                throw e;
+            } catch (NamingException e) {
+                //logger.severe("Unable to get folder information due to : " + e.getMessage());
+                e.printStackTrace();
+                throw e;
+            } finally {
+                if (response != null) {
+                    response.close();
+                }
+            }
+        }
+        return folder;
+    }
 
     public String createSubfolder(String parentCollectionId, String subFolderName) throws IdcClientException, NamingException {
         String newFolderCollectionId = null;
