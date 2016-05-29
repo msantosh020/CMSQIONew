@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="show-connections-TF">
+    <default-activity id="__18">fetchUsers</default-activity>
+    <managed-bean id="__5">
+      <managed-bean-name id="__4">showConnectionBean</managed-bean-name>
+      <managed-bean-class id="__3">gov.cms.portal.qiocollabaration.extension.view.contacts.bean.ShowConnectionBean</managed-bean-class>
+      <managed-bean-scope id="__2">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="showConnections">
+      <page>/gov/cms/poral/qiocollabaration/extensions/fragments/contacts/showConnections.jsff</page>
+    </view>
+    <method-call id="fetchUsers">
+      <method>#{pageFlowScope.showConnectionBean.fetchCompleteConnectionList}</method>
+      <outcome id="__24">
+        <fixed-outcome>fetch</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__19">
+      <from-activity-id id="__20">fetchUsers</from-activity-id>
+      <control-flow-case id="__22">
+        <from-outcome id="__23">fetch</from-outcome>
+        <to-activity-id id="__21">showConnections</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

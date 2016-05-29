@@ -83,4 +83,14 @@
          <string v="QIOCollabarationCustomADFApp_application1"/>
       </list>
    </hash>
+   <hash n="oracle.mds.internal.dt.ide.CustOptions">
+      <list n="custLayerList">
+         <hash>
+            <value n="layerName" v="site"/>
+            <value n="layerValDispName" v="Site One"/>
+            <value n="layerValue" v="site1"/>
+         </hash>
+      </list>
+      <value n="tipLayerName" v="site"/>
+   </hash>
 </jws:workspace>

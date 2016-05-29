@@ -7,9 +7,7 @@
             xmlns:searchC="http://xmlns.oracle.com/webcenter/search/config"
             xmlns:relC="http://xmlns.oracle.com/webcenter/relationship/config"
             xmlns:collabC="http://xmlns.oracle.com/webcenter/collab/config"
-            xmlns:tagC="http://xmlns.oracle.com/webcenter/tagging/config"
-            xmlns:rcs="http://xmlns.oracle.com/adf/rcs/adf-config"
-            xmlns:rcv="http://xmlns.oracle.com/adf/rcs/viewer/adf-config">
+            xmlns:tagC="http://xmlns.oracle.com/webcenter/tagging/config">
   <adf-adfm-config xmlns="http://xmlns.oracle.com/adfm/config">
     <defaults useBindVarsForViewCriteriaLiterals="true"
               useBindValuesInFindByKey="true" executeEmptyOnException="true"/>
@@ -59,14 +57,6 @@
     </service-config>
   </collabC:adf-collaboration-config>
   <adf-tagging-config xmlns="http://xmlns.oracle.com/webcenter/tagging/config"/>
-  <rcs:adf-rcs-config>
-    <rcs:rcs-config>
-      <rcs:catalog-config default-scope="/"/>
-    </rcs:rcs-config>
-  </rcs:adf-rcs-config>
-  <rcv:rcv-config>
-    <rcv:default-catalog catalog-name="/gov/cms/portal/qiocollabaration/extension/view/default-catalog.xml"/>
-  </rcv:rcv-config>
   <mdsC:adf-mds-config version="11.1.1.000">
     <mds-config xmlns="http://xmlns.oracle.com/mds/config">
       <persistence-config>
@@ -86,8 +76,6 @@
           <namespace path="/oracle/webcenter/search/scopedMD"
                      metadata-store-usage="WebCenterFileMetadataStore"/>
           <namespace path="/oracle/webcenter/doclib/scopedMD"
-                     metadata-store-usage="WebCenterFileMetadataStore"/>
-          <namespace path="/xliffBundles/"
                      metadata-store-usage="WebCenterFileMetadataStore"/>
         </metadata-namespaces>
         <metadata-store-usages>
@@ -153,14 +141,4 @@
       </taglib>
     </taglib-config>
   </adf-faces-config>
-  <adf-resourcebundle-config xmlns="http://xmlns.oracle.com/adf/resourcebundle/config">
-    <applicationBundleName>
-      resourcebundles/xliffBundles/QIOCollabarationCustomADFAppOverrideBundle
-    </applicationBundleName>
-    <bundleList>
-      <bundleId override="true">
-        oracle.adf.view.page.editor.resource.ComposerOverrideBundle
-      </bundleId>
-    </bundleList>
-  </adf-resourcebundle-config>
 </adf-config>

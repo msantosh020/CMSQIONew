@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+          
+          <!--<af:outputText value="TEST CONTACTS PAGE #{fn:length(pageFlowScope.showConnectionBean.contactList)}" id="ot1">
+          </af:outputText>-->
+    <af:iterator value="#{pageFlowScope.showConnectionBean.contactList}" var="group"
+                 id="i1">
+        <af:panelHeader text="#{group.groupName}" id="ph1">
+            <af:iterator value="#{group.userProfileList}" var="user" id="i2">
+            <af:panelGroupLayout layout="horizontal" id="pgl1">
+                <af:panelGroupLayout id="pgl2">
+                    <af:image source="#{user.originalPhoto}"
+                              id="i3"/>
+                </af:panelGroupLayout>
+            <af:panelGroupLayout layout="horizontal" id="pgl3">
+                <af:panelGroupLayout layout="vertical" id="pgl4">
+                    <af:panelFormLayout id="pfl1">
+                        <af:inputText readOnly="true" label="City" value="#{user.businessCity}"/>
+                        <af:inputText readOnly="true" label="Country" value="#{user.businessCountry}"/>
+                        <af:inputText readOnly="true" label="Email" value="#{user.businessEmail}"/>
+                        <af:inputText readOnly="true" label="Mobile" value="#{user.businessMobile}"/>
+                        <af:inputText readOnly="true" label="Postal Code" value="#{user.businessPostalCode}"/>
+                        <af:inputText readOnly="true" label="State" value="#{user.businessState}"/>
+                        <af:inputText readOnly="true" label="Street" value="#{user.businessStreet}"/>
+                        <af:inputText readOnly="true" label="DOB" value="#{user.dateofBirth}"/>
+                        <af:inputText readOnly="true" label="Date of Hire" value="#{user.dateofHire}"/>
+                        <af:inputText readOnly="true" label="Department" value="#{user.department}"/>
+                        <af:inputText readOnly="true" label="Employee Number" value="#{user.employeeNumber}"/>
+                        <af:inputText readOnly="true" label="Manager" value="#{user.managerDisplayName}"/>
+                        <af:inputText readOnly="true" label="Title" value="#{user.title} #{user.firstName} #{user.lastName}"/>
+                    </af:panelFormLayout>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout id="pgl5">
+                    <af:commandButton text="Invite" id="cb1">
+                        <af:setPropertyListener from="#{user.userName}" to="#{pageFlowScope.showConnectionBean.selectedUser}" type="action"/>
+                        <af:showPopupBehavior popupId="p1"/>
+                    </af:commandButton>
+                    <af:popup id="p1">
+                        <af:dialog title="Send an Invite" dialogListener="#{pageFlowScope.showConnectionBean.inviteUserDialogListener}"
+                                   id="d1">
+                            <af:inputText label="Invitation Message" rows="5" columns="150" value="#{pageFlowScope.showConnectionBean.invitationMessage}"
+                                          id="it1"/>
+                        </af:dialog>
+                    </af:popup>
+                </af:panelGroupLayout>
+            </af:panelGroupLayout>
+        </af:panelGroupLayout>
+            </af:iterator>
+        </af:panelHeader>
+    </af:iterator>
+</jsp:root>

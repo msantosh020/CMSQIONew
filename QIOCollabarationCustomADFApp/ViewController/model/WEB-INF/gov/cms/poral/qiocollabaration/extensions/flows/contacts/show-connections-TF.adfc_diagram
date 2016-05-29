@@ -1,0 +1,56 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1">
+      <property
+         name="linkStyle">Direct</property>
+      <property
+         name="y">266.5</property>
+      <property
+         name="x">91.5</property>
+   </OverallProperties>
+   <View
+      id="View9">
+      <property
+         name="activityId">showConnections</property>
+      <property
+         name="page">/gov/cms/poral/qiocollabaration/extensions/fragments/contacts/showConnections.jsff</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>showConnections&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">269.91895</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">498.36133</property>
+   </View>
+   <MethodCall
+      id="MethodCall10">
+      <property
+         name="activityId">fetchUsers</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>fetchUsers&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">234.13184</property>
+      <property
+         name="x">281.0</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase11"
+      from="MethodCall10"
+      to="View9">
+      <property
+         name="fromOutcome">fetch</property>
+      <property
+         name="sdm:polyPoints">R50,322.5,233.78125,456.86133,269.56836,L50</property>
+   </ControlFlowCase>
+</SDM>
