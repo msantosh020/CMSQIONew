@@ -7,9 +7,9 @@
     <af:panelGroupLayout id="pgl14" layout="horizontal">
       <af:spacer width="170" height="10" id="s9"/>
       <af:panelGroupLayout id="pgl15" layout="vertical">
-        <af:outputText value="Lorem ipsum dolor sit amet, sapien etiam, nunc amet dolor ac odio mauris justo. Luctus arcu, urna praesent at id quisque ac. Arcu es massa vestibulum malesuada, integer vivamus elit eu mauris eus, cum eros quis aliquam wisi. Nulla wisi laoreet suspendisse integer vivamus elit eu mauris hendrerit facilisi, mi mattis pariatur aliquam pharetra eget."
+     <!--<af:outputText value="Lorem ipsum dolor sit amet, sapien etiam, nunc amet dolor ac odio mauris justo. Luctus arcu, urna praesent at id quisque ac. Arcu es massa vestibulum malesuada, integer vivamus elit eu mauris eus, cum eros quis aliquam wisi. Nulla wisi laoreet suspendisse integer vivamus elit eu mauris hendrerit facilisi, mi mattis pariatur aliquam pharetra eget."
                        id="ot2" styleClass="ResourceTopText"
-                       rendered="#{pageFlowScope.pageType eq 'Resources'}"/>
+                       rendered="#{pageFlowScope.pageType eq 'Resources'}"/>-->
         <af:spacer width="10" height="10" id="s1"/>
         <af:outputText value="#{pageFlowScope.pageTitle}" id="ot1"
                        styleClass="ResourceTopLabel"/>
@@ -493,17 +493,19 @@
           <af:listItem id="li1" styleClass="ResourceGrid">
             <af:panelGroupLayout id="pgl10" layout="vertical">
               <af:panelGroupLayout id="pgl11" layout="vertical">
-                <af:commandImageLink icon="/images/profile_pic_not_available.jpg"
+                <af:commandLink text="#{resource.resourceTitle}"
                                      id="cil3" partialSubmit="true"
-                                     clientComponent="true">
+                                     clientComponent="true"
+                                inlineStyle="font-weight:bold; font-size:medium;">
                   <af:clientListener method="showPdfInPopup" type="click"/>
-                 <af:clientAttribute name="path" value="#{request.scheme}://#{request.serverName}:8888/webcenter/#{resource.resourceWebUrl}"/>
+                 <af:clientAttribute name="path" value="#{request.scheme}://#{request.serverName}:#{request.serverPort}/webcenter/#{resource.resourceWebUrl}"/>
                   <af:clientAttribute name="name"
                                       value="#{fn:substringBefore(resource.resourceWebUrl,'.pdf')}"/>
-                </af:commandImageLink>
+                </af:commandLink>
+
                 <af:spacer width="10" height="10" id="s3"/>
-                <af:outputText value="#{resource.resourceTitle}" id="ot8"
-                               styleClass="ResourceItemText"/>
+               <!-- <af:outputText value="#{resource.resourceTitle}" id="ot8"
+                               styleClass="ResourceItemText"/>-->
                 <af:outputText value="#{resource.resourceDescription}" id="ot9"
                                styleClass="ResourceItemText"/>
                 <af:outputText value="#{resource.resourceFormat}" id="ot10"
@@ -516,13 +518,13 @@
                                id="ot13" styleClass="ResourceItemText"/>
                 <af:spacer width="10" height="10" id="s4"/>
                 <af:panelGroupLayout id="pgl12" layout="horizontal">
-                  <af:outputText escape="false" value="&lt;a href='#{request.scheme}://#{request.serverName}:8888/webcenter/#{resource.resourceWebUrl}' download>Download&lt;/a>"
+                  <af:outputText escape="false" value="&lt;a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}/webcenter/#{resource.resourceWebUrl}' download>Download&lt;/a>"
                                  id="ot16"/>
                   <af:commandLink text="Print" id="cil2" partialSubmit="true"
                                   clientComponent="true">
                     <af:clientListener method="showPdfInNewWindowWithPrint"
                                        type="click"/>
-                    <af:clientAttribute name="path" value="#{request.scheme}://#{request.serverName}:8888/webcenter/#{resource.resourceWebUrl}"/>
+                    <af:clientAttribute name="path" value="#{request.scheme}://#{request.serverName}:#{request.serverPort}/webcenter/#{resource.resourceWebUrl}"/>
                   </af:commandLink>
                   <f:facet name="separator">
                     <af:panelGroupLayout id="pgl13" halign="center"

@@ -3,6 +3,7 @@ package gov.cms.portal.qiocollabaration.extension.view.loa.backingbeans;
 import gov.cms.portal.qiocollabaration.extension.view.common.util.Util;
 import gov.cms.portal.qiocollabaration.extension.view.loa.beans.LOAModuleBean;
 import gov.cms.portal.qiocollabaration.extension.view.loa.beans.LOAPartBean;
+import gov.cms.portal.qiocollabaration.extension.view.loa.beans.LOAPartTypeBean;
 import gov.cms.portal.qiocollabaration.extension.view.loa.util.LOAContentUtil;
 
 import java.util.ArrayList;
@@ -28,7 +29,9 @@ public class LOAMainBackingBean {
     private List<LOAPartBean> loaPartList;
     private int selectedPartIndex = 0;
     private LOAPartBean selectedLOAPartBean;
-    private String selectedPartType = "MODULES";
+    private String selectedPartType;
+    private LOAPartTypeBean selectedLOAPartTypeBean;
+    private int selectedPartTypeIndex = 0;
 
     public void setLoaCSParentFolderPath(String loaCSParentFolderPath) {
         this.loaCSParentFolderPath = loaCSParentFolderPath;
@@ -38,7 +41,7 @@ public class LOAMainBackingBean {
         if (loaCSParentFolderPath == null) {
             loaCSParentFolderPath = Util.getPageFlowScopeParamValue("loaMainContentPath");
             if (loaCSParentFolderPath == null) {
-                loaCSParentFolderPath = "/WebCenterSpaces-Root/LOA/";
+                loaCSParentFolderPath = "/WebCenterSpaces-Root/QIOCollaboration/LOA/LOA 1.0 (2015)";
             }
         }
         return loaCSParentFolderPath;
@@ -58,7 +61,7 @@ public class LOAMainBackingBean {
 
     public Integer getTotalPagesSize() {
         if (totalPagesSize == null) {
-            int filteredTopicResourcesSize = getSelectedLOAPartBean().getModuleList().size();
+            int filteredTopicResourcesSize = getSelectedLOAPartBean().getLoaPartTypeList().size();
             totalPagesSize =
                     filteredTopicResourcesSize % NUMBER_RESOURCES_PER_PAGE > 0 ? (filteredTopicResourcesSize / NUMBER_RESOURCES_PER_PAGE) + 1 : filteredTopicResourcesSize / NUMBER_RESOURCES_PER_PAGE;
             System.out.println("LOAMainBackingBean.java getTotalPagesSize() totalPagesSize= " + totalPagesSize);
@@ -121,6 +124,9 @@ public class LOAMainBackingBean {
     }
 
     public String getSelectedPartType() {
+        if (selectedPartType == null) {
+            selectedPartType = getSelectedLOAPartTypeBean().getPartTypeName();
+        }
         return selectedPartType;
     }
 
@@ -131,7 +137,7 @@ public class LOAMainBackingBean {
     public List<LOAModuleBean> getCurrentPageModules() {
         if (currentPageModules == null) {
             currentPageModules = new ArrayList<LOAModuleBean>();
-            int filteredTopicResourcesSize = getSelectedLOAPartBean().getModuleList() != null ? getSelectedLOAPartBean().getModuleList().size() : 0;
+            int filteredTopicResourcesSize = getSelectedLOAPartTypeBean().getModuleList() != null ? getSelectedLOAPartTypeBean().getModuleList().size() : 0;
             if (filteredTopicResourcesSize > 0) {
                 int currentPageStartIndex = (getCurrentPageIndex() - 1) * NUMBER_RESOURCES_PER_PAGE;
                 int currentPageEndIndex = (getCurrentPageIndex() * NUMBER_RESOURCES_PER_PAGE);
@@ -140,7 +146,7 @@ public class LOAMainBackingBean {
                 }
 
                 for (int i = currentPageStartIndex; i < currentPageEndIndex; i++) {
-                    currentPageModules.add(getSelectedLOAPartBean().getModuleList().get(i));
+                    currentPageModules.add(getSelectedLOAPartTypeBean().getModuleList().get(i));
                 }
             }
             System.out.println("LOAMainBackingBean.java getCurrentPageModules() = " + currentPageModules);
@@ -151,10 +157,31 @@ public class LOAMainBackingBean {
     public void onLOAPartSelection(ActionEvent actionEvent) {
         // Add event code here...
         setSelectedLOAPartBean(null);
-        setSelectedPartType("MODULES");
+        setSelectedPartType(null);
         setCurrentPageIndex(1);
         setCurrentPageModules(null);
         setPagesSI(null);
         setTotalPagesSize(null);
+        setSelectedPartTypeIndex(0);
+        setSelectedLOAPartTypeBean(null);
+    }
+
+    public void setSelectedLOAPartTypeBean(LOAPartTypeBean selectedLOAPartTypeBean) {
+        this.selectedLOAPartTypeBean = selectedLOAPartTypeBean;
+    }
+
+    public LOAPartTypeBean getSelectedLOAPartTypeBean() {
+        if (selectedLOAPartTypeBean == null) {
+            selectedLOAPartTypeBean = getSelectedLOAPartBean().getLoaPartTypeList().get(getSelectedPartTypeIndex());
+        }
+        return selectedLOAPartTypeBean;
+    }
+
+    public void setSelectedPartTypeIndex(int selectedPartTypeIndex) {
+        this.selectedPartTypeIndex = selectedPartTypeIndex;
+    }
+
+    public int getSelectedPartTypeIndex() {
+        return selectedPartTypeIndex;
     }
 }

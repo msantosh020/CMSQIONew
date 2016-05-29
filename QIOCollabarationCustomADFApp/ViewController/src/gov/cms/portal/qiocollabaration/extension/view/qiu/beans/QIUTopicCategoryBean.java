@@ -18,6 +18,7 @@ public class QIUTopicCategoryBean  implements Serializable {
     private String collectionPath;
     private String collectionId;
     private List<ResourceBean> resources;
+    private String categoryType;
 
     public void setResources(List<ResourceBean> resources) {
         this.resources = resources;
@@ -57,5 +58,13 @@ public class QIUTopicCategoryBean  implements Serializable {
 
     public String getCollectionId() {
         return collectionId;
+    }
+
+    public void setCategoryType(String categoryType) {
+        this.categoryType = categoryType;
+    }
+
+    public String getCategoryType() {
+        return categoryType;
     }
 }

@@ -8,9 +8,18 @@
       <af:listItem id="li1" styleClass="ResourceGrid">
         <af:panelGroupLayout id="pgl10" layout="vertical"
                              styleClass="QIUPanelBox">
-          <af:outputText value="#{topic.topicName}" id="ot1"
-                         styleClass="QIUTopicName"/>
+         <!-- <af:outputText value="#{topic.topicName}" id="ot4" escape="false"
+                         styleClass="QIUTopicName"/>-->
           <af:spacer width="10" height="10" id="s1"/>
+          <af:iterator id="i1" var="section" varStatus="vs"
+                       value="#{topic.sectionList}">
+            <af:outputText value="#{section[0]}" id="ot2" 
+                           styleClass="SectionHeader" escape="false"
+                           rendered="#{not empty section and not empty section[1]}"/>
+            <!--<af:outputText value="#{section[1]}" id="ot3" escape="false"
+                           rendered="#{not empty section and not empty section[1]}"/>-->
+          <af:spacer width="10" height="10" id="s3"/>
+          </af:iterator>
           <af:panelGroupLayout id="pgl2" layout="horizontal" halign="center"
                                styleClass="AFStretchWidth">
             <af:commandButton text="View Packet" id="cb1" action="pprnav"
@@ -18,7 +27,9 @@
                               actionListener="#{navigationContext.processAction}">
               <f:attribute name="node"
                            value="#{navigationContext.defaultNavigationModel.node['Home/page12/page168/page1217']}"/>
-              <af:setPropertyListener from="#{topic.collectionId}" to="#{sessionScope.selectedQIUTopicCollectionId}" type="action"/>
+              <af:setPropertyListener from="#{topic.collectionId}"
+                                      to="#{sessionScope.selectedQIUTopicCollectionId}"
+                                      type="action"/>
             </af:commandButton>
           </af:panelGroupLayout>
         </af:panelGroupLayout>

@@ -24,6 +24,7 @@ public class LOAModuleBean {
     private String moduleIconUrl;
     private String moduleSpeakerBioLinkUrl;
     private List<LOAModuleCategoryBean> moduleCategoryList;
+    private List<String[]> sectionList;
 
     public void setModuleName(String moduleName) {
         this.moduleName = moduleName;
@@ -103,5 +104,13 @@ public class LOAModuleBean {
 
     public String getModuleSpeakerBioLinkUrl() {
         return moduleSpeakerBioLinkUrl;
+    }
+
+    public void setSectionList(List<String[]> sectionList) {
+        this.sectionList = sectionList;
+    }
+
+    public List<String[]> getSectionList() {
+        return sectionList;
     }
 }

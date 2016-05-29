@@ -37,7 +37,7 @@ public class LOATopicPageBackingBean {
         if (loaModuleCSParentFolderPath == null) {
             loaModuleCSParentFolderPath = Util.getPageFlowScopeParamValue("loaModuleCSParentFolderPath");
             if (loaModuleCSParentFolderPath == null) {
-                loaModuleCSParentFolderPath = "/WebCenterSpaces-Root/LOA/";
+                loaModuleCSParentFolderPath = "/WebCenterSpaces-Root/QIOCollaboration/LOA/LOA 1.0 (2015)";
             }
         }
         return loaModuleCSParentFolderPath;

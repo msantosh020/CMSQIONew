@@ -1,20 +1,88 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
           xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
-          xmlns:f="http://java.sun.com/jsf/core">
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:cust="http://xmlns.oracle.com/adf/faces/customizable">
   <af:panelGroupLayout id="pgl1" layout="vertical">
-    <af:iterator id="i1" var="category" varStatus="vs"
+    <af:panelGroupLayout id="pgl10" layout="vertical" styleClass="QIUPanelBox">
+      <af:outputText value="Quality Improvement University (QI-U)" 
+                     id="ot1" inlineStyle="font-size:medium; font-weight:bold;"/>
+      <af:spacer width="10" height="10" id="s1"/>
+      <af:iterator id="i1" var="section" varStatus="vs"
+                   value="#{viewScope.QIUTopicPageBackingBean.qiuTopicBean.sectionList}">
+        <af:outputText value="#{section[0]}" id="ot2" escape="false"
+                       styleClass="SectionHeader"/>
+        <af:outputText value="#{section[1]}" id="ot3" escape="false"
+                       rendered="#{not empty section[1]}"/>
+        <af:spacer width="10" height="10" id="s3"/>
+      </af:iterator>
+    </af:panelGroupLayout>
+    <af:iterator id="i3" var="category" varStatus="vs"
                  value="#{viewScope.QIUTopicPageBackingBean.qiuTopicCategoryList}">
-      <af:panelBox text="#{category.categoryName}" id="pb1">
+      <cust:showDetailFrame text="#{category.categoryName}" id="sdf1"
+                            displayHeader="true" stretchContent="false"
+                            showMinimizeAction="none"
+                            background="#{changeModeBean.inEditMode ? 'medium' : 'light'}"
+                            showResizer="never"
+                            styleClass="QIOCollShowDetailFrame">
+        <af:switcher facetName="#{category.categoryType}" defaultFacet="LINKS"
+                     id="s4">
+          <f:facet name="TEXT">
+            <af:panelGroupLayout id="pgl5" layout="vertical">
+              <af:iterator id="i7" var="resourceBean" varStatus="vs"
+                           value="#{category.resources}">
+                <af:outputText value="#{resourceBean.resourceTitle} : #{resourceBean.resourceDescription}"
+                               id="cl1"/>
+                <af:spacer width="10" height="10" id="s9"/>
+              </af:iterator>
+            </af:panelGroupLayout>
+          </f:facet>
+          <f:facet name="LINKS">
+            <af:panelGroupLayout id="pgl6" layout="vertical">
+              <af:iterator id="i4" var="resourceBean" varStatus="vs"
+                           value="#{category.resources}">
+                <af:goLink text="#{resourceBean.resourceTitle}"
+                           destination="#{resourceBean.resourceWebUrl}"
+                           targetFrame="_blank" id="ot7"/>
+                <af:spacer width="10" height="10" id="s10"/>
+              </af:iterator>
+            </af:panelGroupLayout>
+          </f:facet>
+          <f:facet name="VIDOES">
+            <af:iterator id="i5" var="resourceBean" varStatus="vs"
+                         value="#{category.resources}">
+              <af:panelGroupLayout id="pgl2" layout="horizontal">
+                <af:image source="#{resourceBean.resourceImageUrl}" id="i6"/>
+                <af:panelGroupLayout id="pgl4" layout="vertical">
+                  <af:goLink text="#{resourceBean.resourceTitle}"
+                             destination="#{resourceBean.resourceWebUrl}"
+                             targetFrame="_blank" id="gl1"/>
+                  <af:spacer width="10" height="10" id="s11"/>
+                  <af:outputText value="#{resourceBean.resourceDescription}"
+                                 id="ot8"/>
+                </af:panelGroupLayout>
+                <af:spacer width="10" height="10" id="s12"/>
+              </af:panelGroupLayout>
+            </af:iterator>
+          </f:facet>
+        </af:switcher>
+      </cust:showDetailFrame>
+        <!--<af:panelBox text="#{category.categoryName}" id="pb1" 
+                            styleClass="QIOCollShowDetailFrame">
         <f:facet name="toolbar"/>
         <af:panelGroupLayout id="pgl2" layout="vertical">
           <af:iterator id="i2" var="resourceBean" varStatus="vs"
                        value="#{category.resources}">
-            <af:outputText value="#{resourceBean.resourceTitle}" id="cl1"/>  
-            <af:spacer width="10" height="10" id="s1"/>
+            --><!--<af:outputText value="#{resourceBean.resourceTitle}" id="cl1"/>--><!--
+             <af:goLink text="#{resourceBean.resourceTitle}"
+                           destination="#{resourceBean.resourceWebUrl}"
+                           targetFrame="_blank" id="ot7"/>
+            --><!--<af:media player="link" source="#{resourceBean.resourceUrl}"
+                      id="m1" />--><!--
+            <af:spacer width="10" height="10" id="s2"/>
           </af:iterator>
         </af:panelGroupLayout>
-      </af:panelBox>
+      </af:panelBox>-->
     </af:iterator>
   </af:panelGroupLayout>
 </jsp:root>

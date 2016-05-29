@@ -19,6 +19,21 @@ public class ContentFolderBean extends ContentBean implements Serializable {
     private String collectionPath;
     private List<ContentItemBean> folderItems = new ArrayList<ContentItemBean>();
     private List<ContentFolderBean> subFolders = new ArrayList<ContentFolderBean>();
+    
+    
+    private String titleandPubDate;
+    private String faculty;
+    private String backgroundHeader;
+    private String backgroundContent;
+    private String learningObjectivesHeader;
+    private String learningObjectivesContent;
+    private String keyTakeAwaysHeader;
+    private String keyTakeAwaysContent;
+    
+   
+    
+    
+    
 
     public void setCollectionName(String collectionName) {
         this.collectionName = collectionName;
@@ -66,5 +81,70 @@ public class ContentFolderBean extends ContentBean implements Serializable {
 
     public String getCollectionPath() {
         return collectionPath;
+    }
+
+
+    public void setTitleandPubDate(String titleandPubDate) {
+        this.titleandPubDate = titleandPubDate;
+    }
+
+    public String getTitleandPubDate() {
+        return titleandPubDate;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public void setBackgroundHeader(String backgroundHeader) {
+        this.backgroundHeader = backgroundHeader;
+    }
+
+    public String getBackgroundHeader() {
+        return backgroundHeader;
+    }
+
+    public void setBackgroundContent(String backgroundContent) {
+        this.backgroundContent = backgroundContent;
+    }
+
+    public String getBackgroundContent() {
+        return backgroundContent;
+    }
+
+    public void setLearningObjectivesHeader(String learningObjectivesHeader) {
+        this.learningObjectivesHeader = learningObjectivesHeader;
+    }
+
+    public String getLearningObjectivesHeader() {
+        return learningObjectivesHeader;
+    }
+
+    public void setLearningObjectivesContent(String learningObjectivesContent) {
+        this.learningObjectivesContent = learningObjectivesContent;
+    }
+
+    public String getLearningObjectivesContent() {
+        return learningObjectivesContent;
+    }
+
+    public void setKeyTakeAwaysHeader(String keyTakeAwaysHeader) {
+        this.keyTakeAwaysHeader = keyTakeAwaysHeader;
+    }
+
+    public String getKeyTakeAwaysHeader() {
+        return keyTakeAwaysHeader;
+    }
+
+    public void setKeyTakeAwaysContent(String keyTakeAwaysContent) {
+        this.keyTakeAwaysContent = keyTakeAwaysContent;
+    }
+
+    public String getKeyTakeAwaysContent() {
+        return keyTakeAwaysContent;
     }
 }

@@ -16,6 +16,7 @@ public class QIUTopicBean implements Serializable {
     private String parentCollectionId;
     private String collectionPath;
     private String collectionId;
+    private List<String[]> sectionList;
 
     public void setTopicName(String topicName) {
         this.topicName = topicName;
@@ -47,5 +48,13 @@ public class QIUTopicBean implements Serializable {
 
     public String getCollectionId() {
         return collectionId;
+    }
+
+    public void setSectionList(List<String[]> sectionList) {
+        this.sectionList = sectionList;
+    }
+
+    public List<String[]> getSectionList() {
+        return sectionList;
     }
 }
