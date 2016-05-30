@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<DataControlConfigs xmlns="http://xmlns.oracle.com/adfm/configuration"
+                    version="11.1.1.66.73" id="DataControls"
+                    Package="gov.cms.portal.qiocollabaration.extension.model">
+  <AdapterDataControl id="ProfileServiceBean"
+                      FactoryClass="oracle.adf.model.adapter.bean.BeanDCFactoryImpl"
+                      ImplDef="oracle.adf.model.adapter.bean.BeanDefinition"
+                      SupportsTransactions="false" SupportsSortCollection="true"
+                      SupportsResetState="false" SupportsRangesize="false"
+                      SupportsFindMode="false" SupportsUpdates="true"
+                      Definition="gov.cms.portal.qiocollabaration.extension.model.profile.service.ProfileServiceBean"
+                      BeanClass="gov.cms.portal.qiocollabaration.extension.model.profile.service.ProfileServiceBean"
+                      xmlns="http://xmlns.oracle.com/adfm/datacontrol">
+    <CreatableTypes>
+      <TypeInfo FullName="gov.cms.portal.qiocollabaration.extension.model.profile.bean.ProfileBean"/>
+      <TypeInfo FullName="gov.cms.portal.qiocollabaration.extension.model.profile.service.ProfileServiceBean"/>
+    </CreatableTypes>
+    <Source>
+      <bean-definition BeanClass="gov.cms.portal.qiocollabaration.extension.model.profile.service.ProfileServiceBean"
+                       xmlns="http://xmlns.oracle.com/adfm/adapter/bean"/>
+    </Source>
+  </AdapterDataControl>
+</DataControlConfigs>

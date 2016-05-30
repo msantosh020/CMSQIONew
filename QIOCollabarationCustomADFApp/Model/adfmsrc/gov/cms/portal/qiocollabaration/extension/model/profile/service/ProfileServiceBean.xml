@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.66.73"
+          id="ProfileServiceBean"
+          Package="gov.cms.portal.qiocollabaration.extension.model.profile.service"
+          BeanClass="gov.cms.portal.qiocollabaration.extension.model.profile.service.ProfileServiceBean"
+          isJavaBased="true">
+  <MethodAccessor IsCollection="false"
+                  Type="gov.cms.portal.qiocollabaration.extension.model.profile.bean.ProfileBean"
+                  BeanClass="gov.cms.portal.qiocollabaration.extension.model.profile.bean.ProfileBean"
+                  id="getProfileDetais" ReturnNodeName="ProfileBean">
+    <ParameterInfo id="emailId" Type="java.lang.String" isStructured="false"/>
+  </MethodAccessor>
+  <ConstructorMethod IsCollection="true"
+                     Type="gov.cms.portal.qiocollabaration.extension.model.profile.service.ProfileServiceBean"
+                     BeanClass="gov.cms.portal.qiocollabaration.extension.model.profile.service.ProfileServiceBean"
+                     id="ProfileServiceBean"/>
+</JavaBean>

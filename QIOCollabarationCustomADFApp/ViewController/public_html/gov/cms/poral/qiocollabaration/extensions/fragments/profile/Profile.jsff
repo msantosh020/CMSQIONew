@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" layout="vertical">
+    <af:outputText value="Profile" id="ot1" styleClass="ProfileHeaderText"/>
+    <af:panelGroupLayout id="pgl2" layout="horizontal">
+      <af:image source="/images/profile_pic_not_available.jpg" id="i1"/>
+      <af:spacer width="20" height="10" id="s1"/>
+      <af:panelGroupLayout id="pgl3" layout="vertical">
+        <af:outputText value="#{pageFlowScope.ProfileBackingBean.profile.firstName}"
+                       id="ot2" styleClass="ProfileNameText"/>
+        <af:outputText value="Job Title" id="ot3" styleClass="ProfileJobText"/>
+        <af:outputText value="Organization Name/Organization Type" id="ot4"
+                       styleClass="ProfileJobText"/>
+        <af:outputText value="Email" id="ot5" styleClass="ProfileJobText"/>
+        <af:outputText value="Primary Phone" id="ot6"
+                       styleClass="ProfileJobText"/>
+        <af:outputText value="About User" id="ot7" styleClass="ProfileJobText"/>
+      </af:panelGroupLayout>
+      <af:spacer width="10" height="20" id="s2"/>
+    </af:panelGroupLayout>
+    <af:panelGroupLayout id="pgl4" layout="horizontal">
+      <af:commandLink text="Notifications &amp; Activities" id="cl1"
+                      partialSubmit="true"
+                      styleClass="#{empty pageFlowScope.selectedProfileTab or pageFlowScope.selectedProfileTab eq 'Notifications' ? 'selectedProfileTabLink' : 'ProfileTabLink'}">
+        <af:setActionListener from="Notifications"
+                              to="#{pageFlowScope.selectedProfileTab}"/>
+      </af:commandLink>
+      <af:commandLink text="Messages" id="cl2" partialSubmit="true"
+                      styleClass="#{pageFlowScope.selectedProfileTab eq 'Messages' ? 'selectedProfileTabLink' : 'ProfileTabLink'}">
+        <af:setActionListener from="Messages"
+                              to="#{pageFlowScope.selectedProfileTab}"/>
+      </af:commandLink>
+      <af:commandLink text="About Me" id="cl3" partialSubmit="true"
+                      styleClass="#{pageFlowScope.selectedProfileTab eq 'AboutMe' ? 'selectedProfileTabLink' : 'ProfileTabLink'}">
+        <af:setActionListener from="AboutMe"
+                              to="#{pageFlowScope.selectedProfileTab}"/>
+      </af:commandLink>
+      <af:commandLink text="Subscription" id="cl4" partialSubmit="true"
+                      styleClass="#{pageFlowScope.selectedProfileTab eq 'Subscription' ? 'selectedProfileTabLink' : 'ProfileTabLink'}">
+        <af:setActionListener from="Subscription"
+                              to="#{pageFlowScope.selectedProfileTab}"/>
+      </af:commandLink>
+      <af:commandLink text="Account Info" id="cl5" partialSubmit="true"
+                      styleClass="#{pageFlowScope.selectedProfileTab eq 'AccountInfo' ? 'selectedProfileTabLink' : 'ProfileTabLink'}">
+        <af:setActionListener from="AccountInfo"
+                              to="#{pageFlowScope.selectedProfileTab}"/>
+      </af:commandLink>
+      <f:facet name="separator">
+        <af:spacer width="10" height="10" id="s4"/>
+      </f:facet>
+    </af:panelGroupLayout>
+    <af:panelGroupLayout id="pgl5" layout="vertical"
+                         styleClass="ContactTypeOuterBox"
+                         partialTriggers="cl1 cl2 cl3 cl4 cl5">
+      <af:switcher id="s3" facetName="#{pageFlowScope.selectedProfileTab}"
+                   defaultFacet="AboutMe">
+        <f:facet name="Notifications">
+          <af:outputText value="Notifications" id="ot8"
+                         styleClass="ProfileNameText"/>
+        </f:facet>
+        <f:facet name="Messages">
+          <af:outputText value="Messages" id="ot9"
+                         styleClass="ProfileNameText"/>
+        </f:facet>
+        <f:facet name="AboutMe">
+          <af:outputText value="About Me" id="ot10"
+                         styleClass="ProfileNameText"/>
+        </f:facet>
+        <f:facet name="Subscription">
+          <af:outputText value="Subscription" id="ot11"
+                         styleClass="ProfileNameText"/>
+        </f:facet>
+        <f:facet name="AccountInfo">
+          <af:outputText value="Account Info" id="ot12"
+                         styleClass="ProfileNameText"/>
+        </f:facet>
+      </af:switcher>
+    </af:panelGroupLayout>
+  </af:panelGroupLayout>
+</jsp:root>

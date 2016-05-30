@@ -56,6 +56,9 @@
       <string v="oracle.toplink.workbench.addin/toplinkContentSet"/>
    </list>
    <value n="defaultPackage" v="gov.cms.portal.qiocollabaration.extension.model"/>
+   <hash n="oracle.adfdtinternal.model.ide.settings.ADFMSettings">
+      <value n="hasDataControls" v="true"/>
+   </hash>
    <hash n="oracle.ide.model.TechnologyScopeConfiguration">
       <list n="technologyScope">
          <string v="Java"/>
@@ -166,6 +169,10 @@
             <value n="id" v="Oracle JDBC"/>
             <value n="isJDK" v="false"/>
          </hash>
+         <hash>
+            <value n="id" v="ADF Model Generic Runtime"/>
+            <value n="isJDK" v="false"/>
+         </hash>
       </list>
       <list n="libraryReferences">
          <hash>
@@ -198,6 +205,10 @@
          </hash>
          <hash>
             <value n="id" v="Oracle JDBC"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="ADF Model Generic Runtime"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>

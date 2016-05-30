@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="ProfileTF">
+    <default-activity id="__1">Profile</default-activity>
+    <input-parameter-definition id="__2">
+      <name id="__3">emailId</name>
+      <value>#{pageFlowScope.emailId}</value>
+      <class>java.lang.String</class>
+      <required/>
+    </input-parameter-definition>
+    <managed-bean id="__6">
+      <managed-bean-name id="__7">ProfileBackingBean</managed-bean-name>
+      <managed-bean-class id="__4">gov.cms.portal.qiocollabaration.extension.view.profile.backingbean.ProfileBackingBean</managed-bean-class>
+      <managed-bean-scope id="__5">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="Profile">
+      <page>/gov/cms/poral/qiocollabaration/extensions/fragments/profile/Profile.jsff</page>
+    </view>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

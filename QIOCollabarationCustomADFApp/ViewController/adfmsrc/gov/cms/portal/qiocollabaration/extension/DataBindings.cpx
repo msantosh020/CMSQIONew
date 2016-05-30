@@ -20,6 +20,8 @@
           usageId="gov_cms_portal_qiocollabaration_extension_loaTestPageDef"/>
     <page path="/gov/cms/poral/qiocollabaration/extensions/fragments/contacts/showConnections.jsff"
           usageId="gov_cms_portal_qiocollabaration_extension_showConnectionsPageDef"/>
+    <page path="/gov/cms/poral/qiocollabaration/extensions/fragments/profile/Profile.jsff"
+          usageId="gov_cms_portal_qiocollabaration_extension_ProfilePageDef"/>
   </pageMap>
   <pageDefinitionUsages> 
     <page id="gov_cms_portal_qiocollabaration_extension_myTestPageDef"
@@ -34,5 +36,11 @@
           path="test.loaTestPageDef"/>
     <page id="gov_cms_portal_qiocollabaration_extension_showConnectionsPageDef"
           path="gov.cms.poral.qiocollabaration.extensions.fragments.contacts.showConnectionsPageDef"/>
+    <page id="gov_cms_portal_qiocollabaration_extension_ProfilePageDef"
+          path="gov.cms.poral.qiocollabaration.extensions.fragments.profile.ProfilePageDef"/>
   </pageDefinitionUsages>
+  <dataControlUsages>
+    <dc id="ProfileServiceBean"
+        path="gov.cms.portal.qiocollabaration.extension.model.ProfileServiceBean"/>
+  </dataControlUsages>
 </Application>
