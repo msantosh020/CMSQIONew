@@ -1,0 +1,35 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<task-flow-registry xmlns="http://xmlns.oracle.com/adf/controller/rc">
+   <task-flow-descriptor path="WEB-INF/gov/cms/poral/qiocollabaration/extensions/flows/qiu/QIUMainTF.xml" id="QIUMainTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="pageType"/>
+      <input-parameter name="qiuProgramPath"/>
+      <input-parameter name="qiuMainContentPath"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="META-INF/adfc-config.xml" id="" type="" uses-page-fragments="false" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/gov/cms/poral/qiocollabaration/extensions/flows/loa/LOATopicTF.xml" id="LOATopicTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="loaModuleCSParentFolderPath"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/gov/cms/poral/qiocollabaration/extensions/flows/educationtraining/EducationNTrainingMaterialsTF.xml" id="EducationNTrainingMaterialsTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/gov/cms/poral/qiocollabaration/extensions/flows/login/loginTF.xml" id="loginTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/gov/cms/poral/qiocollabaration/extensions/flows/contacts/show-connections-TF.xml" id="show-connections-TF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false"/>
+   <task-flow-descriptor path="WEB-INF/gov/cms/poral/qiocollabaration/extensions/flows/profile/ProfileTF.xml" id="ProfileTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="emailId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/gov/cms/poral/qiocollabaration/extensions/flows/loa/LOAMainTF.xml" id="LOAMainTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="pageType"/>
+      <input-parameter name="loaMainContentPath"/>
+      <input-parameter name="loaProgramPath"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/gov/cms/poral/qiocollabaration/extensions/flows/qiu/QIUTopicTF.xml" id="QIUTopicTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="qiuTopicCSParentFolderPath"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/gov/cms/poral/qiocollabaration/extensions/flows/resources/ResourcesTF.xml" id="ResourcesTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false">
+      <input-parameter name="pageType"/>
+      <input-parameter name="pageTitle"/>
+      <input-parameter name="loaPath"/>
+      <input-parameter name="uploadResourcesPath"/>
+      <input-parameter name="viewTaskCalendarandContactsPath"/>
+      <input-parameter name="resourcesCSParentFolderPath"/>
+      <input-parameter name="qiuPath"/>
+   </task-flow-descriptor>
+</task-flow-registry>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.66.73" id="resourcesTestPageDef" Package="test">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="ResourcesTF1"
+              taskFlowId="/WEB-INF/gov/cms/poral/qiocollabaration/extensions/flows/resources/ResourcesTF.xml#ResourcesTF"
+              activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="pageType" value="Resources"/>
+        <parameter id="pageTitle" value="Resources"/>
+      </parameters>
+    </taskFlow>
+  </executables>
+  <bindings/>
+</pageDefinition>
