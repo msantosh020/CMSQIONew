@@ -18,13 +18,13 @@ public class LOAModuleBean {
     private String collectionPath;
     private String collectionId;
     private String moduleDesc;
-    private String moduleImageUrl;
-    
+    private String moduleImageUrl;    
     private String moduleTitleDesc;
     private String moduleIconUrl;
     private String moduleSpeakerBioLinkUrl;
     private List<LOAModuleCategoryBean> moduleCategoryList;
-    private List<String[]> sectionList;
+    private List<String[]> sectionList;    
+    private String callOutBoxDec;
 
     public void setModuleName(String moduleName) {
         this.moduleName = moduleName;
@@ -112,5 +112,13 @@ public class LOAModuleBean {
 
     public List<String[]> getSectionList() {
         return sectionList;
+    }
+
+    public void setCallOutBoxDec(String callOutBoxDec) {
+        this.callOutBoxDec = callOutBoxDec;
+    }
+
+    public String getCallOutBoxDec() {
+        return callOutBoxDec;
     }
 }

@@ -41,7 +41,7 @@ public class LOAMainBackingBean {
         if (loaCSParentFolderPath == null) {
             loaCSParentFolderPath = Util.getPageFlowScopeParamValue("loaMainContentPath");
             if (loaCSParentFolderPath == null) {
-                loaCSParentFolderPath = "/WebCenterSpaces-Root/QIOCollaboration/LOA/LOA 1.0 (2015)";
+                loaCSParentFolderPath = "/WebCenterSpaces-Root/QIOCollaboration/LOA/LOA 2.0 (2016)";
             }
         }
         return loaCSParentFolderPath;

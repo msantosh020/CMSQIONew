@@ -4,17 +4,22 @@
           xmlns:f="http://java.sun.com/jsf/core">
   <af:panelGroupLayout id="pgl1" layout="vertical">
     <af:panelGroupLayout id="pgl3" layout="vertical">
-      <!--<af:panelGroupLayout id="pgl4" layout="horizontal" halign="end"
+      <af:panelGroupLayout id="pgl4" layout="horizontal" halign="end"
                            styleClass="AFstretchWidth"
-                           inlineStyle="width:500px">
+                           rendered="#{pageFlowScope.pageType eq 'LOAMainPage'}">
         <af:commandLink text="Download Syllabus(PDF)" id="cl2"
                         partialSubmit="true"
                         styleClass="selectedContactTabLink"/>
         <af:spacer width="10" height="10" id="s5"/>
-        <af:commandLink text="View Program Resources" id="cl4"
-                        partialSubmit="true"
-                        styleClass="selectedContactTabLink"/>
-      </af:panelGroupLayout>-->
+        <af:commandButton text="View Program Resources" id="cb3"
+                          styleClass="selectedContactTabLink"
+                          inlineStyle="width:230px"
+                          actionListener="#{navigationContext.processAction}"
+                          action="pprnav">
+          <f:attribute name="node"
+                       value="#{navigationContext.defaultNavigationModel.node['Home/page12/page143/page126']}"/>
+        </af:commandButton>
+      </af:panelGroupLayout>
       <af:spacer width="10" height="10" id="s7"/>
       <af:panelGroupLayout id="pgl8" layout="horizontal"
                            partialTriggers="i1:cl1">
@@ -70,12 +75,13 @@
                 <af:spacer width="10" height="10" id="s3"/>-->
                 <af:iterator id="i2" var="section" varStatus="vs"
                              value="#{module.sectionList}">
-                  <af:outputText value="#{section[0]}" id="ot4" escape="false"
-                                 styleClass="SectionHeader" rendered="#{not empty section and not empty section[1]}"/>
+                  <af:outputText value="#{section[0]}" id="ot4"
+                                 styleClass="SectionHeader"
+                                 rendered="#{not empty section and not empty section[1] and section[0] ne 'Learning Object' and section[0] ne 'Activities' and section[0] ne 'Faculty' and section[0] ne 'Description'}"/>
                   <!--<af:outputText value="#{section[1]}" id="ot3" escape="false"
                                  rendered="#{not empty section[1]}"/>-->
-                  <af:spacer width="10" height="10" id="s1"/>
                 </af:iterator>
+                <af:spacer width="10" height="10" id="s1"/>
                 <af:panelGroupLayout id="pgl2" layout="horizontal"
                                      halign="center"
                                      styleClass="AFStretchWidth">

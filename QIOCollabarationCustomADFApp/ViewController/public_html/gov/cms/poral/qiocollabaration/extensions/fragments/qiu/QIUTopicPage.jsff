@@ -10,11 +10,27 @@
       <af:spacer width="10" height="10" id="s1"/>
       <af:iterator id="i1" var="section" varStatus="vs"
                    value="#{viewScope.QIUTopicPageBackingBean.qiuTopicBean.sectionList}">
-        <af:outputText value="#{section[0]}" id="ot2" escape="false"
-                       styleClass="SectionHeader"/>
-        <af:outputText value="#{section[1]}" id="ot3" escape="false"
-                       rendered="#{not empty section[1]}"/>
-        <af:spacer width="10" height="10" id="s3"/>
+        <af:panelGroupLayout id="pgl7" layout="horizontal"
+                           styleClass="AFStretchWidth">
+        <af:panelGroupLayout id="pgl8" layout="vertical">
+          <af:outputText value="#{section[0]}" id="ot4"
+                         styleClass="SectionHeader" escape="false"/>
+          <af:outputText value="#{section[1]}" id="ot3" escape="false"
+                         rendered="#{not empty section[1]}"/>
+          <af:spacer width="10" height="10" id="s2"/>
+        </af:panelGroupLayout>
+        <af:panelGroupLayout id="pgl9" layout="horizontal" inlineStyle="width:250px"
+                             rendered="#{vs.index eq 0 and not empty viewScope.QIUTopicPageBackingBean.qiuTopicBean.qiuCallOutBoxDec}"
+                             styleClass="AFStretchWidth" halign="right">
+          <af:panelGroupLayout id="pgl3" layout="horizontal"
+                               inlineStyle="width:250px;height:200px;border: 1px solid black;"
+                               halign="center">
+            <af:outputText value="#{ viewScope.QIUTopicPageBackingBean.qiuTopicBean.qiuCallOutBoxDec}"
+                           id="it5" escape="false"
+                           inlineStyle="width:220px;display:block;word-wrap:break-word;"/>
+          </af:panelGroupLayout>
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
       </af:iterator>
     </af:panelGroupLayout>
     <af:iterator id="i3" var="category" varStatus="vs"

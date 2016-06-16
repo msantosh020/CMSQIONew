@@ -7,6 +7,16 @@
       <value>#{pageFlowScope.qiuMainContentPath}</value>
       <class>java.lang.String</class>
     </input-parameter-definition>
+    <input-parameter-definition id="__8">
+      <name id="__9">pageType</name>
+      <value>#{pageFlowScope.pageType}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__10">
+      <name id="__11">qiuProgramPath</name>
+      <value>#{pageFlowScope.qiuProgramPath}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
     <managed-bean id="__2">
       <managed-bean-name id="__4">QIUMainBackingBean</managed-bean-name>
       <managed-bean-class id="__5">gov.cms.portal.qiocollabaration.extension.view.qiu.backingbeans.QIUMainBackingBean</managed-bean-class>

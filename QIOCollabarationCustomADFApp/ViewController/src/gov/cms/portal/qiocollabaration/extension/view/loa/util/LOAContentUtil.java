@@ -22,8 +22,8 @@ public class LOAContentUtil {
         // Use below lines while deploying to server TODO
         WCContentUtil csUtil = new WCContentUtil();
         // Use below code for running local machine
-        //        String url = "http://10.163.64.1:16200/cs/idcplg";
-        //        WCContentUtil csUtil = new WCContentUtil(url, "weblogic");
+//                        String url = "http://10.163.64.1:16200/cs/idcplg";
+//                        WCContentUtil csUtil = new WCContentUtil(url, "weblogic");
         return csUtil;
     }
 
@@ -37,7 +37,7 @@ public class LOAContentUtil {
         try {
             String collectionId = csUtil.getFolderCollectionId(loaCSParentFolderPath);
             System.out.println("LOAContentUtil.java getLOAParts() collectionId = " + collectionId);
-            loaPartFolders = csUtil.getSubFolders(collectionId);
+            loaPartFolders = csUtil.getLOASubFolders(collectionId);
             System.out.println("LOAContentUtil.java getLOAParts() loaPartFolders = " + loaPartFolders);
             for (ContentFolderBean contentFolder : loaPartFolders) {
                 loaPartBean = getLOAPartBean(contentFolder);
@@ -68,7 +68,7 @@ public class LOAContentUtil {
         List<LOAPartTypeBean> loaPartTypeList = new ArrayList<LOAPartTypeBean>();
         LOAPartTypeBean loaPartTypeBean = null;
         try {
-            loaPartModuleFolders = csUtil.getSubFolders(loaPartBean.getCollectionId());
+            loaPartModuleFolders = csUtil.getLOASubFolders(loaPartBean.getCollectionId());
             System.out.println("LOAContentUtil.java loadLOAPartTypes() loaPartModuleFolders = " + loaPartModuleFolders);
             for (ContentFolderBean contentFolder : loaPartModuleFolders) {
                 loaPartTypeBean = getLOoAPartTypeBean(contentFolder);
@@ -112,34 +112,43 @@ public class LOAContentUtil {
         System.out.println("LOAContentUtil.java loadLOATopics() loaPartModuleList = " + loaPartModuleList);
     }
 
-    private static LOAModuleBean getLOAPartModuleBean(ContentFolderBean contentFolder,Boolean isFromMainPage ) {
+    private static LOAModuleBean getLOAPartModuleBean(ContentFolderBean contentFolder, Boolean isFromMainPage) {
         LOAModuleBean loaPartModuleBean = new LOAModuleBean();
         loaPartModuleBean.setModuleName(contentFolder.getCollectionName());
         loaPartModuleBean.setCollectionId(contentFolder.getCollectionId());
         loaPartModuleBean.setCollectionPath(contentFolder.getCollectionPath());
+        loaPartModuleBean.setCallOutBoxDec(contentFolder.getCallOutBoxContent());
 
         List<String[]> sectionList = new ArrayList<String[]>();
         String[] sec1DtlArr = null;
-        if (contentFolder.getTitleandPubDate() != null) {
-            sec1DtlArr = new String[] { contentFolder.getTitleandPubDate(), contentFolder.getFaculty() };
-            sectionList.add(sec1DtlArr);
-        }
-        if (contentFolder.getFaculty() != null && !isFromMainPage) {
-            sec1DtlArr = new String[] { contentFolder.getFaculty(), "" };
-            sectionList.add(sec1DtlArr);
-        }
-        if (contentFolder.getBackgroundHeader() != null && !isFromMainPage) {
-            sec1DtlArr = new String[] { contentFolder.getBackgroundHeader(), contentFolder.getBackgroundContent() };
-            sectionList.add(sec1DtlArr);
-        }
-        if (contentFolder.getLearningObjectivesHeader() != null) {
-            sec1DtlArr = new String[] { contentFolder.getLearningObjectivesHeader(), contentFolder.getLearningObjectivesContent() };
-            sectionList.add(sec1DtlArr);
-        }
-        if (contentFolder.getKeyTakeAwaysHeader() != null && !isFromMainPage) {
-            sec1DtlArr = new String[] { contentFolder.getKeyTakeAwaysHeader(), contentFolder.getKeyTakeAwaysContent() };
-            sectionList.add(sec1DtlArr);
-        }
+
+        sec1DtlArr = new String[3];
+        sec1DtlArr[0] = LOAPropertiesUtil.getPropertiesString(contentFolder.getDescription() + "_TIT");
+        sec1DtlArr[1] = LOAPropertiesUtil.getPropertiesString(contentFolder.getDescription() + "_DT");
+        sec1DtlArr[2] = LOAPropertiesUtil.getPropertiesString(contentFolder.getDescription() + "_ICON");
+        sectionList.add(sec1DtlArr);
+
+        sec1DtlArr = new String[2];
+        sec1DtlArr[0] = "Faculty";
+        sec1DtlArr[1] = LOAPropertiesUtil.getPropertiesString(contentFolder.getDescription() + "_FAC");
+        sectionList.add(sec1DtlArr);
+
+        sec1DtlArr = new String[2];
+        sec1DtlArr[0] = "Description";
+        sec1DtlArr[1] = LOAPropertiesUtil.getPropertiesString(contentFolder.getDescription() + "_DESC");
+        sectionList.add(sec1DtlArr);
+
+
+        sec1DtlArr = new String[2];
+        sec1DtlArr[0] = "Learning Objectives";
+        sec1DtlArr[1] = LOAPropertiesUtil.getPropertiesString(contentFolder.getDescription() + "_OBJ");
+        sectionList.add(sec1DtlArr);
+
+        sec1DtlArr = new String[2];
+        sec1DtlArr[0] = "Activities";
+        sec1DtlArr[1] = LOAPropertiesUtil.getPropertiesString(contentFolder.getDescription() + "_ACT");
+        sectionList.add(sec1DtlArr);
+
 
         loaPartModuleBean.setSectionList(sectionList);
 
@@ -152,7 +161,7 @@ public class LOAContentUtil {
         LOAModuleBean loaPartModuleBean = null;
         try {
             ContentFolderBean contentFolder = csUtil.getLOAFolderInfoFromCollectionId(loaModuleCollectionId);
-            loaPartModuleBean = getLOAPartModuleBean(contentFolder,false);
+            loaPartModuleBean = getLOAPartModuleBean(contentFolder, false);
             loadLOAModule(loaPartModuleBean);
         } catch (Exception e) {
             e.printStackTrace();
@@ -230,10 +239,11 @@ public class LOAContentUtil {
         return resourceBean;
     }
 
+
     public static void main(String[] args) throws Exception {
         //Testig main page
-        /*
-        List<LOAPartBean> loaPartList = getLOAParts("/WebCenterSpaces-Root/QIOCollaboration/LOA/LOA 1.0 (2015)");
+
+        List<LOAPartBean> loaPartList = getLOAParts("/WebCenterSpaces-Root/QIOCollaboration/LOA/LOA 2.0 (2016)");
         System.out.println("loaTopicList =" + loaPartList);
         for (LOAPartBean loaPartBean : loaPartList) {
             System.out.println("loaTopic.getCollectionId() =" + loaPartBean.getCollectionId());
@@ -245,17 +255,17 @@ public class LOAContentUtil {
                 }
             }
         }
-        */
+
         // Testing module page
 
-        String loaModuleCollectionId = "709937743070003430";
-        LOAModuleBean loaModuleBean = getLOAModule(loaModuleCollectionId);
-        for (LOAModuleCategoryBean loaModuleCategoryBean : loaModuleBean.getModuleCategoryList()) {
-            System.out.println("ModuleCategoryName =" + loaModuleCategoryBean.getCategoryName() + "CollectionId =" + loaModuleCategoryBean.getCollectionId());
-            for (ResourceBean resourceBean : loaModuleCategoryBean.getResources()) {
-                System.out.println("ModuleName =" + resourceBean.getResourceTitle() + " --> CollectionId =" + resourceBean.getResourceDescription());
-            }
-        }
+        //        String loaModuleCollectionId = "709937743070003430";
+        //        LOAModuleBean loaModuleBean = getLOAModule(loaModuleCollectionId);
+        //        for (LOAModuleCategoryBean loaModuleCategoryBean : loaModuleBean.getModuleCategoryList()) {
+        //            System.out.println("ModuleCategoryName =" + loaModuleCategoryBean.getCategoryName() + "CollectionId =" + loaModuleCategoryBean.getCollectionId());
+        //            for (ResourceBean resourceBean : loaModuleCategoryBean.getResources()) {
+        //                System.out.println("ModuleName =" + resourceBean.getResourceTitle() + " --> CollectionId =" + resourceBean.getResourceDescription());
+        //            }
+        //        }
 
     }
 }

@@ -17,6 +17,7 @@ public class QIUTopicBean implements Serializable {
     private String collectionPath;
     private String collectionId;
     private List<String[]> sectionList;
+    private String qiuCallOutBoxDec;
 
     public void setTopicName(String topicName) {
         this.topicName = topicName;
@@ -56,5 +57,13 @@ public class QIUTopicBean implements Serializable {
 
     public List<String[]> getSectionList() {
         return sectionList;
+    }
+
+    public void setQiuCallOutBoxDec(String qiuCallOutBoxDec) {
+        this.qiuCallOutBoxDec = qiuCallOutBoxDec;
+    }
+
+    public String getQiuCallOutBoxDec() {
+        return qiuCallOutBoxDec;
     }
 }

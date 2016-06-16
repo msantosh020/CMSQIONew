@@ -3,6 +3,7 @@ package gov.cms.portal.qiocollabaration.extension.view.qiu.util;
 import gov.cms.portal.qiocollabaration.content.beans.ContentFolderBean;
 import gov.cms.portal.qiocollabaration.content.beans.ContentItemBean;
 import gov.cms.portal.qiocollabaration.content.util.WCContentUtil;
+import gov.cms.portal.qiocollabaration.extension.view.loa.util.LOAPropertiesUtil;
 import gov.cms.portal.qiocollabaration.extension.view.qiu.backingbeans.QIUTopicPageBackingBean;
 import gov.cms.portal.qiocollabaration.extension.view.qiu.beans.QIUTopicBean;
 import gov.cms.portal.qiocollabaration.extension.view.qiu.beans.QIUTopicCategoryBean;
@@ -24,10 +25,10 @@ public class QIUContentUtil {
 
     private static WCContentUtil getWCContentUtil() {
         // Use below lines while deploying to server TODO
-       WCContentUtil csUtil = new WCContentUtil();
+        WCContentUtil csUtil = new WCContentUtil();
         // Use below code for running local machine
-//                String url = "http://10.163.64.1:16200/cs/idcplg";
-//                WCContentUtil csUtil = new WCContentUtil(url, "weblogic");
+        //                        String url = "http://10.163.64.1:16200/cs/idcplg";
+        //                        WCContentUtil csUtil = new WCContentUtil(url, "weblogic");
         return csUtil;
     }
 
@@ -61,6 +62,7 @@ public class QIUContentUtil {
         qiuTopicBean.setParentCollectionId(contentFolder.getParentCollectionId());
         qiuTopicBean.setCollectionId(contentFolder.getCollectionId());
         qiuTopicBean.setTopicName(contentFolder.getCollectionName());
+        qiuTopicBean.setQiuCallOutBoxDec(contentFolder.getCallOutBoxContent());
 
         List<String[]> sectionList = new ArrayList<String[]>();
         String[] sec1DtlArr = null;
@@ -68,22 +70,22 @@ public class QIUContentUtil {
             sec1DtlArr = new String[] { contentFolder.getTitleandPubDate(), contentFolder.getFaculty() };
             sectionList.add(sec1DtlArr);
         }
-        if (contentFolder.getFaculty() != null && !isFromMainPage) {
-            sec1DtlArr = new String[] { contentFolder.getFaculty(), "" };
-            sectionList.add(sec1DtlArr);
-        }
         if (contentFolder.getBackgroundHeader() != null && !isFromMainPage) {
             sec1DtlArr = new String[] { contentFolder.getBackgroundHeader(), contentFolder.getBackgroundContent() };
             sectionList.add(sec1DtlArr);
         }
-        if (contentFolder.getLearningObjectivesHeader() != null) {
-            sec1DtlArr = new String[] { contentFolder.getLearningObjectivesHeader(), contentFolder.getLearningObjectivesContent() };
-            sectionList.add(sec1DtlArr);
-        }
-        if (contentFolder.getKeyTakeAwaysHeader() != null && !isFromMainPage) {
-            sec1DtlArr = new String[] { contentFolder.getKeyTakeAwaysHeader(), contentFolder.getKeyTakeAwaysContent() };
-            sectionList.add(sec1DtlArr);
-        }
+
+        sec1DtlArr = new String[2];
+        sec1DtlArr[0] = "Learning Objectives";
+        sec1DtlArr[1] = QIUPropertiesUtil.getPropertiesString(contentFolder.getDescription() + "_LRN_DESC");
+        sectionList.add(sec1DtlArr);
+
+
+        sec1DtlArr = new String[2];
+        sec1DtlArr[0] = "Key Takeaways";
+        sec1DtlArr[1] = QIUPropertiesUtil.getPropertiesString(contentFolder.getDescription() + "_KEY_DESC");
+        sectionList.add(sec1DtlArr);
+
 
         qiuTopicBean.setSectionList(sectionList);
         return qiuTopicBean;
@@ -181,9 +183,9 @@ public class QIUContentUtil {
             _logger.info("qiuTopic.getCollectionId() =" + qiuTopic.getCollectionId());
             List<QIUTopicCategoryBean> qiuTopicCategoryList = getQiuTopicCategoryList(qiuTopic.getCollectionId());
             _logger.info("contentList =" + qiuTopicCategoryList);
-            QIUTopicBean qIUTopicBean =  loadQIUTopicBean(qiuTopic.getCollectionId());
+            QIUTopicBean qIUTopicBean = loadQIUTopicBean(qiuTopic.getCollectionId());
             _logger.info("contentList =" + qIUTopicBean);
         }
-        
+
     }
 }

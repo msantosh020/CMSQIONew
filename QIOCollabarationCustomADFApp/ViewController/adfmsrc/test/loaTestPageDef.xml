@@ -7,7 +7,11 @@
     <taskFlow id="LOAMainTF1"
               taskFlowId="/WEB-INF/gov/cms/poral/qiocollabaration/extensions/flows/loa/LOAMainTF.xml#LOAMainTF"
               activation="deferred"
-              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+              xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="pageType" value="LOA"/>
+      </parameters>
+    </taskFlow>
     <taskFlow id="LOATopicTF1"
               taskFlowId="/WEB-INF/gov/cms/poral/qiocollabaration/extensions/flows/loa/LOATopicTF.xml#LOATopicTF"
               activation="deferred"

@@ -1,53 +1,78 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
           xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
           xmlns:fn="http://java.sun.com/jsp/jstl/functions">
-          
-          <!--<af:outputText value="TEST CONTACTS PAGE #{fn:length(pageFlowScope.showConnectionBean.contactList)}" id="ot1">
-          </af:outputText>-->
-    <af:iterator value="#{pageFlowScope.showConnectionBean.contactList}" var="group"
-                 id="i1">
-        <af:panelHeader text="#{group.groupName}" id="ph1">
-            <af:iterator value="#{group.userProfileList}" var="user" id="i2">
-            <af:panelGroupLayout layout="horizontal" id="pgl1">
-                <af:panelGroupLayout id="pgl2">
-                    <af:image source="#{user.originalPhoto}"
-                              id="i3"/>
-                </af:panelGroupLayout>
-            <af:panelGroupLayout layout="horizontal" id="pgl3">
-                <af:panelGroupLayout layout="vertical" id="pgl4">
-                    <af:panelFormLayout id="pfl1">
-                        <af:inputText readOnly="true" label="City" value="#{user.businessCity}"/>
-                        <af:inputText readOnly="true" label="Country" value="#{user.businessCountry}"/>
-                        <af:inputText readOnly="true" label="Email" value="#{user.businessEmail}"/>
-                        <af:inputText readOnly="true" label="Mobile" value="#{user.businessMobile}"/>
-                        <af:inputText readOnly="true" label="Postal Code" value="#{user.businessPostalCode}"/>
-                        <af:inputText readOnly="true" label="State" value="#{user.businessState}"/>
-                        <af:inputText readOnly="true" label="Street" value="#{user.businessStreet}"/>
-                        <af:inputText readOnly="true" label="DOB" value="#{user.dateofBirth}"/>
-                        <af:inputText readOnly="true" label="Date of Hire" value="#{user.dateofHire}"/>
-                        <af:inputText readOnly="true" label="Department" value="#{user.department}"/>
-                        <af:inputText readOnly="true" label="Employee Number" value="#{user.employeeNumber}"/>
-                        <af:inputText readOnly="true" label="Manager" value="#{user.managerDisplayName}"/>
-                        <af:inputText readOnly="true" label="Title" value="#{user.title} #{user.firstName} #{user.lastName}"/>
-                    </af:panelFormLayout>
-                </af:panelGroupLayout>
-                <af:panelGroupLayout id="pgl5">
-                    <af:commandButton text="Invite" id="cb1">
-                        <af:setPropertyListener from="#{user.userName}" to="#{pageFlowScope.showConnectionBean.selectedUser}" type="action"/>
-                        <af:showPopupBehavior popupId="p1"/>
-                    </af:commandButton>
-                    <af:popup id="p1">
-                        <af:dialog title="Send an Invite" dialogListener="#{pageFlowScope.showConnectionBean.inviteUserDialogListener}"
-                                   id="d1">
-                            <af:inputText label="Invitation Message" rows="5" columns="150" value="#{pageFlowScope.showConnectionBean.invitationMessage}"
-                                          id="it1"/>
-                        </af:dialog>
-                    </af:popup>
-                </af:panelGroupLayout>
+    <af:panelBox id="pb1" showDisclosure="false" showHeader="always"
+                 inlineStyle="border:2px solid; padding:10px; margin-left:30px;margin-right:30px; border-color:rgb(248,248,248);border-radius:20px"
+                 partialTriggers="soc1 it1"
+                 binding="#{pageFlowScope.showConnectionBean.contactPanelBox}">
+        <f:facet name="toolbar">
+        <af:panelGroupLayout layout="horizontal" id="pgl6">
+            <af:selectOneChoice id="soc1" label="Show" autoSubmit="true" value="All"
+                                valueChangeListener="#{pageFlowScope.showConnectionBean.groupChangeListener}">
+                <f:selectItems value="#{pageFlowScope.showConnectionBean.dropdownOptions}" id="si1"/>
+            </af:selectOneChoice>
+                <af:spacer width="10" height="10" id="s1"/>
+                <af:inputText label="Filter"
+                              value="#{pageFlowScope.showConnectionBean.searchText}"
+                              autoSubmit="true" id="it1"
+                              valueChangeListener="#{pageFlowScope.showConnectionBean.searchTextVCL}"/>
             </af:panelGroupLayout>
-        </af:panelGroupLayout>
+        </f:facet>
+        <af:panelFormLayout id="pfl2" rows="#{pageFlowScope.showConnectionBean.rows}" maxColumns="4">
+            <f:facet name="footer"/>
+            <af:iterator value="#{pageFlowScope.showConnectionBean.contactList}"
+                         rows="20"
+                         first="#{pageFlowScope.showConnectionBean.paginationIteratorFirstIndex}"
+                         var="userObj" id="i1"
+                         binding="#{pageFlowScope.showConnectionBean.contactIterator}">
+                <af:panelGroupLayout id="pgl5" layout="horizontal" valign="top">
+                    <!--<af:panelGroupLayout id="pgl2">
+                        <af:image source="/imageservlet?imageByteArray=#{userObj.userProfile.originalPhoto}"
+                                  id="i3"/>
+                    </af:panelGroupLayout>-->
+                    <af:panelGroupLayout id="pgl3" layout="vertical">
+                        <af:panelBox id="pb2" showDisclosure="false"
+                                     background="light"
+                                     inlineStyle="width:220.0px;">
+                            <f:facet name="toolbar"/>
+                            <af:panelFormLayout id="pfl1" fieldWidth="250"
+                                                labelWidth="250">
+                                <af:outputText 
+                                              value="#{userObj.userProfile.firstName} #{userObj.userProfile.lastName} , #{userObj.userProfile.title}"
+                                              id="it7"
+                                              inlineStyle="font-weight:bold; font-size:medium;"/>
+                                <af:inputText readOnly="true"
+                                              value="#{userObj.userProfile.employeeType}"
+                                              id="it2"/>
+                                <af:inputText readOnly="true"
+                                              value="#{userObj.userProfile.businessEmail}"
+                                              id="it3"/>
+                                <af:inputText readOnly="true"
+                                              value="#{userObj.userProfile.businessMobile}"
+                                              id="it4"/>
+                                <af:outputText value="#{userObj.groupName}"
+                                               id="it5"
+                                               inlineStyle="width:180px;display:block;word-wrap:break-word;"/>
+                                <af:inputText readOnly="true"
+                                              value="#{userObj.userProfile.expertise}"
+                                              id="it6"/>
+                            </af:panelFormLayout>
+                        </af:panelBox>
+                    </af:panelGroupLayout>
+                </af:panelGroupLayout>
             </af:iterator>
-        </af:panelHeader>
-    </af:iterator>
+        </af:panelFormLayout>
+        <af:panelGroupLayout id="pgl7" layout="horizontal">
+            <af:iterator value="#{pageFlowScope.showConnectionBean.paginationArrayList}"
+                         var="varrow" varStatus="pageStatus">
+                <af:commandLink text="#{pageStatus.count}" id="cl4Sec"
+                                inlineStyle="#{pageStatus.count eq pageFlowScope.currentPageNo ? 'font-weight:bold;' :''}"
+                                actionListener="#{pageFlowScope.showConnectionBean.changePageListener}"
+                                binding="#{pageFlowScope.showConnectionBean.pageCommandLink}"/>
+                <af:spacer width="5" id="s21Sec"/>
+            </af:iterator>
+        </af:panelGroupLayout>
+    </af:panelBox>
 </jsp:root>

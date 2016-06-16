@@ -19,8 +19,6 @@ public class ContentFolderBean extends ContentBean implements Serializable {
     private String collectionPath;
     private List<ContentItemBean> folderItems = new ArrayList<ContentItemBean>();
     private List<ContentFolderBean> subFolders = new ArrayList<ContentFolderBean>();
-    
-    
     private String titleandPubDate;
     private String faculty;
     private String backgroundHeader;
@@ -29,6 +27,8 @@ public class ContentFolderBean extends ContentBean implements Serializable {
     private String learningObjectivesContent;
     private String keyTakeAwaysHeader;
     private String keyTakeAwaysContent;
+    private String callOutBoxContent;
+    private String description;
     
    
     
@@ -146,5 +146,21 @@ public class ContentFolderBean extends ContentBean implements Serializable {
 
     public String getKeyTakeAwaysContent() {
         return keyTakeAwaysContent;
+    }
+
+    public void setCallOutBoxContent(String callOutBoxContent) {
+        this.callOutBoxContent = callOutBoxContent;
+    }
+
+    public String getCallOutBoxContent() {
+        return callOutBoxContent;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

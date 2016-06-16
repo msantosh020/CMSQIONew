@@ -5,20 +5,49 @@
           xmlns:cust="http://xmlns.oracle.com/adf/faces/customizable">
   <af:panelGroupLayout id="pgl1" layout="vertical">
     <af:panelGroupLayout id="pgl3" layout="horizontal">
-      <af:outputText value="Leadership Organization and Action (LOA) Modules" 
-                      id="ot1"
+      <af:outputText value="Leadership Organization and Action (LOA) Modules"
+                     id="ot1"
                      inlineStyle="font-size:medium; font-weight:bold;"/>
       <af:spacer width="10" height="10" id="s2"/>
-    <!--  <af:image source="#{viewScope.LOATopicPageBackingBean.loaModule.moduleIconUrl}"
-                id="i3"/>-->
     </af:panelGroupLayout>
     <af:spacer width="10" height="10" id="s5"/>
     <af:iterator id="i2" var="section" varStatus="vs"
                  value="#{viewScope.LOATopicPageBackingBean.loaModule.sectionList}">
-      <af:outputText value="#{section[0]}" id="ot4" styleClass="SectionHeader" escape="false"/>
-      <af:outputText value="#{section[1]}" id="ot3" escape="false"
-                     rendered="#{not empty section[1]}"/>
-      <af:spacer width="10" height="10" id="s1"/>
+      <af:panelGroupLayout id="pgl7" layout="horizontal"
+                           styleClass="AFStretchWidth">
+        <af:panelGroupLayout id="pgl8" layout="vertical">
+          <af:switcher id="s6" defaultFacet="OnlyTitle"
+                       facetName="#{vs.index eq 0 ? 'TitleWithIcon' : 'OnlyTitle'}">
+            <f:facet name="TitleWithIcon">
+              <af:panelGroupLayout id="pgl11" layout="horizontal">
+                <af:outputText value="#{section[0]}" id="ot4"
+                               styleClass="SectionHeader"/>
+                <af:spacer width="5" height="10" id="s7"/>
+                <af:image source="#{section[2]}"
+                          inlineStyle="width:30px;height:30px;" id="i3"/>
+              </af:panelGroupLayout>
+            </f:facet>
+            <f:facet name="OnlyTitle">
+              <af:outputText value="#{section[0]}" id="ot2"
+                             styleClass="SectionHeader"/>
+            </f:facet>
+          </af:switcher>
+          <af:outputText value="#{section[1]}" id="ot3" escape="false"
+                         rendered="#{not empty section[1]}"/>
+          <af:spacer width="10" height="10" id="s1"/>
+        </af:panelGroupLayout>
+        <af:panelGroupLayout id="pgl9" layout="horizontal"
+                             rendered="#{vs.index eq 0 and not empty viewScope.LOATopicPageBackingBean.loaModule.callOutBoxDec}"
+                             styleClass="AFStretchWidth" halign="right">
+          <af:panelGroupLayout id="pgl10" layout="horizontal"
+                               inlineStyle="width:250px;height:200px;border: 1px solid black;"
+                               halign="center">
+            <af:outputText value="#{ viewScope.LOATopicPageBackingBean.loaModule.callOutBoxDec}"
+                           id="it5"
+                           inlineStyle="width:220px;display:block;word-wrap:break-word;"/>
+          </af:panelGroupLayout>
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
     </af:iterator>
     <af:spacer width="10" height="20" id="s3"/>
     <af:iterator id="i1" var="category" varStatus="vs"

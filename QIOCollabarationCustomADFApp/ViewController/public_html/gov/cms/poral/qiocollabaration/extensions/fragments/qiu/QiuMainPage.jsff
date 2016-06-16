@@ -2,24 +2,36 @@
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
           xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
           xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl4" layout="horizontal" halign="end"
+                       styleClass="AFstretchWidth"
+                       rendered="#{pageFlowScope.pageType eq 'QIUMainPage'}">
+    <af:commandButton text="View Program Resources" id="cb3"
+                      styleClass="selectedContactTabLink"
+                      inlineStyle="width:230px"
+                      actionListener="#{navigationContext.processAction}"
+                      action="pprnav">
+      <f:attribute name="node"
+                   value="#{navigationContext.defaultNavigationModel.node['Home/page12/page168/page17']}"/>
+    </af:commandButton>
+  </af:panelGroupLayout>
   <af:panelGroupLayout id="pgl1" layout="vertical" partialTriggers="soc7">
     <af:listView id="lv1" var="topic"
                  value="#{viewScope.QIUMainBackingBean.currentPageTopics}">
       <af:listItem id="li1" styleClass="ResourceGrid">
         <af:panelGroupLayout id="pgl10" layout="vertical"
                              styleClass="QIUPanelBox">
-         <!-- <af:outputText value="#{topic.topicName}" id="ot4" escape="false"
+          <!-- <af:outputText value="#{topic.topicName}" id="ot4" escape="false"
                          styleClass="QIUTopicName"/>-->
           <af:spacer width="10" height="10" id="s1"/>
           <af:iterator id="i1" var="section" varStatus="vs"
                        value="#{topic.sectionList}">
-            <af:outputText value="#{section[0]}" id="ot2" 
+            <af:outputText value="#{section[0]}" id="ot2"
                            styleClass="SectionHeader" escape="false"
-                           rendered="#{not empty section and not empty section[1]}"/>
+                           rendered="#{not empty section and not empty section[1] and section[0] ne 'Learning Object' and section[0] ne 'Key Takeaways'}"/>
             <!--<af:outputText value="#{section[1]}" id="ot3" escape="false"
                            rendered="#{not empty section and not empty section[1]}"/>-->
-          <af:spacer width="10" height="10" id="s3"/>
           </af:iterator>
+          <af:spacer width="10" height="10" id="s3"/>
           <af:panelGroupLayout id="pgl2" layout="horizontal" halign="center"
                                styleClass="AFStretchWidth">
             <af:commandButton text="View Packet" id="cb1" action="pprnav"

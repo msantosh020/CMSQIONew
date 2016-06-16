@@ -126,19 +126,19 @@ public class WCContentUtil implements Serializable {
     private static final String xComments = "xComments";
     private static final String dId = "dID";
     private static final String dRevLabel = "dRevLabel";
-    
-// UCM Folder    
-     private static final String Resources = "/WebCenterSpaces-Root/QIOCollaboration/Resources/";
+
+    // UCM Folder
+    private static final String Resources = "/WebCenterSpaces-Root/QIOCollaboration/Resources/";
     private static final String EduandTraining = "";
-     private static final String LOA = "/WebCenterSpaces-Root/QIOCollaboration/LOA/LOA 1.0 (2015)";
+    private static final String LOA = "/WebCenterSpaces-Root/QIOCollaboration/LOA/LOA 2.0 (2016)";
     private static final String QIU = "/WebCenterSpaces-Root/QIOCollaboration/QIU/";
 
-// custom metadata fields
+    // custom metadata fields
     private static final String xcommunityoforigin = "xcommunityoforigin";
     private static final String xtopics = "xtopics";
     private static final String xsow = "xsow";
     private static final String xContentCategory = "xContentCategory";
-    private static final String xDescription = "xDescription";
+    private static final String xdescription = "xdescription";
     private static final String xFolderType = "xFolderType";
     private static final String xContentType = "xContentType";
     private static final String PARTNER_PORTAL_PATH = "/Contribution Folders/PartnerPortal";
@@ -216,7 +216,7 @@ public class WCContentUtil implements Serializable {
                 String connName = utils.getDefaultConnectionName();
                 userContext = utils.getDefaultIdcContext(connName);
 
-             //   IdcContext userContext = new IdcContext("weblogic");
+                //   IdcContext userContext = new IdcContext("weblogic");
 
                 response = idcClient.sendRequest(userContext, dataBinder);
                 DataBinder serverBinder = response.getResponseAsBinder();
@@ -276,7 +276,7 @@ public class WCContentUtil implements Serializable {
         item.setTitle(obj.get(dDocTitle));
         item.setDocNativeName(obj.get(dOriginalName));
         item.setSecurityGroup(obj.get(dSecurityGroup));
-        item.setDescription(obj.get(xDescription));
+        item.setDescription(obj.get(xdescription));
         item.setContentCategory(obj.get(xContentCategory));
         item.setCommunityName(obj.get("xcommunityoforigin"));
         item.setSubTopicName(obj.get("xtopics"));
@@ -326,7 +326,7 @@ public class WCContentUtil implements Serializable {
         item.setDId(obj.get(dId));
         item.setRevisionLabel(obj.get(dRevLabel));
         item.setTagNames(obj.get("xsbiApprovalType"));
- //       item.setTopicsNames(obj.get("xsbiCreatedBy"));
+        //       item.setTopicsNames(obj.get("xsbiCreatedBy"));
 
         return item;
     }
@@ -405,7 +405,7 @@ public class WCContentUtil implements Serializable {
                 dataBinder.putLocal(dOriginalName, newItem.getDocNativeName());
 
             if (newItem.getDescription() != null)
-                dataBinder.putLocal(xDescription, newItem.getDescription());
+                dataBinder.putLocal(xdescription, newItem.getDescription());
 
             dataBinder.putLocal("doFileCopy", "1");
 
@@ -518,10 +518,10 @@ public class WCContentUtil implements Serializable {
         ServiceResponse response = null;
         DataBinder serverBinder = null;
         try {
-                        IdcContext userContext = null;
-                        String connName = utils.getDefaultConnectionName();
-                        userContext = utils.getDefaultIdcContext(connName);
-           // IdcContext userContext = new IdcContext("weblogic");
+            IdcContext userContext = null;
+            String connName = utils.getDefaultConnectionName();
+            userContext = utils.getDefaultIdcContext(connName);
+         //   IdcContext userContext = new IdcContext("weblogic");
             dataBinder = idcClient.createBinder();
             dataBinder.putLocal("IdcService", "COLLECTION_INFO");
             dataBinder.putLocal("hasCollectionPath", "true");
@@ -643,10 +643,10 @@ public class WCContentUtil implements Serializable {
         List<ContentItemBean> contentItems = new ArrayList<ContentItemBean>();
 
         try {
-                        IdcContext userContext = null;
-                        String connName = utils.getDefaultConnectionName();
-                        userContext = utils.getDefaultIdcContext(connName);
-           // IdcContext userContext = new IdcContext("weblogic");
+            IdcContext userContext = null;
+            String connName = utils.getDefaultConnectionName();
+            userContext = utils.getDefaultIdcContext(connName);
+            // IdcContext userContext = new IdcContext("weblogic");
 
             dataBinder = idcClient.createBinder();
             dataBinder.putLocal(IDCSERVICE, GET_SEARCH_RESULTS);
@@ -742,10 +742,10 @@ public class WCContentUtil implements Serializable {
         List<ContentItemBean> contentItems = new ArrayList<ContentItemBean>();
 
         try {
-                        IdcContext userContext = null;
-                        String connName = utils.getDefaultConnectionName();
-                        userContext = utils.getDefaultIdcContext(connName);
-          //  IdcContext userContext = new IdcContext("weblogic");
+            IdcContext userContext = null;
+            String connName = utils.getDefaultConnectionName();
+            userContext = utils.getDefaultIdcContext(connName);
+            //  IdcContext userContext = new IdcContext("weblogic");
 
             dataBinder = idcClient.createBinder();
             dataBinder.putLocal(IDCSERVICE, GET_SEARCH_RESULTS);
@@ -1030,7 +1030,7 @@ public class WCContentUtil implements Serializable {
         }
         return folder;
     }
-    
+
     public ContentFolderBean getFolderInfoFromCollectionId(String parentFolderID) throws IdcClientException, NamingException, ParseException {
         ServiceResponse response = null;
         ContentFolderBean folder = null;
@@ -1044,7 +1044,7 @@ public class WCContentUtil implements Serializable {
                 IdcContext userContext = null;
                 String connName = utils.getDefaultConnectionName();
                 userContext = utils.getDefaultIdcContext(connName);
-              //  IdcContext userContext = new IdcContext("weblogic");
+                //  IdcContext userContext = new IdcContext("weblogic");
                 response = idcClient.sendRequest(userContext, dataBinder);
                 DataBinder serverBinder = response.getResponseAsBinder();
                 DataResultSet resultSet = serverBinder.getResultSet("PATH");
@@ -1054,7 +1054,7 @@ public class WCContentUtil implements Serializable {
                 //logger.severe("Unable to get folder information due to : " + e.getMessage());
                 e.printStackTrace();
                 throw e;
-            
+
             } finally {
                 if (response != null) {
                     response.close();
@@ -1143,7 +1143,7 @@ public class WCContentUtil implements Serializable {
                 IdcContext userContext = null;
                 String connName = utils.getDefaultConnectionName();
                 userContext = utils.getDefaultIdcContext(connName);
-             //                  IdcContext userContext = new IdcContext("weblogic"); //TODO need to revert to above code
+                //                  IdcContext userContext = new IdcContext("weblogic"); //TODO need to revert to above code
                 response = idcClient.sendRequest(userContext, dataBinder);
                 DataBinder serverBinder = response.getResponseAsBinder();
 
@@ -1170,7 +1170,7 @@ public class WCContentUtil implements Serializable {
         }
         return subfolders;
     }
-    
+
     private ContentFolderBean populatedQIUContentFolder(DataObject obj) throws ParseException {
         ContentFolderBean item = new ContentFolderBean();
 
@@ -1212,20 +1212,22 @@ public class WCContentUtil implements Serializable {
         item.setAuthor(obj.get(dDocAuthor));
         item.setCreatedBy(obj.get(dCollectionCreator));
         item.setLastModifiedBy(obj.get(dCollectionModifier));
-        
+
         item.setTitleandPubDate(obj.get("xQIUTitleandPubDate"));
-        item.setFaculty(obj.get("xQIUFaculty")); 
+        item.setFaculty(obj.get("xQIUFaculty"));
         item.setBackgroundHeader(obj.get("xQIUBackgroundHeader"));
         item.setBackgroundContent(obj.get("xQiuBackgroundContent"));
         item.setLearningObjectivesHeader(obj.get("xQIULearningObjectivesHeader"));
         item.setLearningObjectivesContent(obj.get("xQIULearningObjectivesContent"));
         item.setKeyTakeAwaysHeader(obj.get("xQIUKeyTakeAwaysHeader"));
         item.setKeyTakeAwaysContent(obj.get("xQIUKeyTakeAwaysContent"));
-      
+        item.setCallOutBoxContent(obj.get("xQIUKeyTakeAwaysContent"));
+        item.setDescription(obj.get(xdescription));
+
 
         return item;
     }
-    
+
     public List<ContentFolderBean> getQIUSubFolders(String parentFolderID) throws IdcClientException, NamingException, ParseException {
         List<ContentFolderBean> subfolders = new ArrayList<ContentFolderBean>();
         ServiceResponse response = null;
@@ -1239,7 +1241,7 @@ public class WCContentUtil implements Serializable {
                 IdcContext userContext = null;
                 String connName = utils.getDefaultConnectionName();
                 userContext = utils.getDefaultIdcContext(connName);
-              //                 IdcContext userContext = new IdcContext("weblogic"); //TODO need to revert to above code
+                //                 IdcContext userContext = new IdcContext("weblogic"); //TODO need to revert to above code
                 response = idcClient.sendRequest(userContext, dataBinder);
                 DataBinder serverBinder = response.getResponseAsBinder();
 
@@ -1260,7 +1262,7 @@ public class WCContentUtil implements Serializable {
         }
         return subfolders;
     }
-    
+
     public ContentFolderBean getQIUFolderInfoFromCollectionId(String parentFolderID) throws IdcClientException, NamingException, ParseException {
         ServiceResponse response = null;
         ContentFolderBean folder = null;
@@ -1274,7 +1276,7 @@ public class WCContentUtil implements Serializable {
                 IdcContext userContext = null;
                 String connName = utils.getDefaultConnectionName();
                 userContext = utils.getDefaultIdcContext(connName);
-            //    IdcContext userContext = new IdcContext("weblogic");
+                //    IdcContext userContext = new IdcContext("weblogic");
                 response = idcClient.sendRequest(userContext, dataBinder);
                 DataBinder serverBinder = response.getResponseAsBinder();
                 DataResultSet resultSet = serverBinder.getResultSet("PATH");
@@ -1284,7 +1286,7 @@ public class WCContentUtil implements Serializable {
                 //logger.severe("Unable to get folder information due to : " + e.getMessage());
                 e.printStackTrace();
                 throw e;
-            
+
             } finally {
                 if (response != null) {
                     response.close();
@@ -1364,7 +1366,7 @@ public class WCContentUtil implements Serializable {
             }
         }
     }
-    
+
     private ContentFolderBean populatedLOAContentFolder(DataObject obj) throws ParseException {
         ContentFolderBean item = new ContentFolderBean();
 
@@ -1406,20 +1408,21 @@ public class WCContentUtil implements Serializable {
         item.setAuthor(obj.get(dDocAuthor));
         item.setCreatedBy(obj.get(dCollectionCreator));
         item.setLastModifiedBy(obj.get(dCollectionModifier));
-        
+
         item.setTitleandPubDate(obj.get("xLOATitleandPubDate"));
-        item.setFaculty(obj.get("xLOAFaculty")); 
+        item.setFaculty(obj.get("xLOAFaculty"));
         item.setBackgroundHeader(obj.get("xLOADescriptionHeader"));
         item.setBackgroundContent(obj.get("xLOADescriptionContent"));
         item.setLearningObjectivesHeader(obj.get("xLOALearningObjectivesHeader"));
         item.setLearningObjectivesContent(obj.get("xLOALearningObjectivesContent"));
         item.setKeyTakeAwaysHeader(obj.get("xQIUKeyTakeAwaysHeader"));
         item.setKeyTakeAwaysContent(obj.get("xQIUKeyTakeAwaysContent"));
-      
+        item.setCallOutBoxContent(obj.get("xQIUKeyTakeAwaysContent"));
+        item.setDescription(obj.get(xdescription));
 
         return item;
     }
-    
+
     public List<ContentFolderBean> getLOASubFolders(String parentFolderID) throws IdcClientException, NamingException, ParseException {
         List<ContentFolderBean> subfolders = new ArrayList<ContentFolderBean>();
         ServiceResponse response = null;
@@ -1433,7 +1436,7 @@ public class WCContentUtil implements Serializable {
                 IdcContext userContext = null;
                 String connName = utils.getDefaultConnectionName();
                 userContext = utils.getDefaultIdcContext(connName);
-              //                 IdcContext userContext = new IdcContext("weblogic"); //TODO need to revert to above code
+                //                 IdcContext userContext = new IdcContext("weblogic"); //TODO need to revert to above code
                 response = idcClient.sendRequest(userContext, dataBinder);
                 DataBinder serverBinder = response.getResponseAsBinder();
 
@@ -1454,7 +1457,7 @@ public class WCContentUtil implements Serializable {
         }
         return subfolders;
     }
-    
+
     public ContentFolderBean getLOAFolderInfoFromCollectionId(String parentFolderID) throws IdcClientException, NamingException, ParseException {
         ServiceResponse response = null;
         ContentFolderBean folder = null;
@@ -1468,7 +1471,7 @@ public class WCContentUtil implements Serializable {
                 IdcContext userContext = null;
                 String connName = utils.getDefaultConnectionName();
                 userContext = utils.getDefaultIdcContext(connName);
-             //   IdcContext userContext = new IdcContext("weblogic");
+                //   IdcContext userContext = new IdcContext("weblogic");
                 response = idcClient.sendRequest(userContext, dataBinder);
                 DataBinder serverBinder = response.getResponseAsBinder();
                 DataResultSet resultSet = serverBinder.getResultSet("PATH");
@@ -1478,7 +1481,7 @@ public class WCContentUtil implements Serializable {
                 //logger.severe("Unable to get folder information due to : " + e.getMessage());
                 e.printStackTrace();
                 throw e;
-            
+
             } finally {
                 if (response != null) {
                     response.close();
