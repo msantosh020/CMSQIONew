@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="loginTF">
+    <default-activity id="__1">login</default-activity>
+    <managed-bean id="__5">
+      <managed-bean-name id="__2">OAMLoginBean</managed-bean-name>
+      <managed-bean-class id="__3">gov.cms.portal.qiocollabaration.extension.view.login.OAMLoginBean</managed-bean-class>
+      <managed-bean-scope id="__4">session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__7">
+      <managed-bean-name id="__9">LoginBackingBean</managed-bean-name>
+      <managed-bean-class id="__6">oracle.webcenter.security.view.login.LoginBackingBean</managed-bean-class>
+      <managed-bean-scope id="__8">session</managed-bean-scope>
+    </managed-bean>
+    <view id="login">
+      <page>/gov/cms/poral/qiocollabaration/extensions/fragments/login/login.jsff</page>
+    </view>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

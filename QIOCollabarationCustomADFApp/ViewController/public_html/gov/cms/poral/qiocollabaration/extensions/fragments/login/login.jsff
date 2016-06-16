@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+   <af:panelGroupLayout id="pgl1">
+      <af:subform id="pt_sf1" defaultCommand="pt_logincb">
+         <af:panelFormLayout id="pt_pfl1">
+            <af:panelLabelAndMessage id="pt_plam1" label="User Name"
+                                     for="pt_it1" styleClass="NoLabelWrap"
+                                     labelStyle="font-size:small;color:white;">
+               <af:inputText id="pt_it1" simple="true"
+                             value="#{o_w_s_l_LoginBackingBean.userName}"
+                             columns="15"/>
+            </af:panelLabelAndMessage>
+            <af:panelLabelAndMessage id="pt_plam2" label="Password" for="pt_it2"
+                                     styleClass="NoLabelWrap"
+                                     labelStyle="font-size:small;color:white;">
+               <af:inputText id="pt_it2" simple="true"
+                             value="#{o_w_s_l_LoginBackingBean.password}"
+                             columns="15" secret="true"/>
+            </af:panelLabelAndMessage>
+         </af:panelFormLayout>
+         <af:spacer width="3" height="3" id="pt_s2"/>
+         <af:panelGroupLayout id="pt_pgl14" layout="horizontal" halign="end">
+            <af:commandLink id="pt_logincb" text="Login"
+                            action="#{OAMLoginBean.doLogin}"
+                            inlineStyle="font-size:small;color:white;"/>
+            <af:spacer id="pt_s3" width="5px"/>
+         </af:panelGroupLayout>
+      </af:subform>
+   </af:panelGroupLayout>
+</jsp:root>
